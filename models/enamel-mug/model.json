@@ -1,0 +1,14 @@
+{
+  "slug": "enamel-mug",
+  "title": "Emaljmugg",
+  "factory": "createObjectModel.ts",
+  "export": "createEnamelMugModel",
+  "typeName": "EnamelMug",
+  "sourceRun": "C:\\repos\\img2three-runs\\enamel-mug-20261117-121428",
+  "published": "2026-11-17",
+  "assetUrls": {},
+  "turns": 239,
+  "apiEquivalentCostUsd": 20.01,
+  "durationMinutes": 58,
+  "fidelityEstimate": 0.8
+}

@@ -1,0 +1,36 @@
+{
+  "slug": "claw-hammer",
+  "title": "Snickarhammare",
+  "factory": "createObjectModel.ts",
+  "export": "createClawHammerModel",
+  "typeName": "ClawHammer",
+  "sourceRun": "C:\\repos\\img2three-runs\\claw-hammer-20261117-132359",
+  "published": "2026-11-17",
+  "assetUrls": {
+    "../evidence/stamp/stamp_ink.png": "models/claw-hammer/assets/evidence/stamp/stamp_ink.png",
+    "../evidence/stamp/scuff.png": "models/claw-hammer/assets/evidence/stamp/scuff.png",
+    "../evidence/stamp/grip_marks.png": "models/claw-hammer/assets/evidence/stamp/grip_marks.png",
+    "../material-evidence/pbr-forged-steel/forged-steel_albedo.png": "models/claw-hammer/assets/material-evidence/pbr-forged-steel/forged-steel_albedo.png",
+    "../material-evidence/pbr-forged-steel/forged-steel_roughness.png": "models/claw-hammer/assets/material-evidence/pbr-forged-steel/forged-steel_roughness.png",
+    "../material-evidence/pbr-forged-steel/forged-steel_height.png": "models/claw-hammer/assets/material-evidence/pbr-forged-steel/forged-steel_height.png",
+    "../material-evidence/pbr-forged-steel/forged-steel_normal.png": "models/claw-hammer/assets/material-evidence/pbr-forged-steel/forged-steel_normal.png",
+    "../material-evidence/pbr-forged-steel/forged-steel_ao.png": "models/claw-hammer/assets/material-evidence/pbr-forged-steel/forged-steel_ao.png",
+    "../material-evidence/pbr-face-steel/face-steel_albedo.png": "models/claw-hammer/assets/material-evidence/pbr-face-steel/face-steel_albedo.png",
+    "../material-evidence/pbr-face-steel/face-steel_roughness.png": "models/claw-hammer/assets/material-evidence/pbr-face-steel/face-steel_roughness.png",
+    "../material-evidence/pbr-face-steel/face-steel_height.png": "models/claw-hammer/assets/material-evidence/pbr-face-steel/face-steel_height.png",
+    "../material-evidence/pbr-face-steel/face-steel_normal.png": "models/claw-hammer/assets/material-evidence/pbr-face-steel/face-steel_normal.png",
+    "../material-evidence/pbr-face-steel/face-steel_ao.png": "models/claw-hammer/assets/material-evidence/pbr-face-steel/face-steel_ao.png",
+    "../material-evidence/pbr-claw-steel/claw-steel_albedo.png": "models/claw-hammer/assets/material-evidence/pbr-claw-steel/claw-steel_albedo.png",
+    "../material-evidence/pbr-claw-steel/claw-steel_roughness.png": "models/claw-hammer/assets/material-evidence/pbr-claw-steel/claw-steel_roughness.png",
+    "../material-evidence/pbr-claw-steel/claw-steel_height.png": "models/claw-hammer/assets/material-evidence/pbr-claw-steel/claw-steel_height.png",
+    "../material-evidence/pbr-claw-steel/claw-steel_normal.png": "models/claw-hammer/assets/material-evidence/pbr-claw-steel/claw-steel_normal.png",
+    "../material-evidence/pbr-claw-steel/claw-steel_ao.png": "models/claw-hammer/assets/material-evidence/pbr-claw-steel/claw-steel_ao.png"
+  },
+  "turns": 285,
+  "apiEquivalentCostUsd": 22.48,
+  "durationMinutes": 61,
+  "fidelityEstimate": 0.81,
+  "libraryPatches": [
+    "createObjectModel.ts:1044 strict-null fix in partOf's loop update (x = x.parent -> x = x?.parent ?? null), behaviour unchanged; found by tsc --strict, the run had no typecheck"
+  ]
+}

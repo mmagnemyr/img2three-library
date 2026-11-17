@@ -1,0 +1,5210 @@
+{
+  "targetName": "Enamel mug",
+  "targetId": "enamel-mug",
+  "schemaVersion": "2.1",
+  "terminologyProfile": {
+    "domain": "real-time procedural Three.js asset",
+    "geometryTerms": [
+      "silhouette",
+      "topology",
+      "primitive",
+      "bevel",
+      "chamfer",
+      "taper",
+      "bend",
+      "boolean cut",
+      "edge loop",
+      "surface normal",
+      "displacement"
+    ],
+    "materialTerms": [
+      "albedo",
+      "baseColor",
+      "roughness",
+      "metalness",
+      "normal map",
+      "bump map",
+      "ambient occlusion",
+      "cavity dirt",
+      "edge wear",
+      "clearcoat"
+    ],
+    "lightingTerms": [
+      "key light",
+      "fill light",
+      "rim light",
+      "HDRI/environment reflection",
+      "contact shadow"
+    ],
+    "descriptionRule": "Use measurable 3D graphics terms. Avoid vague words unless they are paired with concrete geometry/material/shader parameters."
+  },
+  "sourceImage": "reference/reference.jpg",
+  "referenceCamera": {
+    "solved": true,
+    "fovDegrees": 2.707,
+    "distance": 25.0,
+    "target": [
+      0.157,
+      0.415,
+      0.0
+    ],
+    "orientation": {
+      "yaw": 0.0,
+      "pitch": 1.0,
+      "roll": 0
+    },
+    "referenceCrop": {
+      "image": "reference/reference.jpg",
+      "box": [
+        643.5,
+        196,
+        1147.5,
+        556
+      ],
+      "renderSize": [
+        840,
+        600
+      ]
+    },
+    "method": "silhouette extents: 0.85 units = 259 px; crop 360 px tall -> 1.1815 units -> dist = 1.1815 / (2 tan 4 deg); pitch from rim/base ellipse semi-minor/semi-major ~0.03; yaw 0 from handle reach 0.417 D (profile). | refit: dist 8.45 stretched height +4% (front base edge 5% closer); moved to dist 25 (telephoto) keeping the 1.1815-unit frame height. | target y 0.43 -> 0.415: base-centre row in the render was 7.6 px below the reference's (518.4 vs 510.8). | material-pass: pitch 2 -> 1 deg (camera height ~0.85 = rim height; reference rim shows no opening, base sagitta still ~2 deg); profile heights re-derived with elevation varying 0 (rim) .. 2 deg (base). | lighting-pass: reverted the pitch-1 refit. Rim top edge drops ~7 px toward the ends (back arc seen from above) and base sagitta ~5.3 px -> camera looks down ~2-2.5 deg at both; near-orthographic dist 60, fov 1.128, pitch 2.3. The dark rim band is bead + shadowed interior (cavity AO bake on the lathe interior). | lighting-pass: tested near-orthographic dist 60 / pitch 2.3 (band 17 px vs ref 10 px) -> reverted to dist 25 / pitch 1.0 (band 245-255 vs ref 245-254). Rim-end frown unmodelled.",
+    "confidence": 0.7
+  },
+  "suitability": "conditional",
+  "scores": {
+    "object_isolation": 0,
+    "silhouette_readability": 0,
+    "depth_inference": 0,
+    "primitive_decomposition": 0,
+    "material_procedurality": 0,
+    "occlusion_risk": 0,
+    "interaction_fit": 0
+  },
+  "preSpecAssessment": {
+    "objectClass": {
+      "primaryType": "enamelware camp mug",
+      "primaryDomain": "object",
+      "formLanguage": [
+        "hard-surface",
+        "radial-symmetric",
+        "thin-shell"
+      ],
+      "structureKind": [
+        "compound object",
+        "layered shell"
+      ],
+      "motionPotential": [
+        "static prop",
+        "whole-object transform",
+        "destructible"
+      ],
+      "materialFamilies": [
+        "ceramic",
+        "metal"
+      ],
+      "notes": "Pressed steel cup with vitreous enamel: white body, black rolled rim bead, tubular open D handle on +X, fired-on black skull decal with white lettering; partial sunburst mark on far side."
+    },
+    "complexity": {
+      "tier": "moderate",
+      "scores": {
+        "silhouetteComplexity": 1,
+        "componentCount": 1,
+        "hierarchyDepth": 1,
+        "repetitionDensity": 0,
+        "materialLayerCount": 2,
+        "localDetailDensity": 2,
+        "occlusionRisk": 1,
+        "actionReadinessNeed": 1
+      },
+      "estimatedCounts": {
+        "macroComponents": 2,
+        "mesoComponents": 3,
+        "microFeatureGroups": 3,
+        "materialLayers": 4,
+        "repetitionSystems": 0
+      },
+      "reasoning": [
+        "Two macro masses (body shell, handle loop), meso rim bead/base fillet/cavity, micro decals and chip.",
+        "Identity depends on surface print (skull + lettering) -> projection of reference pixels.",
+        "Body H ~= D (259 px dia, 260 px height incl. rim), rim bead dia ~1.10 x wall, handle reach ~0.40 D."
+      ]
+    },
+    "specDepthDecision": {
+      "requiredDepth": "moderate",
+      "minimumComponentLevels": [
+        "macro",
+        "meso"
+      ],
+      "needsRepetitionSystems": false,
+      "needsMaterialLocalOverrides": false,
+      "needsMultipleReviewViews": true,
+      "needsActionReadyHierarchy": true,
+      "rationale": "Choose simple/moderate/complex/ultra-complex from observed structure, not from a hardcoded domain."
+    },
+    "unknownsToResolveBeforeImplementation": [],
+    "detailInventory": {
+      "scanMethod": "component-zones",
+      "targetMinDetails": 9,
+      "note": "Enumerate every identity-defining small detail before authoring the spec. Each detail must map to a component.localFeatures entry or material.localOverrides entry, never prose only. Use forge/stage1_intake/build_detail_inventory.py to scan zones.",
+      "details": [
+        {
+          "id": "rim-bead",
+          "kind": "ridge",
+          "description": "Black rolled bead rim overhanging the wall (~1.10 x wall dia), round section",
+          "region": {
+            "x": 0.55,
+            "y": 0.335,
+            "width": 0.225,
+            "height": 0.03,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "silhouette+albedo",
+          "mapsTo": {
+            "type": "localFeature",
+            "ref": "rim-rolled-bead"
+          },
+          "evidenceRef": "detail-inventory/rim.png",
+          "confidence": 0.9,
+          "realization": "unreported"
+        },
+        {
+          "id": "enamel-gloss",
+          "kind": "gloss",
+          "description": "Soft broad specular on white enamel wall, low roughness glass coat",
+          "region": {
+            "x": 0.56,
+            "y": 0.36,
+            "width": 0.2,
+            "height": 0.34,
+            "units": "normalized"
+          },
+          "scale": "macro",
+          "affects": "roughness",
+          "mapsTo": {
+            "type": "localOverride",
+            "ref": "enamel-glass-coat"
+          },
+          "evidenceRef": "analysis/crop2x.png",
+          "confidence": 0.75,
+          "realization": "unreported"
+        },
+        {
+          "id": "rim-gloss",
+          "kind": "gloss",
+          "description": "Thin highlight streak along top of black bead",
+          "region": {
+            "x": 0.55,
+            "y": 0.335,
+            "width": 0.225,
+            "height": 0.012,
+            "units": "normalized"
+          },
+          "scale": "micro",
+          "affects": "roughness",
+          "mapsTo": {
+            "type": "localOverride",
+            "ref": "rim-highlight-streak"
+          },
+          "evidenceRef": "detail-inventory/rim.png",
+          "confidence": 0.7,
+          "realization": "unreported"
+        },
+        {
+          "id": "skull-decal",
+          "kind": "decal",
+          "description": "Black skull side profile (faces camera-left, open jaw), ~0.5 D wide, centred ~0.48 H",
+          "region": {
+            "x": 0.61,
+            "y": 0.43,
+            "width": 0.105,
+            "height": 0.2,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "albedo",
+          "mapsTo": {
+            "type": "localOverride",
+            "ref": "skull-print"
+          },
+          "evidenceRef": "detail-inventory/decal.png",
+          "confidence": 0.9,
+          "realization": "unreported"
+        },
+        {
+          "id": "decal-lettering",
+          "kind": "linework",
+          "description": "White hand lettering 'DECAF!' / 'PANDCO' with two underline strokes inside the skull cranium",
+          "region": {
+            "x": 0.65,
+            "y": 0.45,
+            "width": 0.065,
+            "height": 0.09,
+            "units": "normalized"
+          },
+          "scale": "micro",
+          "affects": "albedo",
+          "mapsTo": {
+            "type": "localOverride",
+            "ref": "lettering-knockout"
+          },
+          "evidenceRef": "detail-inventory/decal.png",
+          "confidence": 0.85,
+          "realization": "unreported"
+        },
+        {
+          "id": "sunburst-mark",
+          "kind": "decal",
+          "description": "Partial radial sunburst strokes on far-left limb (wraps toward the hidden side)",
+          "region": {
+            "x": 0.56,
+            "y": 0.46,
+            "width": 0.02,
+            "height": 0.13,
+            "units": "normalized"
+          },
+          "scale": "micro",
+          "affects": "albedo",
+          "mapsTo": {
+            "type": "localOverride",
+            "ref": "sunburst-strokes"
+          },
+          "evidenceRef": "detail-inventory/body-left.png",
+          "confidence": 0.5,
+          "realization": "unreported"
+        },
+        {
+          "id": "base-chip",
+          "kind": "chip",
+          "description": "Enamel chip at base edge exposing dark steel, front-left",
+          "region": {
+            "x": 0.58,
+            "y": 0.69,
+            "width": 0.025,
+            "height": 0.01,
+            "units": "normalized"
+          },
+          "scale": "micro",
+          "affects": "albedo+roughness+metalness",
+          "mapsTo": {
+            "type": "localOverride",
+            "ref": "base-edge-chip"
+          },
+          "evidenceRef": "detail-inventory/base.png",
+          "confidence": 0.7,
+          "realization": "unreported"
+        },
+        {
+          "id": "base-fillet",
+          "kind": "bevel",
+          "description": "Lightly radiused bottom corner of the body",
+          "region": {
+            "x": 0.56,
+            "y": 0.69,
+            "width": 0.2,
+            "height": 0.015,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "silhouette",
+          "mapsTo": {
+            "type": "localFeature",
+            "ref": "base-corner-fillet"
+          },
+          "evidenceRef": "detail-inventory/base.png",
+          "confidence": 0.7,
+          "realization": "unreported"
+        },
+        {
+          "id": "handle-upper-joint",
+          "kind": "seam",
+          "description": "Handle upper end welded flat to wall just below rim",
+          "region": {
+            "x": 0.755,
+            "y": 0.41,
+            "width": 0.025,
+            "height": 0.03,
+            "units": "normalized"
+          },
+          "scale": "micro",
+          "affects": "silhouette",
+          "mapsTo": {
+            "type": "localFeature",
+            "ref": "handle-upper-weld"
+          },
+          "evidenceRef": "detail-inventory/handle.png",
+          "confidence": 0.8,
+          "realization": "unreported"
+        },
+        {
+          "id": "handle-lower-joint",
+          "kind": "seam",
+          "description": "Handle lower end welded to wall in bottom fifth",
+          "region": {
+            "x": 0.755,
+            "y": 0.64,
+            "width": 0.025,
+            "height": 0.03,
+            "units": "normalized"
+          },
+          "scale": "micro",
+          "affects": "silhouette",
+          "mapsTo": {
+            "type": "localFeature",
+            "ref": "handle-lower-weld"
+          },
+          "evidenceRef": "detail-inventory/handle.png",
+          "confidence": 0.8,
+          "realization": "unreported"
+        },
+        {
+          "id": "mug-opening",
+          "kind": "hole",
+          "description": "Open top cavity (interior inferred, white enamel)",
+          "region": {
+            "x": 0.55,
+            "y": 0.335,
+            "width": 0.225,
+            "height": 0.02,
+            "units": "normalized"
+          },
+          "scale": "macro",
+          "affects": "topology",
+          "mapsTo": {
+            "type": "localFeature",
+            "ref": "interior-cavity"
+          },
+          "evidenceRef": "analysis/crop2x.png",
+          "confidence": 0.6,
+          "realization": "unreported"
+        }
+      ]
+    },
+    "anatomy": {
+      "applies": false,
+      "styleHeads": 0.0,
+      "proportions": {
+        "headUnit": 0.0,
+        "torso": 0.0,
+        "legs": 0.0,
+        "shoulderWidth": 0.0,
+        "hipWidth": 0.0
+      },
+      "pose": {
+        "type": "unassessed",
+        "jointAngles": {}
+      },
+      "faceLandmarks": {
+        "eyeLine": 0.0,
+        "eyeSpacing": 0.0,
+        "noseBase": 0.0,
+        "mouthLine": 0.0,
+        "hairline": 0.0
+      },
+      "features": [],
+      "confidence": 0.0,
+      "note": "Only meaningful when objectClass.primaryDomain is character or hybrid. Set applies=true and fill from forge/stage1_intake/extract_landmarks.py. See grimoire/character/reconstruction.md and grimoire/character/likeness_maximization.md."
+    },
+    "sourceImage": "reference/reference.jpg",
+    "resolvedUnknowns": [
+      {
+        "unknown": "Rear side (azimuth 90-270 deg from camera) unseen: assume plain white enamel except the partial sunburst mark.",
+        "resolution": "assumed; flagged in RESULT.md",
+        "confidence": 0.5
+      },
+      {
+        "unknown": "Interior unseen: assume white enamel interior, black rim bead continuous.",
+        "resolution": "assumed; flagged in RESULT.md",
+        "confidence": 0.5
+      },
+      {
+        "unknown": "Exact sunburst mark shape: only ~8 strokes on the visible limb; reconstructed as radial strokes (low confidence).",
+        "resolution": "assumed; flagged in RESULT.md",
+        "confidence": 0.5
+      },
+      {
+        "unknown": "Absolute scale: assume standard 350 ml camp mug, body diameter 8.5 cm, height 8.0 cm (scene units: 1 unit = 10 cm).",
+        "resolution": "assumed; flagged in RESULT.md",
+        "confidence": 0.5
+      }
+    ]
+  },
+  "qualityContract": {
+    "qualityBar": "moderate",
+    "definitionOfDone": [
+      "Straight white cylinder body with H/D ~1.0 and black rolled bead overhanging ~5% per side, viewed from the fitted camera, silhouette IoU >= 0.9 vs isolated reference.",
+      "Open D-loop round-section handle on +X, top joint just below the rim, bottom joint in the bottom fifth, reach ~0.40 D, visible negative space inside the loop.",
+      "Skull decal with white DECAF!/PANDCO lettering projected from the reference pixels at the observed placement and size, legible in the 2x crop.",
+      "White gloss enamel (dielectric, roughness ~0.3) and black gloss rim; no metallic look."
+    ],
+    "minimumSpecDepth": {
+      "macroComponents": 2,
+      "mesoComponents": 3,
+      "microFeatureGroups": 2,
+      "materialLayers": 2,
+      "repetitionSystems": 0,
+      "reviewViewpoints": 3
+    },
+    "featureGroups": [
+      {
+        "id": "overall-silhouette",
+        "name": "Overall silhouette and proportions",
+        "required": true,
+        "qualityCriteria": [
+          "Bounding shape, dominant curves, negative spaces, and scale relationships are explicitly described.",
+          "Body H/D 1.0 +/- 0.05; rim bead overhang 4-6% of radius; handle reach 0.38-0.42 D."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "model reads as a generic placeholder instead of the reference object",
+          "major proportions are guessed without evidence"
+        ]
+      },
+      {
+        "id": "primary-structure",
+        "name": "Primary structure and hierarchy",
+        "required": true,
+        "qualityCriteria": [
+          "Major parts, joints, seams, contact points, and parent-child relationships are named before code generation."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "large visible parts are merged into one mesh",
+          "component hierarchy is too shallow for the observed complexity"
+        ]
+      },
+      {
+        "id": "attachment-joint-correctness",
+        "name": "Attachment and joint correctness",
+        "required": true,
+        "qualityCriteria": [
+          "Every visible child appendage, branch, limb, handle, connector, tube, cable, horn, wing, leg, or hinged part has an attachment contract with parent socket, localStart/localEnd, contact type, embed/overlap, and gap tolerance."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "child part root floats away from the parent",
+          "branch/limb/tube is centered in space instead of pivoting from its root",
+          "parent-child transform mixes world and local coordinates"
+        ]
+      },
+      {
+        "id": "surface-material-response",
+        "name": "Surface material response",
+        "required": true,
+        "qualityCriteria": [
+          "Albedo zones, roughness, normal/bump/displacement intent, cavity dirt, edge wear, and local overrides are specified where visible.",
+          "Important materials define independent albedo, roughness, height/normal, and AO responses instead of reusing one texture for unrelated PBR channels.",
+          "Surface response is decomposed into macro, meso, and micro frequency bands with scale and amplitude tied to object scale."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "surface looks like flat plastic",
+          "local material variation is missing or not tied to image evidence"
+        ]
+      },
+      {
+        "id": "reference-lookdev",
+        "name": "Reference color, material, and lighting response",
+        "required": true,
+        "qualityCriteria": [
+          "Material-pass names the reference-derived albedo palette, roughness variation, tactile normal/bump/displacement response, and local masks.",
+          "When a source image is available, run reference PBR extraction and require confidence >= 0.7 before treating maps as implementation-ready.",
+          "Lighting-pass names key/fill/rim or environment light, exposure, tone mapping, background, and contact shadow behavior.",
+          "Neutral, grazing-angle, and reference-matched renders prove that surface relief survives relighting and is not painted into albedo."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "model has acceptable shape but reads as flat shaded or plastic",
+          "colors are a generic average instead of reference-observed local color zones",
+          "lighting is evenly ambient and cannot reproduce the source value range"
+        ]
+      }
+    ],
+    "visualDeltaChecks": [
+      "silhouette and negative-space delta",
+      "component hierarchy depth delta",
+      "repetition density and distribution delta",
+      "material albedo/roughness/normal response delta",
+      "local feature placement and scale delta"
+    ],
+    "antiShallowSpecRules": [
+      "Do not proceed to code if qualityContract.qualityBar is unassessed.",
+      "Do not proceed to code if the spec only contains a root component for a moderate or complex object.",
+      "Do not proceed to code if required featureGroups are not represented by componentTree, materials, or repetitionSystems.",
+      "Do not proceed to code if visible local features are described only in prose and not attached to components/materials/evidenceRefs.",
+      "Do not proceed past structural-pass if attached child parts lack attachment.parentSocket, localStart, localEnd, embedDepth/overlap, and gapTolerance.",
+      "Do not pass material look-dev when albedo is reused as roughness, height, normal, or AO.",
+      "Do not pass material look-dev without macro, meso, and micro surface frequency bands for close-up materials.",
+      "Do not pass reference-fidelity material look-dev from a source image without usable referencePbr maps or an explicit documented limitation.",
+      "Do not patch a spec with extracted PBR maps when extraction confidence is below the target threshold unless the user explicitly accepts lower fidelity.",
+      "Do not place adjacent separate-geometry parts below 0.02 world-unit seam overlap (source: grimoire/build/geometry_patterns.md).",
+      "Do not satisfy raised or recessed relief, fasteners, or grip structure with a map alone when the feature affects form; use geometry or displacement (source: grimoire/build/geometry_patterns.md).",
+      "Adjacent components must overlap by at least 0.02 world units at shared seams (source: grimoire/build/geometry_patterns.md).",
+      "Raised or recessed relief and fasteners must be geometry, instanced micro-parts, or displacement; a map alone is an approximation (source: grimoire/build/geometry_patterns.md)."
+    ],
+    "mustNotDo": [
+      "Do not proceed to code if qualityContract.qualityBar is unassessed.",
+      "Do not proceed to code if the spec only contains a root component for a moderate or complex object.",
+      "Do not proceed to code if required featureGroups are not represented by componentTree, materials, or repetitionSystems.",
+      "Do not proceed to code if visible local features are described only in prose and not attached to components/materials/evidenceRefs.",
+      "Do not proceed past structural-pass if attached child parts lack attachment.parentSocket, localStart, localEnd, embedDepth/overlap, and gapTolerance.",
+      "Do not pass material look-dev when albedo is reused as roughness, height, normal, or AO.",
+      "Do not pass material look-dev without macro, meso, and micro surface frequency bands for close-up materials.",
+      "Do not pass reference-fidelity material look-dev from a source image without usable referencePbr maps or an explicit documented limitation.",
+      "Do not patch a spec with extracted PBR maps when extraction confidence is below the target threshold unless the user explicitly accepts lower fidelity.",
+      "Do not place adjacent separate-geometry parts below 0.02 world-unit seam overlap (source: grimoire/build/geometry_patterns.md).",
+      "Do not satisfy raised or recessed relief, fasteners, or grip structure with a map alone when the feature affects form; use geometry or displacement (source: grimoire/build/geometry_patterns.md).",
+      "Adjacent components must overlap by at least 0.02 world units at shared seams (source: grimoire/build/geometry_patterns.md).",
+      "Raised or recessed relief and fasteners must be geometry, instanced micro-parts, or displacement; a map alone is an approximation (source: grimoire/build/geometry_patterns.md)."
+    ]
+  },
+  "qualityTargets": {
+    "targetFidelity": 0.7,
+    "mustMatch": [
+      "macro silhouette and proportions",
+      "primary material albedo/roughness response",
+      "reference-derived PBR material response at or above 0.7 confidence when source pixels are usable",
+      "most recognizable local features"
+    ],
+    "niceToHave": [
+      "micro scratches, stains, chips, and dirt masks",
+      "secondary lighting match"
+    ],
+    "fpsTarget": 60,
+    "reviewViewpoints": [
+      "front",
+      "three-quarter",
+      "side",
+      "thickness-axis",
+      "long-axis"
+    ]
+  },
+  "selfCorrectLoop": {
+    "enabled": true,
+    "visualAcceptance": {
+      "reviewer": "ai-vision",
+      "threshold": 0.7,
+      "comparisonArtifactRequired": true,
+      "layerScoresRequired": true,
+      "codePixelDiffIsAcceptanceAuthority": false,
+      "scoringRule": "AI vision must inspect a side-by-side reference/render sheet and score the current pass from 0 to 1. Pixel-diff code may assist diagnostics but cannot approve a pass.",
+      "requiredLayerScores": [
+        "silhouetteProportion",
+        "componentStructure",
+        "formDetail",
+        "materialSurface",
+        "lightingCamera"
+      ],
+      "featureReviewPolicy": {
+        "enabled": true,
+        "reviewUnit": "semantic-subsystem",
+        "maxCriticalFeaturesPerPass": 5,
+        "maxImportantFeaturesPerPass": 3,
+        "criticalDefaultThreshold": 0.8,
+        "importantAverageThreshold": 0.65,
+        "adaptiveEscalation": true,
+        "singleImagePairOnly": true,
+        "selectionRule": "Choose only the most visually salient, identity-defining, user-prioritized, or high-risk semantic systems. Group repeated parts instead of reviewing every mesh. AI vision scores every selected feature from the same full reference/render pair."
+      }
+    },
+    "reviewAfterPasses": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "surface-pass",
+      "lighting-pass",
+      "interaction-pass",
+      "optimization-pass"
+    ],
+    "allowedActions": [
+      "continue",
+      "refine-spec",
+      "refine-code",
+      "request-input",
+      "stop"
+    ],
+    "specRefineTriggers": [
+      "missing component",
+      "wrong primitive family",
+      "wrong proportions",
+      "material layer under-specified",
+      "local feature not traceable to viewEvidence",
+      "reference ambiguity discovered during implementation"
+    ],
+    "codeRefineTriggers": [
+      "spec is adequate but generated geometry/material does not match",
+      "browser render differs from reference",
+      "performance budget exceeded",
+      "lighting hides geometry or material response"
+    ],
+    "stopCriteria": [
+      "target fidelity reached or user accepts current approximation",
+      "remaining gaps require new reference images or manual art"
+    ],
+    "screenshotPolicy": {
+      "requiredForPasses": [
+        "blockout",
+        "structural-pass",
+        "form-refinement",
+        "material-pass",
+        "surface-pass",
+        "lighting-pass",
+        "interaction-pass"
+      ],
+      "preferredCapture": "in-app-browser-screenshot",
+      "fallbackCapture": "user-supplied-screenshot-path",
+      "minimumEvidence": "Each visual pass needs a reference image, rendered screenshot, side-by-side comparison sheet, AI vision score, layer scores, and critique before choosing continue.",
+      "reviewPairRule": "Compare the same camera/viewpoint whenever possible; do not judge a front reference against a random render angle.",
+      "acceptanceAuthority": "AI vision review of the comparison sheet. Code-generated pixel similarity is not sufficient evidence."
+    }
+  },
+  "featureReviewTargets": [
+    {
+      "id": "body-silhouette-proportion",
+      "name": "Straight cylinder body, H/D ~1.0, radiused base corner",
+      "tier": "critical",
+      "passIds": [
+        "blockout",
+        "structural-pass",
+        "form-refinement"
+      ],
+      "minimumScore": 0.8,
+      "mustPass": true,
+      "componentRefs": [
+        "body-shell"
+      ],
+      "evidenceRefs": [
+        "full-object",
+        "analysis/ref_mask_full.png"
+      ]
+    },
+    {
+      "id": "black-rim-bead",
+      "name": "Black rolled rim bead overhanging the wall",
+      "tier": "critical",
+      "passIds": [
+        "structural-pass",
+        "form-refinement",
+        "material-pass"
+      ],
+      "minimumScore": 0.8,
+      "mustPass": true,
+      "componentRefs": [
+        "rim-bead"
+      ],
+      "evidenceRefs": [
+        "detail-inventory/rim.png"
+      ]
+    },
+    {
+      "id": "d-ring-handle",
+      "name": "D-ring strap handle on +X: top arm under the rim, outer side, angled lower arm, straight side on the wall, open negative space",
+      "tier": "critical",
+      "passIds": [
+        "blockout",
+        "structural-pass",
+        "form-refinement"
+      ],
+      "minimumScore": 0.8,
+      "mustPass": true,
+      "componentRefs": [
+        "handle"
+      ],
+      "evidenceRefs": [
+        "detail-inventory/handle.png"
+      ]
+    },
+    {
+      "id": "skull-decal",
+      "name": "Black skull profile print with white DECAF!/PANDCO lettering, facing the camera",
+      "tier": "critical",
+      "passIds": [
+        "material-pass",
+        "lighting-pass"
+      ],
+      "minimumScore": 0.8,
+      "mustPass": true,
+      "componentRefs": [
+        "decal-shell"
+      ],
+      "evidenceRefs": [
+        "detail-inventory/decal.png"
+      ]
+    },
+    {
+      "id": "enamel-palette",
+      "name": "White gloss enamel body vs black gloss rim, dielectric (not metallic)",
+      "tier": "critical",
+      "passIds": [
+        "material-pass",
+        "lighting-pass"
+      ],
+      "minimumScore": 0.75,
+      "mustPass": true,
+      "componentRefs": [
+        "body-shell",
+        "rim-bead",
+        "handle"
+      ],
+      "evidenceRefs": [
+        "analysis/crop2x.png"
+      ]
+    },
+    {
+      "id": "secondary-marks",
+      "name": "Sunburst on the left limb and base chip",
+      "tier": "important",
+      "passIds": [
+        "material-pass"
+      ],
+      "minimumScore": 0.5,
+      "mustPass": false,
+      "componentRefs": [
+        "decal-shell",
+        "base-chip"
+      ],
+      "evidenceRefs": [
+        "analysis/leftedge3x.png",
+        "detail-inventory/base.png"
+      ]
+    }
+  ],
+  "sculptPipeline": {
+    "passGateMode": "locked-sequential",
+    "passOrder": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "surface-pass",
+      "lighting-pass",
+      "interaction-pass",
+      "optimization-pass"
+    ],
+    "currentPass": "complete",
+    "completedPasses": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "surface-pass",
+      "lighting-pass",
+      "interaction-pass",
+      "optimization-pass"
+    ],
+    "lastCompletedPass": "optimization-pass",
+    "blockedReason": "all build passes completed",
+    "nextRequiredEvidence": []
+  },
+  "lookDevTargets": {
+    "qualityPriority": "reference-fidelity",
+    "materialPass": {
+      "albedoPaletteRequired": true,
+      "roughnessVariationRequired": true,
+      "normalOrBumpRequired": true,
+      "localOverridesRequired": true,
+      "minimumTextureResolution": 1024,
+      "preferredTextureResolution": 2048,
+      "independentMapChannels": [
+        "albedo",
+        "roughness",
+        "height",
+        "normal",
+        "ambient-occlusion"
+      ],
+      "requiredSurfaceFrequencyBands": [
+        "macro",
+        "meso",
+        "micro"
+      ],
+      "geometryReliefRequiredWhenSilhouetteAffected": true,
+      "referencePbrExtraction": {
+        "requiredWhenSourceImagePresent": true,
+        "targetThreshold": 0.7,
+        "stopOnLowConfidence": true,
+        "script": "forge/stage1_intake/extract_pbr_evidence.py",
+        "acceptedLimitation": "single-image extraction is reference-derived inference, not exact photogrammetry"
+      },
+      "mustAvoid": [
+        "single flat albedo per material",
+        "uniform roughness",
+        "albedo texture reused as roughness/height/normal/AO",
+        "single-frequency random noise",
+        "plastic-looking smooth bark, stone, cloth, foliage, or aged material",
+        "local color/detail described only in prose without material masks",
+        "claiming exact PBR recovery when confidence is below the target threshold"
+      ]
+    },
+    "lightingPass": {
+      "requiredTerms": [
+        "key light",
+        "fill light",
+        "rim or environment light",
+        "exposure",
+        "tone mapping",
+        "background",
+        "contact shadow"
+      ],
+      "mustAvoid": [
+        "ambient-only lighting",
+        "flat value range",
+        "missing contact shadow",
+        "reference lighting copied without separating material readability"
+      ]
+    },
+    "screenshotReview": [
+      "Compare albedo palette and local color zones.",
+      "Compare roughness/normal/bump response under light.",
+      "Compare cavity dirt, edge wear, stains, moss, scratches, or other local masks.",
+      "Compare key/fill/rim structure, exposure, tone mapping, background, and contact shadows.",
+      "Capture a neutral-light render to verify material readability without reference lighting.",
+      "Capture a grazing-light close-up to expose flat normals, uniform roughness, tiling, and plastic highlights.",
+      "Capture a reference-matched render from the same camera framing as the source."
+    ]
+  },
+  "actionReadiness": {
+    "contract": "Every macro/meso component should be generated as a stable named Object3D pivot node with a mesh child, action metadata, optional sockets, collider proxy, and destruction metadata.",
+    "defaultRigType": "action-ready-static-rig",
+    "rootMotionNode": "root",
+    "requiredComponentFields": [
+      "id",
+      "parent",
+      "transform",
+      "attachment for child appendages, connectors, limbs, tubes, handles, legs, horns, wings, branches, or cables",
+      "actionProfile.animationRole",
+      "actionProfile.pivot",
+      "actionProfile.collider",
+      "actionProfile.destruction"
+    ],
+    "transformChannels": [
+      "translate",
+      "rotate",
+      "scale",
+      "bend",
+      "twist",
+      "detach",
+      "visibility",
+      "material-state"
+    ],
+    "authoringRules": [
+      "Do not collapse independently movable parts into one mesh.",
+      "Put transforms on component pivot groups, not only on raw meshes.",
+      "For attached child parts, put the pivot at the semantic root/socket and build visible geometry from localStart to localEnd.",
+      "Represent hinge, socket, detachable, and breakable intent even when no animation is implemented yet.",
+      "Use simplified collider proxies for runtime physics instead of visual mesh colliders by default."
+    ],
+    "destructionPolicy": {
+      "defaultBreakable": false,
+      "fractureGroupNaming": "Use stable semantic names such as body-shell, left-hinge, glass-panel, branch-segment.",
+      "debrisStrategy": "Prefer detachable component groups and a small number of procedural fragments over random mesh explosion."
+    }
+  },
+  "assumptions": [
+    "RESOLVED-UNKNOWN (assumed, single view): Rear side (azimuth 90-270 deg from camera) unseen: assume plain white enamel except the partial sunburst mark.",
+    "RESOLVED-UNKNOWN (assumed, single view): Interior unseen: assume white enamel interior, black rim bead continuous.",
+    "RESOLVED-UNKNOWN (assumed, single view): Exact sunburst mark shape: only ~8 strokes on the visible limb; reconstructed as radial strokes (low confidence).",
+    "RESOLVED-UNKNOWN (assumed, single view): Absolute scale: assume standard 350 ml camp mug, body diameter 8.5 cm, height 8.0 cm (scene units: 1 unit = 10 cm)."
+  ],
+  "coordinateFrame": {
+    "front": "+Z = side facing the reference camera (decal centre)",
+    "up": "+Y",
+    "right": "+X = handle side",
+    "origin": "base centre on the table",
+    "scaleReference": "1 unit ~ 10 cm; body diameter 0.85 = 259 reference px",
+    "notes": "handle at +X appears on the right of the reference"
+  },
+  "silhouette": {
+    "boundingShape": "upright cylinder 0.85 D x 0.86 H with a D-loop on +X (total width 1.17 = 379 px)",
+    "aspectRatios": [
+      {
+        "name": "height/bodyDiameter",
+        "value": 1.012
+      },
+      {
+        "name": "rimDiameter/bodyDiameter",
+        "value": 1.093
+      },
+      {
+        "name": "handleReach/bodyDiameter",
+        "value": 0.417
+      },
+      {
+        "name": "handleUpperJoint/height",
+        "value": 0.76
+      },
+      {
+        "name": "handleLowerJoint/height",
+        "value": 0.12
+      }
+    ],
+    "symmetry": "radial body; bilateral about the XY plane with the handle",
+    "dominantCurves": [
+      "straight vertical wall",
+      "flat elliptical rim (pitch ~2 deg)",
+      "D-loop handle"
+    ],
+    "negativeSpaces": [
+      "handle loop interior (~0.27 x 0.40 units)"
+    ],
+    "landmarks": [
+      "rim top y=0.86",
+      "handle upper weld y=0.650",
+      "handle lower weld y=0.098",
+      "skull centre azimuth 0, y=0.43"
+    ]
+  },
+  "viewEvidence": [
+    {
+      "id": "full-object",
+      "view": "primary (reference, yaw 0, pitch ~2 deg, telephoto)",
+      "imageRegion": {
+        "x": 0.55,
+        "y": 0.34,
+        "width": 0.3,
+        "height": 0.365,
+        "units": "normalized"
+      },
+      "observations": [
+        "body 259 px wide, 262 px tall incl. bead",
+        "bead 283 px wide",
+        "handle outer edge x=1084, 107 px beyond wall"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "analysis/crop2x.png",
+      "view": "primary (crop)",
+      "imageRegion": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0,
+        "units": "normalized"
+      },
+      "observations": [
+        "2x crop of the mug"
+      ],
+      "confidence": 0.8
+    },
+    {
+      "id": "analysis/leftedge3x.png",
+      "view": "primary (crop)",
+      "imageRegion": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0,
+        "units": "normalized"
+      },
+      "observations": [
+        "3x crop of the left limb (sunburst)"
+      ],
+      "confidence": 0.8
+    },
+    {
+      "id": "analysis/ref_mask_full.png",
+      "view": "primary (crop)",
+      "imageRegion": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0,
+        "units": "normalized"
+      },
+      "observations": [
+        "authored subject mask (tools/make_mask.py)"
+      ],
+      "confidence": 0.8
+    },
+    {
+      "id": "detail-inventory/rim.png",
+      "view": "primary (crop)",
+      "imageRegion": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0,
+        "units": "normalized"
+      },
+      "observations": [
+        "rim zone"
+      ],
+      "confidence": 0.8
+    },
+    {
+      "id": "detail-inventory/handle.png",
+      "view": "primary (crop)",
+      "imageRegion": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0,
+        "units": "normalized"
+      },
+      "observations": [
+        "handle zone"
+      ],
+      "confidence": 0.8
+    },
+    {
+      "id": "detail-inventory/decal.png",
+      "view": "primary (crop)",
+      "imageRegion": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0,
+        "units": "normalized"
+      },
+      "observations": [
+        "decal zone"
+      ],
+      "confidence": 0.8
+    },
+    {
+      "id": "detail-inventory/base.png",
+      "view": "primary (crop)",
+      "imageRegion": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0,
+        "units": "normalized"
+      },
+      "observations": [
+        "base zone"
+      ],
+      "confidence": 0.8
+    },
+    {
+      "id": "detail-inventory/body-left.png",
+      "view": "primary (crop)",
+      "imageRegion": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0,
+        "units": "normalized"
+      },
+      "observations": [
+        "left wall zone"
+      ],
+      "confidence": 0.8
+    },
+    {
+      "id": "projection/decal_uv.png",
+      "view": "primary (crop)",
+      "imageRegion": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0,
+        "units": "normalized"
+      },
+      "observations": [
+        "baked decal projection"
+      ],
+      "confidence": 0.8
+    }
+  ],
+  "componentTree": [
+    {
+      "id": "body-shell",
+      "name": "Mug body shell (pressed steel, white enamel)",
+      "level": "macro",
+      "role": "body",
+      "importance": 1.0,
+      "confidence": 0.85,
+      "primitive": "lathe",
+      "topologyClass": "continuous-sculpt",
+      "topologyRationale": "Revolved thin-walled vessel: one continuous surface of revolution (floor, radiused base corner, straight wall, flared lip) -> lathe, never a cylinder primitive.",
+      "geometryDescriptor": {
+        "topologyIntent": "thin-walled surface of revolution with inner and outer skin",
+        "edgeTreatment": {
+          "type": "fillet",
+          "bevelRadius": 0.02,
+          "segments": 4
+        },
+        "deformationStack": [],
+        "uvStrategy": "lathe (u = azimuth, v = profile length)",
+        "normalStrategy": "vertex normals from lathe",
+        "latheProfile": {
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.4,
+              0.0
+            ],
+            [
+              0.413,
+              0.0015
+            ],
+            [
+              0.4205,
+              0.006
+            ],
+            [
+              0.424,
+              0.013
+            ],
+            [
+              0.425,
+              0.022
+            ],
+            [
+              0.425,
+              0.7861
+            ],
+            [
+              0.4265,
+              0.8078
+            ],
+            [
+              0.4315,
+              0.8215
+            ],
+            [
+              0.4385,
+              0.8313
+            ],
+            [
+              0.4335,
+              0.8363
+            ],
+            [
+              0.4225,
+              0.8235
+            ],
+            [
+              0.4185,
+              0.8038
+            ],
+            [
+              0.417,
+              0.7861
+            ],
+            [
+              0.417,
+              0.0405
+            ],
+            [
+              0.4164,
+              0.0348
+            ],
+            [
+              0.4148,
+              0.0293
+            ],
+            [
+              0.4122,
+              0.0242
+            ],
+            [
+              0.4086,
+              0.0197
+            ],
+            [
+              0.4042,
+              0.0159
+            ],
+            [
+              0.3992,
+              0.0131
+            ],
+            [
+              0.3937,
+              0.0113
+            ],
+            [
+              0.388,
+              0.0105
+            ],
+            [
+              0.387,
+              0.0105
+            ],
+            [
+              0.0,
+              0.0105
+            ]
+          ],
+          "segments": 96
+        },
+        "cavityOcclusion": {
+          "method": "vertex-colour AO bake on inner-facing lathe vertices (tools/patch_factory.py)",
+          "lipAo": 0.5,
+          "deepAo": 0.22,
+          "rampDepth": 0.22,
+          "overhangBand": {
+            "y0": 0.788,
+            "y1": 0.8121,
+            "ao": 0.5,
+            "reason": "outer lip flare under the bead overhang reads ~0.6 of wall brightness in the reference (view rows 100-108); viewer shadow normalBias 0.015 cannot resolve a 0.04 overhang"
+          },
+          "reason": "hemisphere/environment fill has no occlusion and lit the cup interior white; in the reference the interior seen through the opening is dark (rim band rows 245-254 solid)"
+        }
+      },
+      "parent": null,
+      "attachment": null,
+      "dimensions": {
+        "width": 0.85,
+        "height": 0.846,
+        "depth": 0.85,
+        "units": "scene (1 = 10 cm)",
+        "confidence": 0.85
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "root",
+        "pivot": {
+          "mode": "base",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.85
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [
+          {
+            "id": "rim-socket",
+            "localPosition": [
+              0,
+              0.8286,
+              0
+            ],
+            "localRotation": [
+              0,
+              0,
+              0
+            ],
+            "purpose": "rim bead seat"
+          },
+          {
+            "id": "handle-upper-socket",
+            "localPosition": [
+              0.391,
+              0.6367,
+              0.1907
+            ],
+            "localRotation": [
+              0,
+              0,
+              0
+            ],
+            "purpose": "handle upper weld"
+          },
+          {
+            "id": "handle-lower-socket",
+            "localPosition": [
+              0.391,
+              0.0897,
+              0.1907
+            ],
+            "localRotation": [
+              0,
+              0,
+              0
+            ],
+            "purpose": "handle lower weld"
+          },
+          {
+            "id": "decal-socket",
+            "localPosition": [
+              0,
+              0.44,
+              0
+            ],
+            "localRotation": [
+              0,
+              0,
+              0
+            ],
+            "purpose": "print carrier"
+          }
+        ],
+        "collider": {
+          "type": "cylinder",
+          "offset": [
+            0,
+            0.43,
+            0
+          ],
+          "scale": [
+            0.85,
+            0.86,
+            0.85
+          ],
+          "isTrigger": false,
+          "notes": "body proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": true,
+          "fractureGroup": "body-shell",
+          "seamRefs": [
+            "handle-upper-weld",
+            "handle-lower-weld"
+          ],
+          "detachableFragments": [
+            "handle",
+            "rim-bead"
+          ],
+          "breakImpulse": 40.0,
+          "debrisMaterial": "white-enamel"
+        }
+      },
+      "material": "white-enamel",
+      "materialLayers": [
+        "white-enamel"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "base-corner-fillet",
+          "kind": "bevel",
+          "description": "radius ~0.022 at the base corner (lathe points 1-5)",
+          "effect": "geometry",
+          "evidenceRef": "detail-inventory/base.png"
+        },
+        {
+          "id": "interior-cavity",
+          "kind": "hole",
+          "description": "open top, wall 0.008 thick, inner floor at y=0.0105; interior white enamel (inferred, unseen)",
+          "effect": "geometry",
+          "evidenceRef": "analysis/crop2x.png"
+        },
+        {
+          "id": "lip-flare",
+          "kind": "ridge",
+          "description": "wall flares from r=0.425 at y=0.80 into the rolled bead (shaded band under rim, rows 255-261)",
+          "effect": "geometry",
+          "evidenceRef": "detail-inventory/rim.png"
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.3,
+        "microRoughness": 0.05,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "none: vitreous glass coat, orange-peel not resolvable at 259 px diameter (zone crops)",
+        "displacementPattern": "none",
+        "occlusionPattern": "cavity occlusion inside the cup; contact shadow under the base; shading band under the bead overhang (lighting-driven, not baked)",
+        "edgeWearPattern": "single chip at the base edge (base-chip component); no rim wear visible",
+        "notes": "tactile response is gloss only; relief would contradict the reference"
+      },
+      "evidenceRefs": [
+        "full-object",
+        "analysis/crop2x.png"
+      ],
+      "fidelityTier": "reference-fidelity",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(232, 236, 238, 1.0)",
+        "secondaryAlbedo": "rgba(162, 170, 174, 1.0)",
+        "materialClass": "ceramic",
+        "materialClassConfidence": 0.85,
+        "evidenceNote": "lit wall (740-780, 300-480) vs shaded right limb (930-965); vitreous enamel = glass coat on steel -> ceramic class"
+      }
+    },
+    {
+      "id": "rim-bead",
+      "name": "Rolled rim bead (black enamel)",
+      "level": "meso",
+      "role": "trim",
+      "importance": 0.95,
+      "confidence": 0.85,
+      "primitive": "torus",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Rolled lip is a closed round-section ring around the opening -> torus (ring-relative tube ratio).",
+      "geometryDescriptor": {
+        "topologyIntent": "round-section rolled bead",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0.0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "torus",
+        "normalStrategy": "smooth",
+        "torusTubeRatio": 0.03684
+      },
+      "parent": "body-shell",
+      "attachment": null,
+      "dimensions": {
+        "width": 0.9288,
+        "height": 0.033,
+        "depth": 0.9288,
+        "units": "scene (1 = 10 cm)",
+        "confidence": 0.85
+      },
+      "transform": {
+        "position": [
+          0,
+          0.8286,
+          0
+        ],
+        "rotation": [
+          1.5707963267948966,
+          0,
+          0
+        ],
+        "scale": [
+          0.99533,
+          0.99533,
+          0.99533
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static",
+        "pivot": {
+          "mode": "center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.85
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            0.93,
+            0.033,
+            0.93
+          ],
+          "isTrigger": false,
+          "notes": "thin ring proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "body-shell",
+          "seamRefs": [
+            "handle-upper-weld",
+            "handle-lower-weld"
+          ],
+          "detachableFragments": [
+            "handle",
+            "rim-bead"
+          ],
+          "breakImpulse": 40.0,
+          "debrisMaterial": "black-enamel"
+        }
+      },
+      "material": "black-enamel",
+      "materialLayers": [
+        "black-enamel"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "rim-rolled-bead",
+          "kind": "ridge",
+          "description": "bead major radius 0.4479, minor 0.0165; overhangs wall by 0.0394 (4.7% of D per side)",
+          "effect": "geometry",
+          "evidenceRef": "detail-inventory/rim.png"
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.35,
+        "microRoughness": 0.05,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "none (rolled steel under black enamel)",
+        "displacementPattern": "none",
+        "occlusionPattern": "self-shadow under the bead on the lip flare",
+        "edgeWearPattern": "none visible",
+        "notes": "specular streak along the crown from the key"
+      },
+      "evidenceRefs": [
+        "detail-inventory/rim.png"
+      ],
+      "fidelityTier": "reference-fidelity",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(24, 24, 27, 1.0)",
+        "secondaryAlbedo": "rgba(46, 47, 53, 1.0)",
+        "materialClass": "ceramic",
+        "materialClassConfidence": 0.85,
+        "evidenceNote": "rim rows 245-254"
+      }
+    },
+    {
+      "id": "handle",
+      "name": "D-ring strap handle (white enamel)",
+      "level": "macro",
+      "role": "handle",
+      "importance": 0.95,
+      "confidence": 0.75,
+      "primitive": "tube",
+      "topologyClass": "fiber-strand",
+      "topologyRationale": "Bent strap following a closed planar D path -> tube along the traced centreline (strap section = tube scaled 1.5x in Z).",
+      "geometryDescriptor": {
+        "topologyIntent": "open swept C-loop strap, both ends sunk 0.004 into the wall; straight side = handle-wall-strip",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0.0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "tube",
+        "normalStrategy": "smooth",
+        "tubePath": {
+          "points": [
+            [
+              0.3784,
+              0.6367,
+              0.1846
+            ],
+            [
+              0.409,
+              0.6352,
+              0.1995
+            ],
+            [
+              0.4314,
+              0.6336,
+              0.2104
+            ],
+            [
+              0.4972,
+              0.6339,
+              0.2425
+            ],
+            [
+              0.5927,
+              0.6311,
+              0.2891
+            ],
+            [
+              0.6564,
+              0.6152,
+              0.3201
+            ],
+            [
+              0.6978,
+              0.583,
+              0.3403
+            ],
+            [
+              0.7232,
+              0.5379,
+              0.3527
+            ],
+            [
+              0.7391,
+              0.4733,
+              0.3605
+            ],
+            [
+              0.7423,
+              0.4087,
+              0.3621
+            ],
+            [
+              0.7328,
+              0.3504,
+              0.3574
+            ],
+            [
+              0.7137,
+              0.2984,
+              0.3481
+            ],
+            [
+              0.6882,
+              0.2561,
+              0.3357
+            ],
+            [
+              0.6245,
+              0.2035,
+              0.3046
+            ],
+            [
+              0.5449,
+              0.1602,
+              0.2658
+            ],
+            [
+              0.4972,
+              0.1401,
+              0.2425
+            ],
+            [
+              0.4526,
+              0.1199,
+              0.2208
+            ],
+            [
+              0.4176,
+              0.1041,
+              0.2037
+            ],
+            [
+              0.3784,
+              0.0862,
+              0.1846
+            ]
+          ],
+          "radius": 0.0245,
+          "radialSegments": 16,
+          "closed": false
+        },
+        "strapSectionAspectZ": 1.0
+      },
+      "parent": "body-shell",
+      "attachment": {
+        "parentSocket": "handle-upper-socket",
+        "childSocket": "handle-root",
+        "localStart": [
+          0.391,
+          0.6367,
+          0.1907
+        ],
+        "localEnd": [
+          0.391,
+          0.0897,
+          0.1907
+        ],
+        "contactType": "weld",
+        "baseRadius": 0.0245,
+        "endRadius": 0.0245,
+        "embedDepth": 0.012,
+        "overlap": 0.012,
+        "gapTolerance": 0.002,
+        "notes": "D-ring strap: both ends and the straight side are welded to the wall at r=0.4325 (half the strap embedded). localStart/localEnd are the two weld points; the visible loop follows geometryDescriptor.tubePath (generator DEF-5 replaces it with a straight cylinder -> tools/patch_factory.py restores the authored path)."
+      },
+      "dimensions": {
+        "width": 0.35,
+        "height": 0.58,
+        "depth": 0.049,
+        "units": "scene (1 = 10 cm)",
+        "confidence": 0.75
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "grab-target",
+        "pivot": {
+          "mode": "socket",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.75
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [
+          {
+            "id": "handle-root",
+            "localPosition": [
+              0,
+              0,
+              0
+            ],
+            "localRotation": [
+              0,
+              0,
+              0
+            ],
+            "purpose": "attachment root (= upper weld)"
+          },
+          {
+            "id": "grip-point",
+            "localPosition": [
+              0.2382,
+              -0.2367,
+              0.1162
+            ],
+            "localRotation": [
+              0,
+              0,
+              0
+            ],
+            "purpose": "hand IK target on the loop's outer side"
+          }
+        ],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0.1842,
+            -0.2567,
+            0.0899
+          ],
+          "scale": [
+            0.38,
+            0.58,
+            0.08
+          ],
+          "isTrigger": true,
+          "notes": "grab volume in the handle node frame (node at the upper weld), plane at 64 deg"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": true,
+          "fractureGroup": "handle",
+          "seamRefs": [
+            "handle-upper-weld",
+            "handle-lower-weld"
+          ],
+          "detachableFragments": [
+            "handle",
+            "rim-bead"
+          ],
+          "breakImpulse": 60.0,
+          "debrisMaterial": "white-enamel"
+        }
+      },
+      "material": "white-enamel",
+      "materialLayers": [
+        "white-enamel"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "handle-upper-weld",
+          "kind": "seam",
+          "description": "upper end welded just under the rim (y=0.650)",
+          "effect": "geometry",
+          "evidenceRef": "detail-inventory/handle.png"
+        },
+        {
+          "id": "handle-lower-weld",
+          "kind": "seam",
+          "description": "lower arm meets the wall at y=0.098 with a sharp corner",
+          "effect": "geometry",
+          "evidenceRef": "detail-inventory/handle.png"
+        },
+        {
+          "id": "handle-d-loop",
+          "kind": "contour",
+          "description": "handle plane at azimuth 64 deg (yawed 26 deg toward the reference camera); top arm horizontal, rounded outer corner, outer side rho=0.84 (reach 0.40 = 0.47 D beyond the wall), lower arm angled back down",
+          "effect": "geometry",
+          "evidenceRef": "detail-inventory/handle.png"
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.3,
+        "microRoughness": 0.05,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "none",
+        "displacementPattern": "none",
+        "occlusionPattern": "contact occlusion where the strap meets the wall",
+        "edgeWearPattern": "none visible",
+        "notes": "rolled strap reads as a round section"
+      },
+      "evidenceRefs": [
+        "detail-inventory/handle.png",
+        "analysis/ref_mask_full.png"
+      ],
+      "fidelityTier": "reference-fidelity",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(232, 236, 238, 1.0)",
+        "secondaryAlbedo": "rgba(209, 217, 220, 1.0)",
+        "materialClass": "ceramic",
+        "materialClassConfidence": 0.8,
+        "evidenceNote": "handle outer side (1070-1080, 350-400)"
+      }
+    },
+    {
+      "id": "handle-wall-strip",
+      "name": "Handle straight side welded on the wall",
+      "level": "meso",
+      "role": "joint",
+      "importance": 0.7,
+      "confidence": 0.7,
+      "primitive": "capsule",
+      "topologyClass": "fiber-strand",
+      "topologyRationale": "Straight side of the D-ring: a straight round strap lying on the wall between the welds -> segment between attachment endpoints.",
+      "geometryDescriptor": {
+        "topologyIntent": "",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0.0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "body-shell",
+      "attachment": {
+        "parentSocket": "handle-lower-socket",
+        "childSocket": "strip-root",
+        "localStart": [
+          0.391,
+          0.0897,
+          0.1907
+        ],
+        "localEnd": [
+          0.391,
+          0.6367,
+          0.1907
+        ],
+        "contactType": "weld",
+        "baseRadius": 0.0245,
+        "endRadius": 0.0245,
+        "embedDepth": 0.0145,
+        "overlap": 0.0145,
+        "gapTolerance": 0.002
+      },
+      "dimensions": {
+        "width": 1,
+        "height": 1,
+        "depth": 1,
+        "units": "scene (1 = 10 cm)",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static",
+        "pivot": {
+          "mode": "socket",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.7
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "none",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "part of handle collider"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": true,
+          "fractureGroup": "handle",
+          "seamRefs": [
+            "handle-upper-weld",
+            "handle-lower-weld"
+          ],
+          "detachableFragments": [
+            "handle",
+            "rim-bead"
+          ],
+          "breakImpulse": 40.0,
+          "debrisMaterial": "white-enamel"
+        }
+      },
+      "material": "white-enamel",
+      "materialLayers": [
+        "white-enamel"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "handle-straight-side",
+          "kind": "seam",
+          "description": "strip on the wall at azimuth 64 deg, visible inside the body silhouette at 958-976 px",
+          "effect": "geometry",
+          "evidenceRef": "detail-inventory/handle.png"
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.3,
+        "microRoughness": 0.05,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "none: vitreous glass coat, orange-peel not resolvable at 259 px diameter (zone crops)",
+        "displacementPattern": "none",
+        "occlusionPattern": "cavity occlusion inside the cup; contact shadow under the base; shading band under the bead overhang (lighting-driven, not baked)",
+        "edgeWearPattern": "single chip at the base edge (base-chip component); no rim wear visible",
+        "notes": "tactile response is gloss only; relief would contradict the reference"
+      },
+      "evidenceRefs": [
+        "detail-inventory/handle.png"
+      ],
+      "fidelityTier": "reference-fidelity",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(232, 236, 238, 1.0)",
+        "secondaryAlbedo": "rgba(200, 206, 210, 1.0)",
+        "materialClass": "ceramic",
+        "materialClassConfidence": 0.7,
+        "evidenceNote": "strip on the wall (958-976 px)"
+      }
+    },
+    {
+      "id": "handle-upper-weld-pad",
+      "name": "Handle upper weld pad",
+      "level": "meso",
+      "role": "joint",
+      "importance": 0.6,
+      "confidence": 0.6,
+      "primitive": "ellipsoid",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Strap end pressed flat against the wall at the weld: a flattened ellipsoid pad straddling the wall surface.",
+      "geometryDescriptor": {
+        "topologyIntent": "",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0.0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry",
+        "decimate": {
+          "targetRatio": 0.25
+        },
+        "shadowCaster": false,
+        "optimizationNote": "embedded inside the strap ends; 1216 -> ~300 tris, no shadow pass (optimization-pass)"
+      },
+      "parent": "body-shell",
+      "attachment": {
+        "parentSocket": "handle-upper-socket",
+        "childSocket": "handle-upper-weld-pad-root",
+        "localStart": [
+          0.3874,
+          0.6367,
+          0.1889
+        ],
+        "localEnd": [
+          0.3874,
+          0.6367,
+          0.1889
+        ],
+        "contactType": "weld",
+        "baseRadius": 0.03,
+        "endRadius": 0.03,
+        "embedDepth": 0.008,
+        "overlap": 0.008,
+        "gapTolerance": 0.002
+      },
+      "dimensions": {
+        "width": 0.026,
+        "height": 0.05,
+        "depth": 0.046,
+        "units": "scene (1 = 10 cm)",
+        "confidence": 0.6
+      },
+      "transform": {
+        "position": [
+          0.3874,
+          0.6367,
+          0.1889
+        ],
+        "rotation": [
+          0,
+          -0.4538,
+          0
+        ],
+        "scale": [
+          0.026,
+          0.05,
+          0.046
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static",
+        "pivot": {
+          "mode": "socket",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.6
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "none",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "part of handle collider"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": true,
+          "fractureGroup": "handle",
+          "seamRefs": [
+            "handle-upper-weld",
+            "handle-lower-weld"
+          ],
+          "detachableFragments": [
+            "handle",
+            "rim-bead"
+          ],
+          "breakImpulse": 40.0,
+          "debrisMaterial": "white-enamel"
+        }
+      },
+      "material": "white-enamel",
+      "materialLayers": [
+        "white-enamel"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "handle-upper-weld-pad",
+          "kind": "seam",
+          "description": "flattened strap end on the wall (kept within the 0.0245 strap radius: a 0.03 half-width poked out as a knob in structural run 1)",
+          "effect": "geometry",
+          "evidenceRef": "detail-inventory/handle.png"
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.3,
+        "microRoughness": 0.05,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "none: vitreous glass coat, orange-peel not resolvable at 259 px diameter (zone crops)",
+        "displacementPattern": "none",
+        "occlusionPattern": "cavity occlusion inside the cup; contact shadow under the base; shading band under the bead overhang (lighting-driven, not baked)",
+        "edgeWearPattern": "single chip at the base edge (base-chip component); no rim wear visible",
+        "notes": "tactile response is gloss only; relief would contradict the reference"
+      },
+      "evidenceRefs": [
+        "detail-inventory/handle.png"
+      ],
+      "fidelityTier": "reference-fidelity",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(232, 236, 238, 1.0)",
+        "secondaryAlbedo": "rgba(200, 206, 210, 1.0)",
+        "materialClass": "ceramic",
+        "materialClassConfidence": 0.7,
+        "evidenceNote": "same enamel as handle"
+      }
+    },
+    {
+      "id": "handle-lower-weld-pad",
+      "name": "Handle lower weld pad",
+      "level": "meso",
+      "role": "joint",
+      "importance": 0.6,
+      "confidence": 0.6,
+      "primitive": "ellipsoid",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Strap end pressed flat against the wall at the weld: a flattened ellipsoid pad straddling the wall surface.",
+      "geometryDescriptor": {
+        "topologyIntent": "",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0.0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry",
+        "decimate": {
+          "targetRatio": 0.25
+        },
+        "shadowCaster": false,
+        "optimizationNote": "embedded inside the strap ends; 1216 -> ~300 tris, no shadow pass (optimization-pass)"
+      },
+      "parent": "body-shell",
+      "attachment": {
+        "parentSocket": "handle-lower-socket",
+        "childSocket": "handle-lower-weld-pad-root",
+        "localStart": [
+          0.3874,
+          0.0897,
+          0.1889
+        ],
+        "localEnd": [
+          0.3874,
+          0.0897,
+          0.1889
+        ],
+        "contactType": "weld",
+        "baseRadius": 0.03,
+        "endRadius": 0.03,
+        "embedDepth": 0.008,
+        "overlap": 0.008,
+        "gapTolerance": 0.002
+      },
+      "dimensions": {
+        "width": 0.026,
+        "height": 0.05,
+        "depth": 0.046,
+        "units": "scene (1 = 10 cm)",
+        "confidence": 0.6
+      },
+      "transform": {
+        "position": [
+          0.3874,
+          0.0897,
+          0.1889
+        ],
+        "rotation": [
+          0,
+          -0.4538,
+          0
+        ],
+        "scale": [
+          0.026,
+          0.05,
+          0.046
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static",
+        "pivot": {
+          "mode": "socket",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.6
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "none",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "part of handle collider"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": true,
+          "fractureGroup": "handle",
+          "seamRefs": [
+            "handle-upper-weld",
+            "handle-lower-weld"
+          ],
+          "detachableFragments": [
+            "handle",
+            "rim-bead"
+          ],
+          "breakImpulse": 40.0,
+          "debrisMaterial": "white-enamel"
+        }
+      },
+      "material": "white-enamel",
+      "materialLayers": [
+        "white-enamel"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "handle-lower-weld-pad",
+          "kind": "seam",
+          "description": "flattened strap end on the wall (kept within the 0.0245 strap radius: a 0.03 half-width poked out as a knob in structural run 1)",
+          "effect": "geometry",
+          "evidenceRef": "detail-inventory/handle.png"
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.3,
+        "microRoughness": 0.05,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "none: vitreous glass coat, orange-peel not resolvable at 259 px diameter (zone crops)",
+        "displacementPattern": "none",
+        "occlusionPattern": "cavity occlusion inside the cup; contact shadow under the base; shading band under the bead overhang (lighting-driven, not baked)",
+        "edgeWearPattern": "single chip at the base edge (base-chip component); no rim wear visible",
+        "notes": "tactile response is gloss only; relief would contradict the reference"
+      },
+      "evidenceRefs": [
+        "detail-inventory/handle.png"
+      ],
+      "fidelityTier": "reference-fidelity",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(232, 236, 238, 1.0)",
+        "secondaryAlbedo": "rgba(200, 206, 210, 1.0)",
+        "materialClass": "ceramic",
+        "materialClassConfidence": 0.7,
+        "evidenceNote": "same enamel as handle"
+      }
+    },
+    {
+      "id": "decal-shell",
+      "name": "Printed decal carrier (skull, lettering, sunburst)",
+      "level": "micro",
+      "role": "decal",
+      "importance": 0.95,
+      "confidence": 0.85,
+      "primitive": "cylinder",
+      "topologyClass": "material-only",
+      "topologyRationale": "Fired-on print with no relief: a thin open cylinder segment 0.0012 proud of the wall carries the projected ink alpha.",
+      "geometryDescriptor": {
+        "topologyIntent": "open cylinder segment, theta -120..60 deg, y 0.08..0.76",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0.0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "cylindrical (u = azimuth, v = height)",
+        "normalStrategy": "smooth",
+        "decalProjection": {
+          "texture": "projection/decal_uv.png",
+          "module": "src/decalTexture.ts",
+          "baker": "tools/bake_decal.py",
+          "mode": "orthographic-front-projection",
+          "thetaStartDeg": -120,
+          "thetaLengthDeg": 180,
+          "y0": 0.08,
+          "y1": 0.76,
+          "radius": 0.42619999999999997
+        }
+      },
+      "parent": "body-shell",
+      "attachment": {
+        "parentSocket": "decal-socket",
+        "childSocket": "decal-root",
+        "localStart": [
+          0,
+          0.08,
+          0
+        ],
+        "localEnd": [
+          0,
+          0.76,
+          0
+        ],
+        "contactType": "flush",
+        "baseRadius": 0.42619999999999997,
+        "endRadius": 0.42619999999999997,
+        "embedDepth": 0.0,
+        "overlap": 0.0012,
+        "gapTolerance": 0.0015,
+        "notes": "Print shell sits 0.0012 proud of the wall (flush decal); localStart/localEnd span its height on the mug axis. Not a sweep: tools/patch_factory.py builds the open cylinder segment."
+      },
+      "dimensions": {
+        "width": 0.853,
+        "height": 0.68,
+        "depth": 0.853,
+        "units": "scene (1 = 10 cm)",
+        "confidence": 0.85
+      },
+      "transform": {
+        "position": [
+          0,
+          0.42,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          0.8524,
+          0.68,
+          0.8524
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static",
+        "pivot": {
+          "mode": "center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.85
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "none",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "uses body collider"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "body-shell",
+          "seamRefs": [
+            "handle-upper-weld",
+            "handle-lower-weld"
+          ],
+          "detachableFragments": [
+            "handle",
+            "rim-bead"
+          ],
+          "breakImpulse": 40.0,
+          "debrisMaterial": "decal-ink"
+        }
+      },
+      "material": "decal-ink",
+      "materialLayers": [
+        "decal-ink"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "skull-decal-print",
+          "kind": "decal",
+          "description": "skull profile + knocked-out lettering projected from reference pixels, azimuth -29..31 deg",
+          "effect": "material",
+          "evidenceRef": "detail-inventory/decal.png"
+        },
+        {
+          "id": "sunburst-decal",
+          "kind": "decal",
+          "description": "radial sunburst centred at azimuth -76 deg, y=0.38 (redrawn, low confidence)",
+          "effect": "material",
+          "evidenceRef": "detail-inventory/body-left.png"
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.32,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "none: fired print is flush (grazing look-dev shows no relief, matching the reference)",
+        "displacementPattern": "none",
+        "occlusionPattern": "none",
+        "edgeWearPattern": "none",
+        "notes": "print boundary is an alpha mask, not relief"
+      },
+      "evidenceRefs": [
+        "detail-inventory/decal.png",
+        "projection/decal_uv.png"
+      ],
+      "fidelityTier": "reference-fidelity",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(20, 20, 22, 1.0)",
+        "secondaryAlbedo": "rgba(232, 236, 238, 0.0)",
+        "materialClass": "ceramic",
+        "materialClassConfidence": 0.8,
+        "evidenceNote": "ink core luma 25-40; knock-out = transparent"
+      }
+    },
+    {
+      "id": "base-chip",
+      "name": "Enamel chip at base edge (exposed steel)",
+      "level": "micro",
+      "role": "wear",
+      "importance": 0.4,
+      "confidence": 0.6,
+      "primitive": "ellipsoid",
+      "topologyClass": "surface-relief",
+      "topologyRationale": "Small missing-enamel patch on the base corner; a thin dark plate conforming to the wall tangent.",
+      "geometryDescriptor": {
+        "topologyIntent": "",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0.0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry",
+        "decimate": {
+          "targetRatio": 0.25
+        },
+        "shadowCaster": false,
+        "optimizationNote": "20 px sliver; 1216 -> ~300 tris, no shadow pass (optimization-pass)"
+      },
+      "parent": "body-shell",
+      "attachment": {
+        "parentSocket": "decal-socket",
+        "childSocket": "chip-root",
+        "localStart": [
+          -0.2886,
+          0.0075,
+          0.3095
+        ],
+        "localEnd": [
+          -0.2886,
+          0.0075,
+          0.3095
+        ],
+        "contactType": "flush",
+        "baseRadius": 0.0,
+        "endRadius": 0.0,
+        "embedDepth": 0.0015,
+        "overlap": 0.0015,
+        "gapTolerance": 0.002
+      },
+      "dimensions": {
+        "width": 0.11,
+        "height": 0.008,
+        "depth": 0.006,
+        "units": "scene (1 = 10 cm)",
+        "confidence": 0.6
+      },
+      "transform": {
+        "position": [
+          -0.2886,
+          0.0075,
+          0.3095
+        ],
+        "rotation": [
+          0,
+          -0.7505,
+          -0.06
+        ],
+        "scale": [
+          0.11,
+          0.008,
+          0.006
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static",
+        "pivot": {
+          "mode": "center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.6
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "none",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "none"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "body-shell",
+          "seamRefs": [
+            "handle-upper-weld",
+            "handle-lower-weld"
+          ],
+          "detachableFragments": [
+            "handle",
+            "rim-bead"
+          ],
+          "breakImpulse": 40.0,
+          "debrisMaterial": "exposed-steel"
+        }
+      },
+      "material": "exposed-steel",
+      "materialLayers": [
+        "exposed-steel"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "base-edge-chip-geo",
+          "kind": "chip",
+          "description": "thin dark sliver ~30 px long lying ON the base edge (y 0.002-0.013), slightly tilted; ellipsoid flattened against the fillet (form run 1: a box 5 px above the edge read as a floating tag)",
+          "effect": "geometry",
+          "evidenceRef": "detail-inventory/base.png"
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.55,
+        "microRoughness": 0.2,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "none at 20 px",
+        "displacementPattern": "flattened ellipsoid sliver",
+        "occlusionPattern": "none",
+        "edgeWearPattern": "exposed steel at the chip",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "detail-inventory/base.png"
+      ],
+      "fidelityTier": "reference-fidelity",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(38, 36, 34, 1.0)",
+        "secondaryAlbedo": "rgba(58, 47, 40, 1.0)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.6,
+        "evidenceNote": "chip pixels at base (745-775, 500-506)"
+      }
+    }
+  ],
+  "materials": [
+    {
+      "id": "white-enamel",
+      "name": "White vitreous enamel",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#E8ECEE",
+      "color": "#E8ECEE",
+      "albedo": {
+        "dominant": "#E8ECEE",
+        "secondary": [
+          "#E2E3E1",
+          "#C8CDD0"
+        ],
+        "samplingNotes": "lit wall 218-226 luma (cool white, b>r by 4-8), shaded right limb 130-160; de-lit albedo ~#ECECE8"
+      },
+      "colorVariation": {
+        "palette": [
+          "#E8ECEE",
+          "#E2E3E1",
+          "#C8CDD0"
+        ],
+        "pattern": "uniform (flat fired finish)",
+        "amplitude": 0.0,
+        "heightCorrelation": 0.0
+      },
+      "roughness": {
+        "base": 0.3,
+        "variation": 0.03,
+        "map": "none (uniform glass coat)",
+        "localResponse": "see localOverrides"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "clearcoat": 0.5,
+      "clearcoatRoughness": 0.12,
+      "localOverrides": [
+        {
+          "id": "enamel-glass-coat",
+          "kind": "gloss",
+          "region": "whole wall",
+          "roughness": 0.3,
+          "clearcoat": 0.5,
+          "clearcoatRoughness": 0.12,
+          "evidenceRef": "analysis/crop2x.png",
+          "notes": "broad soft highlight, no mirror reflections"
+        },
+        {
+          "id": "base-edge-chip",
+          "kind": "chip",
+          "region": "base edge azimuth -52..-34 deg",
+          "color": "#262422",
+          "metalness": 0.5,
+          "roughness": 0.55,
+          "realizedBy": "base-chip component",
+          "evidenceRef": "detail-inventory/base.png"
+        }
+      ],
+      "qualityTier": "hero",
+      "textureless": {
+        "declared": true,
+        "evidence": [
+          "Zone crops detail-inventory/body-left.png, body-right.png: wall luma varies only with lighting (smooth gradient 226 -> 130 toward the shaded limb); no grain, pores, orange-peel or speckle resolvable at 259 px diameter.",
+          "Fired vitreous enamel is a glass coat: uniform albedo, uniform low roughness."
+        ]
+      },
+      "materialEvidence": {
+        "crop": "material-evidence/white-enamel-crop.png (742,270,782,440)",
+        "pbrExtraction": {
+          "confidence": 0.716,
+          "verdict": "pass",
+          "warnings": "tiny foreground mask (crop is all subject; expected)"
+        },
+        "analyzeTexture": {
+          "tool": {
+            "finishClass": "brushed-steel",
+            "metalness": 1.0,
+            "roughness": 0.35,
+            "clearcoat": 0,
+            "anisotropy": 1.0,
+            "proceduralTexture": "brushed"
+          },
+          "override": {
+            "finishClass": "gloss-enamel",
+            "metalness": 0.0,
+            "roughness": 0.3,
+            "clearcoat": 0.5,
+            "clearcoatRoughness": 0.12,
+            "anisotropy": 0,
+            "proceduralTexture": "none"
+          },
+          "reason": "CLAUDE.md lesson 4 reproduced: white enamel misread as brushed steel. Vitreous enamel is a glass (dielectric) coat: the reference shows no streaked/anisotropic highlight, no metallic tint in reflections, and a diffuse white albedo of 229-236 under soft light. Metal with albedo #E8ECEE would render as chrome."
+        },
+        "palette": [
+          "#E0E5E7",
+          "#E6EAED",
+          "#E5E9EC",
+          "#E3E7EA"
+        ],
+        "source": "material-evidence/material-evidence.json"
+      },
+      "finishClass": "gloss-enamel"
+    },
+    {
+      "id": "black-enamel",
+      "name": "Black enamel (rim bead)",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#323238",
+      "color": "#323238",
+      "albedo": {
+        "dominant": "#323238",
+        "secondary": [
+          "#2E2F35"
+        ],
+        "samplingNotes": "rim rows 245-254 luma 39-50, highlight streak to ~60. material-pass: #18181B/r0.25/cc0.6 rendered a broad crown highlight over a L30 body (comparator dE00 22.7, material_feedback proposed the lit crop mean #4B4C54); albedo set to #2A2A2F (lifted-black grading, same as ink) and gloss softened"
+      },
+      "colorVariation": {
+        "palette": [
+          "#323238",
+          "#2E2F35"
+        ],
+        "pattern": "uniform (flat fired finish)",
+        "amplitude": 0.0,
+        "heightCorrelation": 0.0
+      },
+      "roughness": {
+        "base": 0.35,
+        "variation": 0.03,
+        "map": "none (uniform glass coat)",
+        "localResponse": "see localOverrides"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "clearcoat": 0.35,
+      "clearcoatRoughness": 0.2,
+      "localOverrides": [
+        {
+          "id": "rim-highlight-streak",
+          "kind": "gloss",
+          "region": "top of bead",
+          "roughness": 0.3,
+          "evidenceRef": "detail-inventory/rim.png",
+          "notes": "thin specular line along the bead crown from the overhead key"
+        }
+      ],
+      "qualityTier": "hero",
+      "textureless": {
+        "declared": true,
+        "evidence": [
+          "detail-inventory/rim.png: bead is uniform black with one specular streak; no texture detail."
+        ]
+      },
+      "materialEvidence": {
+        "crop": "material-evidence/black-enamel-crop.png (760,247,940,253)",
+        "pbrExtraction": {
+          "confidence": 0.86,
+          "verdict": "pass"
+        },
+        "analyzeTexture": {
+          "tool": {
+            "finishClass": "worn-composite",
+            "roughness": 0.9,
+            "clearcoat": 0,
+            "proceduralTexture": "mottle"
+          },
+          "override": {
+            "finishClass": "gloss-enamel",
+            "roughness": 0.25,
+            "clearcoat": 0.6,
+            "clearcoatRoughness": 0.1,
+            "proceduralTexture": "none"
+          },
+          "reason": "The bead shows a sharp thin specular streak along its crown (detail-inventory/rim.png); roughness 0.9 cannot produce it. 'Mottle' is the specular streak being read as albedo variation; palette entry #7B8495 is that highlight, not albedo."
+        },
+        "palette": [
+          "#2E2D31",
+          "#303740",
+          "#2C2D31"
+        ],
+        "source": "material-evidence/material-evidence.json"
+      },
+      "finishClass": "gloss-enamel"
+    },
+    {
+      "id": "decal-ink",
+      "name": "Fired-on black print",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#3E3E46",
+      "color": "#3E3E46",
+      "albedo": {
+        "dominant": "#3E3E46",
+        "secondary": [],
+        "samplingNotes": "skull ink core luma 25-40 in the lit region"
+      },
+      "colorVariation": {
+        "palette": [
+          "#3E3E46"
+        ],
+        "pattern": "uniform (flat fired finish)",
+        "amplitude": 0.0,
+        "heightCorrelation": 0.0
+      },
+      "roughness": {
+        "base": 0.32,
+        "variation": 0.03,
+        "map": "none (uniform glass coat)",
+        "localResponse": "see localOverrides"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "clearcoat": 0.5,
+      "clearcoatRoughness": 0.12,
+      "localOverrides": [
+        {
+          "id": "skull-print",
+          "kind": "decal",
+          "region": "azimuth -29..31 deg, y 0.15..0.66",
+          "mask": "projection/decal_uv.png (alpha)",
+          "evidenceRef": "detail-inventory/decal.png"
+        },
+        {
+          "id": "lettering-knockout",
+          "kind": "linework",
+          "region": "inside cranium",
+          "mask": "alpha holes in projection/decal_uv.png",
+          "notes": "lettering is enamel showing through the ink",
+          "evidenceRef": "analysis/crop2x.png"
+        },
+        {
+          "id": "sunburst-strokes",
+          "kind": "decal",
+          "region": "azimuth -76 deg, y 0.38",
+          "mask": "drawn strokes in projection/decal_uv.png",
+          "evidenceRef": "analysis/leftedge3x.png"
+        }
+      ],
+      "qualityTier": "hero",
+      "textureless": {
+        "declared": true,
+        "evidence": [
+          "Ink is a flat fired colour with the same gloss as the enamel (detail-inventory/decal.png); its only structure is the print boundary, carried as an alpha mask on the decal-shell component, not as a PBR texture."
+        ]
+      },
+      "materialEvidence": {
+        "crop": "material-evidence/decal-ink-crop.png (880,392,910,402)",
+        "pbrExtraction": {
+          "confidence": 0.805,
+          "verdict": "pass"
+        },
+        "analyzeTexture": {
+          "tool": {
+            "finishClass": "worn-composite",
+            "roughness": 0.9,
+            "clearcoat": 0
+          },
+          "override": {
+            "roughness": 0.32,
+            "clearcoat": 0.5,
+            "clearcoatRoughness": 0.12
+          },
+          "reason": "Fired-on print sits under/in the same glass coat as the white enamel; the wall highlight passes over the ink without a gloss break in the reference crop."
+        },
+        "palette": [
+          "#2E2D33",
+          "#302F36",
+          "#26252E"
+        ],
+        "source": "material-evidence/material-evidence.json"
+      },
+      "finishClass": "fired-print"
+    },
+    {
+      "id": "exposed-steel",
+      "name": "Exposed steel at chip",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#262422",
+      "color": "#262422",
+      "albedo": {
+        "dominant": "#262422",
+        "secondary": [
+          "#3a2f28"
+        ],
+        "samplingNotes": "chip luma 35-50"
+      },
+      "colorVariation": {
+        "palette": [
+          "#262422",
+          "#3a2f28"
+        ],
+        "pattern": "uniform (flat fired finish)",
+        "amplitude": 0.0,
+        "heightCorrelation": 0.0
+      },
+      "roughness": {
+        "base": 0.55,
+        "variation": 0.03,
+        "map": "none (uniform glass coat)",
+        "localResponse": "see localOverrides"
+      },
+      "metalness": {
+        "base": 0.5,
+        "variation": 0.0
+      },
+      "clearcoat": 0.0,
+      "clearcoatRoughness": 0.1,
+      "localOverrides": [],
+      "qualityTier": "hero",
+      "textureless": {
+        "declared": true,
+        "evidence": [
+          "Chip is ~20 px; no resolvable surface detail."
+        ]
+      },
+      "materialEvidence": {
+        "crop": "detail-inventory/base.png (chip, too small for extraction)",
+        "pbrExtraction": {
+          "confidence": null,
+          "verdict": "not-run: ~20 px region"
+        },
+        "analyzeTexture": null,
+        "palette": [],
+        "source": "material-evidence/material-evidence.json"
+      },
+      "finishClass": "raw-steel"
+    }
+  ],
+  "repetitionSystems": [],
+  "buildPasses": [
+    {
+      "id": "blockout",
+      "goal": "Match macro silhouette and proportions.",
+      "componentRefs": [
+        "body-shell",
+        "handle",
+        "handle-wall-strip"
+      ],
+      "acceptance": [
+        "Silhouette reads correctly without materials.",
+        "Quality contract has named all required macro feature groups before code generation.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "structural-pass",
+      "goal": "Build the component hierarchy implied by the pre-spec complexity assessment.",
+      "componentRefs": [
+        "body-shell",
+        "rim-bead",
+        "handle",
+        "handle-wall-strip",
+        "handle-upper-weld-pad",
+        "handle-lower-weld-pad"
+      ],
+      "acceptance": [
+        "Macro, meso, and repeated structures meet qualityContract.minimumSpecDepth.",
+        "Parent-child relations, joints, seams, sockets, and contact points are explicit.",
+        "Every attached child appendage/connector has parentSocket, localStart/localEnd, contactType, embedDepth or overlap, and gapTolerance.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "form-refinement",
+      "goal": "Refine shape, deformation, bevels, tapers, curves, asymmetry, and visible local geometry.",
+      "componentRefs": [
+        "body-shell",
+        "rim-bead",
+        "handle",
+        "handle-wall-strip",
+        "handle-upper-weld-pad",
+        "handle-lower-weld-pad",
+        "base-chip"
+      ],
+      "acceptance": [
+        "Important visible forms are represented in component geometryDescriptor, deformations, localFeatures, or repetitionSystems.",
+        "Endpoint-based child parts are rooted at their attachment sockets and do not visibly float away from parents.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "material-pass",
+      "goal": "Match material color, roughness, bump, and local variation.",
+      "componentRefs": [
+        "body-shell",
+        "rim-bead",
+        "handle",
+        "handle-wall-strip",
+        "handle-upper-weld-pad",
+        "handle-lower-weld-pad",
+        "decal-shell",
+        "base-chip"
+      ],
+      "acceptance": [
+        "Reference-derived albedo palette records dominant, secondary, and accent colors per visible material.",
+        "Each important material defines roughness variation and at least one normal/bump/displacement response.",
+        "Local material overrides, dirt/wear/stains/moss/chips/scratches or equivalent masks are tied to evidenceRefs.",
+        "Thin, transparent, reflective, wet, or fibrous materials document alpha/transmission/clearcoat/metalness/fiber response when relevant.",
+        "Generated preview uses procedural albedo/roughness/bump texture or vertex color variation instead of one flat color.",
+        "Generated preview uses independent PBR maps at 1024px or higher for the quality-first tier.",
+        "If source pixels are available, referencePbr extraction passed at confidence >= 0.7 or the pass is stopped/requesting better references.",
+        "Macro, meso, and micro surface frequency bands are visible at the intended review distance without obvious tiling.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "surface-pass",
+      "goal": "Add procedural surface locality such as normal/bump/displacement, AO, dirt, stains, chips, grain, moss, scratches, and wear.",
+      "componentRefs": [
+        "body-shell",
+        "rim-bead",
+        "handle",
+        "handle-wall-strip",
+        "handle-upper-weld-pad",
+        "handle-lower-weld-pad",
+        "decal-shell",
+        "base-chip"
+      ],
+      "acceptance": [
+        "Every required material feature group has local overrides or surfaceDetail tied to evidenceRefs.",
+        "A grazing-angle close-up proves that normal/height detail breaks highlights naturally and does not read as smooth plastic.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "lighting-pass",
+      "goal": "Make material and form readable under neutral turntable lighting plus optional reference lighting.",
+      "componentRefs": [
+        "body-shell",
+        "rim-bead",
+        "handle",
+        "handle-wall-strip",
+        "handle-upper-weld-pad",
+        "handle-lower-weld-pad",
+        "decal-shell",
+        "base-chip"
+      ],
+      "acceptance": [
+        "lightingFromPhoto identifies key light direction/color/intensity, fill light, rim or environment light, and ambient color.",
+        "Exposure, tone mapping, background color/gradient, shadow softness, and contact shadow behavior are specified.",
+        "Lighting does not hide geometry/material gaps and screenshots can be compared fairly to the reference.",
+        "Neutral, grazing, and reference-matched lighting checks distinguish material errors from lighting errors.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "interaction-pass",
+      "goal": "Make the model ready for future animation, transformation, physics, or destruction.",
+      "componentRefs": [
+        "body-shell",
+        "rim-bead",
+        "handle",
+        "handle-wall-strip",
+        "handle-upper-weld-pad",
+        "handle-lower-weld-pad",
+        "decal-shell",
+        "base-chip"
+      ],
+      "acceptance": [
+        "Macro and movable meso components have stable pivot nodes.",
+        "Sockets, collider proxies, and destruction metadata are present for future runtime actions.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "optimization-pass",
+      "goal": "Protect runtime performance after visual fidelity is accepted.",
+      "componentRefs": [
+        "body-shell",
+        "rim-bead",
+        "handle",
+        "handle-wall-strip",
+        "handle-upper-weld-pad",
+        "handle-lower-weld-pad",
+        "decal-shell",
+        "base-chip"
+      ],
+      "acceptance": [
+        "Triangle count, draw calls, instancing, LOD strategy, and FPS target are documented or verified.",
+        "Repeated detail is instanced or simplified where possible without breaking silhouette/material believability."
+      ]
+    }
+  ],
+  "visualEvidence": [
+    {
+      "timestamp": "2026-11-17T11:40:42.068905+00:00",
+      "passId": "blockout",
+      "estimatedFidelity": 0.55,
+      "aiVisionScore": 0.82,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.75,
+        "formDetail": 0.7,
+        "materialSurface": 0.4,
+        "lightingCamera": 0.75
+      },
+      "featureReviews": [
+        {
+          "id": "body-silhouette-proportion",
+          "score": 0.88,
+          "visible": true,
+          "notes": "Straight cylinder, body width 433 vs 432 px, height 431 px (no bead yet; expected ~428), base row 520 vs 517; IoU 0.904 on iso crops. Radiused base corner reads. Bead overhang absent until structural-pass."
+        },
+        {
+          "id": "d-ring-handle",
+          "score": 0.84,
+          "visible": true,
+          "notes": "Closed D: top arm under rim, outer side x 734 = ref 734, lower arm meets the wall-strip at row 468 (ref 467) after centreline re-trace; straight side sits inside the body silhouette like the reference (plane yawed 26 deg toward camera, evidence analysis/handle4x.png). Top-right arc slightly tighter than the reference's broad curve."
+        }
+      ],
+      "referenceScreenshot": "analysis/ref_view.png",
+      "renderScreenshot": "renders/blockout/reference.png",
+      "comparisonImage": "renders/blockout/cmp.png",
+      "cameraView": "reference",
+      "notes": "",
+      "aiVisionNotes": "Pass goal is macro silhouette: met. Material layer intentionally flat (blockout). Zoomed handle pair checked (lesson 7): closed D, yaw evidenced by wall strip inside silhouette; lower-arm kink found and fixed before recording. Axial views: long-axis (az 90, el 0) shows a coherent D; top view shows the handle plane at 64 deg."
+    },
+    {
+      "timestamp": "2026-11-17T11:43:28.635830+00:00",
+      "passId": "structural-pass",
+      "estimatedFidelity": 0.62,
+      "aiVisionScore": 0.84,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.92,
+        "componentStructure": 0.86,
+        "formDetail": 0.75,
+        "materialSurface": 0.45,
+        "lightingCamera": 0.75
+      },
+      "featureReviews": [
+        {
+          "id": "body-silhouette-proportion",
+          "score": 0.9,
+          "visible": true,
+          "notes": "With the bead: height 436/436 px, left 104/103, right 734/734, aspect and scale delta 0.000, IoU 0.910."
+        },
+        {
+          "id": "black-rim-bead",
+          "score": 0.8,
+          "visible": true,
+          "notes": "Black torus bead overhangs the wall like the reference (left extent 104 vs 103 px); band ~25 vs ~30 zoom px; a thin grey sliver of the cup interior shows between front and back bead where the reference reads solid black; specular streak weaker (material/lighting pass)."
+        },
+        {
+          "id": "d-ring-handle",
+          "score": 0.86,
+          "visible": true,
+          "notes": "Weld-pad knobs removed (pads kept inside strap radius); D outline, wall strip and lower corner match the 2x zoom pair; top-right arc still slightly tighter."
+        }
+      ],
+      "referenceScreenshot": "analysis/ref_view.png",
+      "renderScreenshot": "renders/structural-pass/reference.png",
+      "comparisonImage": "renders/structural-pass/cmp.png",
+      "cameraView": "reference",
+      "notes": "",
+      "aiVisionNotes": "Structure complete for the visible object; decal and finish deferred to material-pass by design. Zoomed rim (3x) and handle (2x) inspected before deciding."
+    },
+    {
+      "timestamp": "2026-11-17T11:49:07.868029+00:00",
+      "passId": "form-refinement",
+      "estimatedFidelity": 0.72,
+      "aiVisionScore": 0.84,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.92,
+        "componentStructure": 0.86,
+        "formDetail": 0.82,
+        "materialSurface": 0.6,
+        "lightingCamera": 0.7
+      },
+      "featureReviews": [
+        {
+          "id": "body-silhouette-proportion",
+          "score": 0.9,
+          "visible": true,
+          "notes": "Unchanged silhouette (IoU 0.907, aspect/scale delta 0); base fillet and chip sit on the base edge."
+        },
+        {
+          "id": "black-rim-bead",
+          "score": 0.8,
+          "visible": true,
+          "notes": "Bead shape right; grey interior sliver within the rim ellipse and weak specular streak remain (finish/lighting)."
+        },
+        {
+          "id": "d-ring-handle",
+          "score": 0.86,
+          "visible": true,
+          "notes": "No change since structural; closed D with wall strip, corners match the 2x pair."
+        },
+        {
+          "id": "secondary-marks",
+          "score": 0.7,
+          "visible": true,
+          "notes": "Sunburst marks on the left limb now land on the measured rows (chevron 375-396 vs 374-395, strokes 339-350/418-429 vs 336-352/419-431); hidden half inferred. Chip is a thin dark sliver on the base edge (ref: irregular streak with a hook)."
+        }
+      ],
+      "referenceScreenshot": "analysis/ref_view.png",
+      "renderScreenshot": "renders/form-refinement/reference.png",
+      "comparisonImage": "renders/form-refinement/cmp.png",
+      "cameraView": "reference",
+      "notes": "",
+      "aiVisionNotes": "Form-level identity now complete; zoomed decal/base/limb pairs inspected. Remaining deltas are finish and lighting, owned by the next two passes."
+    },
+    {
+      "timestamp": "2026-11-17T11:55:33.381262+00:00",
+      "passId": "material-pass",
+      "estimatedFidelity": 0.78,
+      "aiVisionScore": 0.85,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.93,
+        "componentStructure": 0.86,
+        "formDetail": 0.82,
+        "materialSurface": 0.82,
+        "lightingCamera": 0.7
+      },
+      "featureReviews": [
+        {
+          "id": "black-rim-bead",
+          "score": 0.82,
+          "visible": true,
+          "notes": "Single dark band rows 82-98 (ref 82-97) after the camera-height refit removed the interior sliver; comparator dE00 6.0 (was 22.7); crown highlight still spans the full width where the reference streak is only on the right half."
+        },
+        {
+          "id": "skull-decal",
+          "score": 0.88,
+          "visible": true,
+          "notes": "Projected skull + knocked-out DECAF!/PANDCO lettering, crisp after the steeper alpha ramp / 2048 texture; ink core L43.6 vs 45.6; comparator dE00 3.2. Ink lacks the reference's faint blue sheen over the cranium."
+        },
+        {
+          "id": "enamel-palette",
+          "score": 0.8,
+          "visible": true,
+          "notes": "White enamel dielectric gloss (comparator dE00 3.1 on the lit wall), black gloss rim, black print; no metallic read. Wall is neutral where the reference is cool (b-r +7) and the right limb is 29 luma too bright -> lighting-pass."
+        },
+        {
+          "id": "secondary-marks",
+          "score": 0.7,
+          "visible": true,
+          "notes": "Sunburst marks at measured rows, slightly lighter/narrower than the reference; chip sliver on the base edge."
+        }
+      ],
+      "referenceScreenshot": "analysis/ref_view.png",
+      "renderScreenshot": "renders/material-pass/reference.png",
+      "comparisonImage": "renders/material-pass/cmp.png",
+      "cameraView": "reference",
+      "notes": "",
+      "aiVisionNotes": "Material identity met: glazed white enamel, black bead, black fired print with knock-out lettering. Textureless declaration honoured (no invented maps). Remaining deltas are illumination (cool fill, limb falloff, under-bead shadow), owned by lighting-pass."
+    },
+    {
+      "timestamp": "2026-11-17T11:57:04.270698+00:00",
+      "passId": "surface-pass",
+      "estimatedFidelity": 0.78,
+      "aiVisionScore": 0.85,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.93,
+        "componentStructure": 0.86,
+        "formDetail": 0.82,
+        "materialSurface": 0.83,
+        "lightingCamera": 0.7
+      },
+      "featureReviews": [
+        {
+          "id": "enamel-palette",
+          "score": 0.8,
+          "visible": true,
+          "notes": "Grazing close-up: smooth glaze, no fabricated relief; print flush. Cool tint / limb falloff still lighting-pass."
+        },
+        {
+          "id": "skull-decal",
+          "score": 0.88,
+          "visible": true,
+          "notes": "Unchanged from material-pass; crisp under grazing light, no relief (matches a fired print)."
+        }
+      ],
+      "referenceScreenshot": "analysis/ref_view.png",
+      "renderScreenshot": "renders/surface-pass/reference.png",
+      "comparisonImage": "renders/surface-pass/cmp.png",
+      "cameraView": "reference",
+      "notes": "",
+      "aiVisionNotes": "Surface pass verifies that tactile response is gloss-only, as the reference shows."
+    },
+    {
+      "timestamp": "2026-11-17T12:04:21.398130+00:00",
+      "passId": "lighting-pass",
+      "estimatedFidelity": 0.8,
+      "aiVisionScore": 0.87,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.93,
+        "componentStructure": 0.86,
+        "formDetail": 0.83,
+        "materialSurface": 0.84,
+        "lightingCamera": 0.84
+      },
+      "featureReviews": [
+        {
+          "id": "skull-decal",
+          "score": 0.88,
+          "visible": true,
+          "notes": "Ink core L41.6 vs 45.6 after the env reduction (ink albedo compensated); crisp lettering; faint cranium sheen present."
+        },
+        {
+          "id": "enamel-palette",
+          "score": 0.85,
+          "visible": true,
+          "notes": "Cool white wall (224,225,227 vs 225,229,232); right-limb falloff 167.6 vs 168.6; handle outer 218.6 vs 214.8; shaded band under the bead now present (cavity/overhang AO bake). Rim region mean 49 vs 73: reference bead carries a bright narrow crown streak the render spreads thinner."
+        }
+      ],
+      "referenceScreenshot": "analysis/ref_view.png",
+      "renderScreenshot": "renders/lighting-pass/reference.png",
+      "comparisonImage": "renders/lighting-pass/cmp.png",
+      "cameraView": "reference",
+      "notes": "",
+      "aiVisionNotes": "Correction to the material-pass note: the camera-height refit (pitch 1) was re-tested against a near-orthographic 2.3 deg camera and kept on measured band thickness; the interior darkness is now also physically motivated by the AO bake rather than only hidden by the camera."
+    },
+    {
+      "timestamp": "2026-11-17T12:07:05.103525+00:00",
+      "passId": "interaction-pass",
+      "estimatedFidelity": 0.8,
+      "aiVisionScore": 0.87,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.93,
+        "componentStructure": 0.9,
+        "formDetail": 0.83,
+        "materialSurface": 0.84,
+        "lightingCamera": 0.84
+      },
+      "featureReviews": [
+        {
+          "id": "d-ring-handle",
+          "score": 0.86,
+          "visible": true,
+          "notes": "Handle is a pickable part (grab-target, grip-point socket, trigger collider rotated to the 64 deg plane); explodes outward with its wall strip and weld pads as separate parts."
+        },
+        {
+          "id": "skull-decal",
+          "score": 0.88,
+          "visible": true,
+          "notes": "Decal shell flagged explodeWithParent: rides the body in explode, a click on it resolves to body-shell."
+        },
+        {
+          "id": "enamel-palette",
+          "score": 0.85,
+          "visible": true,
+          "notes": "Unchanged from lighting-pass."
+        }
+      ],
+      "referenceScreenshot": "analysis/ref_view.png",
+      "renderScreenshot": "renders/interaction-pass/reference.png",
+      "comparisonImage": "renders/interaction-pass/cmp.png",
+      "cameraView": "reference",
+      "notes": "",
+      "aiVisionNotes": "Explode capture inspected: rim lifts, handle/strip/pads separate, decal and chip ride the body; no part fused."
+    },
+    {
+      "timestamp": "2026-11-17T12:09:24.032826+00:00",
+      "passId": "optimization-pass",
+      "estimatedFidelity": 0.8,
+      "aiVisionScore": 0.87,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.93,
+        "componentStructure": 0.9,
+        "formDetail": 0.83,
+        "materialSurface": 0.84,
+        "lightingCamera": 0.84
+      },
+      "featureReviews": [
+        {
+          "id": "body-silhouette-proportion",
+          "score": 0.9,
+          "visible": true,
+          "notes": "IoU 0.910, height 437/436 px, width 431/432 px; unchanged by optimisation."
+        },
+        {
+          "id": "black-rim-bead",
+          "score": 0.82,
+          "visible": true,
+          "notes": "Band 245-255 vs 245-254 photo rows; crown streak narrower in the reference; end 'frown' unmodelled."
+        },
+        {
+          "id": "d-ring-handle",
+          "score": 0.86,
+          "visible": true,
+          "notes": "Unchanged geometry (3648 tris); zoom pair re-inspected."
+        },
+        {
+          "id": "skull-decal",
+          "score": 0.88,
+          "visible": true,
+          "notes": "Unchanged; decal shell 320 tris + 2048x1024 projected alpha."
+        },
+        {
+          "id": "enamel-palette",
+          "score": 0.85,
+          "visible": true,
+          "notes": "Unchanged tones (wall 223.6/228.4, limb 167.6/168.6)."
+        }
+      ],
+      "referenceScreenshot": "analysis/ref_view.png",
+      "renderScreenshot": "renders/optimization-pass/reference.png",
+      "comparisonImage": "renders/optimization-pass/cmp.png",
+      "cameraView": "reference",
+      "notes": "",
+      "aiVisionNotes": "Final pass: optimisation verified visually neutral."
+    }
+  ],
+  "reviewHistory": [
+    {
+      "timestamp": "2026-11-17T11:40:42.068905+00:00",
+      "passId": "blockout",
+      "estimatedFidelity": 0.55,
+      "aiVisionScore": 0.82,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.75,
+        "formDetail": 0.7,
+        "materialSurface": 0.4,
+        "lightingCamera": 0.75
+      },
+      "featureReviews": [
+        {
+          "id": "body-silhouette-proportion",
+          "score": 0.88,
+          "visible": true,
+          "notes": "Straight cylinder, body width 433 vs 432 px, height 431 px (no bead yet; expected ~428), base row 520 vs 517; IoU 0.904 on iso crops. Radiused base corner reads. Bead overhang absent until structural-pass."
+        },
+        {
+          "id": "d-ring-handle",
+          "score": 0.84,
+          "visible": true,
+          "notes": "Closed D: top arm under rim, outer side x 734 = ref 734, lower arm meets the wall-strip at row 468 (ref 467) after centreline re-trace; straight side sits inside the body silhouette like the reference (plane yawed 26 deg toward camera, evidence analysis/handle4x.png). Top-right arc slightly tighter than the reference's broad curve."
+        }
+      ],
+      "action": "continue",
+      "summary": "Blockout: lathe body + yawed D-ring handle (C-loop tube + wall strip) match the reference silhouette (IoU 0.904, width 433/432 px, handle outer 734/734 px, lower joint 468/467 px). Rim bead, decal and materials belong to later passes.",
+      "matched": [
+        "body H/D and width",
+        "straight wall + radiused base",
+        "handle reach and vertical extent",
+        "D straight side inside silhouette",
+        "camera framing (telephoto refit)"
+      ],
+      "mismatches": [
+        "rim bead not yet built (structural-pass)",
+        "decal not yet built (material-pass)",
+        "handle top-right arc slightly tighter than reference",
+        "interior-difference rim band 0.449 / decal band 0.250 (features absent by pass design)"
+      ],
+      "specFixes": [],
+      "codeFixes": [
+        "none for blockout",
+        "DEF-5 tubePath restored by tools/patch_factory.py"
+      ],
+      "evidence": [
+        "renders/blockout/tier1.json",
+        "renders/blockout/multi-angle.json",
+        "renders/blockout/turntable.json",
+        "renders/blockout/self-intersection.json",
+        "renders/blockout/attachment-anchor.json",
+        "renders/blockout/interior-difference.json",
+        "renders/blockout/zoom-handle.png",
+        "renders/blockout/orbits-sheet.png",
+        "renders/blockout/axis-long-x.png (long-axis)",
+        "renders/blockout/axis-thickness-top.png (thickness-axis)"
+      ],
+      "mapStrippedRender": "renders/blockout/map-stripped.png",
+      "reviewViewpoints": [
+        "reference",
+        "orbit-000",
+        "orbit-090",
+        "orbit-180",
+        "orbit-270",
+        "long-axis",
+        "thickness-axis"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "analysis/ref_view.png",
+        "renderScreenshot": "renders/blockout/reference.png",
+        "comparisonImage": "renders/blockout/cmp.png",
+        "cameraView": "reference",
+        "notes": "",
+        "aiVisionNotes": "Pass goal is macro silhouette: met. Material layer intentionally flat (blockout). Zoomed handle pair checked (lesson 7): closed D, yaw evidenced by wall strip inside silhouette; lower-arm kink found and fixed before recording. Axial views: long-axis (az 90, el 0) shows a coherent D; top view shows the handle plane at 64 deg."
+      }
+    },
+    {
+      "timestamp": "2026-11-17T11:43:28.635830+00:00",
+      "passId": "structural-pass",
+      "estimatedFidelity": 0.62,
+      "aiVisionScore": 0.84,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.92,
+        "componentStructure": 0.86,
+        "formDetail": 0.75,
+        "materialSurface": 0.45,
+        "lightingCamera": 0.75
+      },
+      "featureReviews": [
+        {
+          "id": "body-silhouette-proportion",
+          "score": 0.9,
+          "visible": true,
+          "notes": "With the bead: height 436/436 px, left 104/103, right 734/734, aspect and scale delta 0.000, IoU 0.910."
+        },
+        {
+          "id": "black-rim-bead",
+          "score": 0.8,
+          "visible": true,
+          "notes": "Black torus bead overhangs the wall like the reference (left extent 104 vs 103 px); band ~25 vs ~30 zoom px; a thin grey sliver of the cup interior shows between front and back bead where the reference reads solid black; specular streak weaker (material/lighting pass)."
+        },
+        {
+          "id": "d-ring-handle",
+          "score": 0.86,
+          "visible": true,
+          "notes": "Weld-pad knobs removed (pads kept inside strap radius); D outline, wall strip and lower corner match the 2x zoom pair; top-right arc still slightly tighter."
+        }
+      ],
+      "action": "continue",
+      "summary": "Structural: rim bead torus (R 0.448, r 0.0165) + handle wall strip + weld pads added; silhouette landmarks match to <=1 px (IoU 0.910, aspect/scale delta 0); rim interior-difference band 0.449 -> 0.215.",
+      "matched": [
+        "rim overhang and black band",
+        "component hierarchy body > rim/handle/strip/pads with sockets",
+        "handle D closed with wall strip",
+        "no floating parts (anchor gate, self-intersection 0)"
+      ],
+      "mismatches": [
+        "decal band 0.250 (decal is material-pass)",
+        "rim specular streak weaker than reference",
+        "grey interior sliver inside the rim ellipse",
+        "handle top-right arc slightly tighter"
+      ],
+      "specFixes": [],
+      "codeFixes": [
+        "weld pads shrunk to stay inside strap radius (knob artefact) before recording"
+      ],
+      "evidence": [
+        "renders/structural-pass/tier1.json",
+        "renders/structural-pass/multi-angle.json",
+        "renders/structural-pass/turntable.json",
+        "renders/structural-pass/self-intersection.json",
+        "renders/structural-pass/attachment-anchor.json",
+        "renders/structural-pass/interior-difference.json",
+        "renders/structural-pass/zoom.png",
+        "renders/structural-pass/zoom-rim3x.png",
+        "renders/structural-pass/orbits-sheet.png",
+        "renders/structural-pass/axis-long-x.png (long-axis)",
+        "renders/structural-pass/axis-thickness-top.png (thickness-axis)"
+      ],
+      "mapStrippedRender": "renders/structural-pass/map-stripped.png",
+      "reviewViewpoints": [
+        "reference",
+        "orbit-000",
+        "orbit-090",
+        "orbit-180",
+        "orbit-270",
+        "long-axis",
+        "thickness-axis"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "analysis/ref_view.png",
+        "renderScreenshot": "renders/structural-pass/reference.png",
+        "comparisonImage": "renders/structural-pass/cmp.png",
+        "cameraView": "reference",
+        "notes": "",
+        "aiVisionNotes": "Structure complete for the visible object; decal and finish deferred to material-pass by design. Zoomed rim (3x) and handle (2x) inspected before deciding."
+      }
+    },
+    {
+      "timestamp": "2026-11-17T11:49:07.868029+00:00",
+      "passId": "form-refinement",
+      "estimatedFidelity": 0.72,
+      "aiVisionScore": 0.84,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.92,
+        "componentStructure": 0.86,
+        "formDetail": 0.82,
+        "materialSurface": 0.6,
+        "lightingCamera": 0.7
+      },
+      "featureReviews": [
+        {
+          "id": "body-silhouette-proportion",
+          "score": 0.9,
+          "visible": true,
+          "notes": "Unchanged silhouette (IoU 0.907, aspect/scale delta 0); base fillet and chip sit on the base edge."
+        },
+        {
+          "id": "black-rim-bead",
+          "score": 0.8,
+          "visible": true,
+          "notes": "Bead shape right; grey interior sliver within the rim ellipse and weak specular streak remain (finish/lighting)."
+        },
+        {
+          "id": "d-ring-handle",
+          "score": 0.86,
+          "visible": true,
+          "notes": "No change since structural; closed D with wall strip, corners match the 2x pair."
+        },
+        {
+          "id": "secondary-marks",
+          "score": 0.7,
+          "visible": true,
+          "notes": "Sunburst marks on the left limb now land on the measured rows (chevron 375-396 vs 374-395, strokes 339-350/418-429 vs 336-352/419-431); hidden half inferred. Chip is a thin dark sliver on the base edge (ref: irregular streak with a hook)."
+        }
+      ],
+      "action": "continue",
+      "summary": "Form: base chip on the base edge, projected skull/lettering decal and measured sunburst marks; interior difference whole 0.172 -> 0.101, decal band 0.250 -> 0.119; silhouette unchanged (IoU 0.907).",
+      "matched": [
+        "skull outline, jaw, eye, lettering DECAF!/PANDCO with underlines at the reference placement",
+        "sunburst rows on the limb",
+        "base chip position",
+        "silhouette"
+      ],
+      "mismatches": [
+        "wall shading flatter than the reference (right limb should fall to ~160 luma)",
+        "rim specular streak weak",
+        "grey interior sliver inside the rim",
+        "chip shape simplified"
+      ],
+      "specFixes": [],
+      "codeFixes": [
+        "chip box -> flattened ellipsoid on the base edge",
+        "sunburst re-measured by pixel scan (centre row 392 -> 385, chevron 0.03-0.07)"
+      ],
+      "evidence": [
+        "renders/form-refinement/tier1.json",
+        "renders/form-refinement/multi-angle.json",
+        "renders/form-refinement/turntable.json",
+        "renders/form-refinement/self-intersection.json",
+        "renders/form-refinement/attachment-anchor.json",
+        "renders/form-refinement/interior-difference.json",
+        "renders/form-refinement/zoom.png",
+        "renders/form-refinement/orbits-sheet.png",
+        "renders/form-refinement/axis-long-x.png (long-axis)",
+        "renders/form-refinement/axis-thickness-top.png (thickness-axis)"
+      ],
+      "mapStrippedRender": "renders/form-refinement/map-stripped.png",
+      "reviewViewpoints": [
+        "reference",
+        "orbit-000",
+        "orbit-090",
+        "orbit-180",
+        "orbit-270",
+        "long-axis",
+        "thickness-axis"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "analysis/ref_view.png",
+        "renderScreenshot": "renders/form-refinement/reference.png",
+        "comparisonImage": "renders/form-refinement/cmp.png",
+        "cameraView": "reference",
+        "notes": "",
+        "aiVisionNotes": "Form-level identity now complete; zoomed decal/base/limb pairs inspected. Remaining deltas are finish and lighting, owned by the next two passes."
+      }
+    },
+    {
+      "timestamp": "2026-11-17T11:55:33.381262+00:00",
+      "passId": "material-pass",
+      "estimatedFidelity": 0.78,
+      "aiVisionScore": 0.85,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.93,
+        "componentStructure": 0.86,
+        "formDetail": 0.82,
+        "materialSurface": 0.82,
+        "lightingCamera": 0.7
+      },
+      "featureReviews": [
+        {
+          "id": "black-rim-bead",
+          "score": 0.82,
+          "visible": true,
+          "notes": "Single dark band rows 82-98 (ref 82-97) after the camera-height refit removed the interior sliver; comparator dE00 6.0 (was 22.7); crown highlight still spans the full width where the reference streak is only on the right half."
+        },
+        {
+          "id": "skull-decal",
+          "score": 0.88,
+          "visible": true,
+          "notes": "Projected skull + knocked-out DECAF!/PANDCO lettering, crisp after the steeper alpha ramp / 2048 texture; ink core L43.6 vs 45.6; comparator dE00 3.2. Ink lacks the reference's faint blue sheen over the cranium."
+        },
+        {
+          "id": "enamel-palette",
+          "score": 0.8,
+          "visible": true,
+          "notes": "White enamel dielectric gloss (comparator dE00 3.1 on the lit wall), black gloss rim, black print; no metallic read. Wall is neutral where the reference is cool (b-r +7) and the right limb is 29 luma too bright -> lighting-pass."
+        },
+        {
+          "id": "secondary-marks",
+          "score": 0.7,
+          "visible": true,
+          "notes": "Sunburst marks at measured rows, slightly lighter/narrower than the reference; chip sliver on the base edge."
+        }
+      ],
+      "action": "continue",
+      "summary": "Material: ink albedo raised (L17 -> L43.6 vs ref 45.6), rim albedo/gloss retuned (comparator dE00 22.7 -> 6.0), decal sharpened (2048 tex, steeper alpha ramp); camera height refit to rim level (pitch 2 -> 1 deg, profile re-derived, H 0.829 -> 0.845) which removed the interior sliver in the rim. Interior difference whole 0.101 -> 0.067.",
+      "matched": [
+        "white gloss enamel (dE00 3.1)",
+        "black print (dE00 3.2) with crisp knocked-out lettering",
+        "black rim band",
+        "neutral + grazing look-dev read as glazed enamel with a flat fired print"
+      ],
+      "mismatches": [
+        "wall white neutral vs cool in reference",
+        "right limb falloff too weak (+29 luma)",
+        "rim crown highlight too even",
+        "shaded band under the bead missing",
+        "table/background tone simplified"
+      ],
+      "specFixes": [],
+      "codeFixes": [
+        "tools/bake_decal.py INK_RGB (50,50,56), 2048x1024, ramp (a-0.32)/0.34",
+        "black-enamel #2A2A2F r0.35 cc0.35",
+        "referenceCamera pitch 1.0 with height-dependent elevation in author_spec/bake_decal"
+      ],
+      "evidence": [
+        "renders/material-pass/tier1.json",
+        "renders/material-pass/multi-angle.json",
+        "renders/material-pass/turntable.json",
+        "renders/material-pass/self-intersection.json",
+        "renders/material-pass/interior-difference.json",
+        "renders/material-pass/material-crops/white-enamel-comparison.json",
+        "renders/material-pass/material-crops/black-enamel-comparison.json",
+        "renders/material-pass/material-crops/decal-ink-comparison.json",
+        "renders/material-pass/material-crops/black-enamel-feedback.json",
+        "renders/material-pass/lookdev-neutral.png",
+        "renders/material-pass/lookdev-grazing-closeup.png",
+        "renders/material-pass/zoom.png",
+        "renders/material-pass/tones.json",
+        "renders/material-pass/axis-long-x.png (long-axis)",
+        "renders/material-pass/axis-thickness-top.png (thickness-axis)"
+      ],
+      "mapStrippedRender": "renders/material-pass/map-stripped.png",
+      "reviewViewpoints": [
+        "reference",
+        "orbit-000",
+        "orbit-090",
+        "orbit-180",
+        "orbit-270",
+        "long-axis",
+        "thickness-axis",
+        "lookdev-neutral",
+        "lookdev-grazing-closeup"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "analysis/ref_view.png",
+        "renderScreenshot": "renders/material-pass/reference.png",
+        "comparisonImage": "renders/material-pass/cmp.png",
+        "cameraView": "reference",
+        "notes": "",
+        "aiVisionNotes": "Material identity met: glazed white enamel, black bead, black fired print with knock-out lettering. Textureless declaration honoured (no invented maps). Remaining deltas are illumination (cool fill, limb falloff, under-bead shadow), owned by lighting-pass."
+      }
+    },
+    {
+      "timestamp": "2026-11-17T11:57:04.270698+00:00",
+      "passId": "surface-pass",
+      "estimatedFidelity": 0.78,
+      "aiVisionScore": 0.85,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.93,
+        "componentStructure": 0.86,
+        "formDetail": 0.82,
+        "materialSurface": 0.83,
+        "lightingCamera": 0.7
+      },
+      "featureReviews": [
+        {
+          "id": "enamel-palette",
+          "score": 0.8,
+          "visible": true,
+          "notes": "Grazing close-up: smooth glaze, no fabricated relief; print flush. Cool tint / limb falloff still lighting-pass."
+        },
+        {
+          "id": "skull-decal",
+          "score": 0.88,
+          "visible": true,
+          "notes": "Unchanged from material-pass; crisp under grazing light, no relief (matches a fired print)."
+        }
+      ],
+      "action": "continue",
+      "summary": "Surface: surfaceDetail authored for every visible component (glass-coat gloss, no relief; occlusion/wear locality named: cavity, under-bead, base contact, chip). Grazing-light close-up confirms smooth glaze and a flush print, matching the reference; no geometry change, metrics unchanged (interior whole 0.067, IoU 0.912).",
+      "matched": [
+        "no invented bump/normal (textureless evidence)",
+        "flush decal",
+        "chip as the only wear"
+      ],
+      "mismatches": [
+        "illumination deltas (cool fill, limb falloff, under-bead shading) remain for lighting-pass"
+      ],
+      "specFixes": [],
+      "codeFixes": [],
+      "evidence": [
+        "renders/surface-pass/tier1.json",
+        "renders/surface-pass/multi-angle.json",
+        "renders/surface-pass/turntable.json",
+        "renders/surface-pass/self-intersection.json",
+        "renders/surface-pass/interior-difference.json",
+        "renders/surface-pass/lookdev-grazing-closeup.png",
+        "renders/surface-pass/lookdev-neutral.png",
+        "renders/surface-pass/surface-sheet.png",
+        "renders/surface-pass/axis-long-x.png (long-axis)",
+        "renders/surface-pass/axis-thickness-top.png (thickness-axis)"
+      ],
+      "mapStrippedRender": "renders/surface-pass/map-stripped.png",
+      "reviewViewpoints": [
+        "reference",
+        "orbit-000",
+        "orbit-090",
+        "orbit-180",
+        "orbit-270",
+        "long-axis",
+        "thickness-axis",
+        "lookdev-neutral",
+        "lookdev-grazing-closeup"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "analysis/ref_view.png",
+        "renderScreenshot": "renders/surface-pass/reference.png",
+        "comparisonImage": "renders/surface-pass/cmp.png",
+        "cameraView": "reference",
+        "notes": "",
+        "aiVisionNotes": "Surface pass verifies that tactile response is gloss-only, as the reference shows."
+      }
+    },
+    {
+      "timestamp": "2026-11-17T12:04:21.398130+00:00",
+      "passId": "lighting-pass",
+      "estimatedFidelity": 0.8,
+      "aiVisionScore": 0.87,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.93,
+        "componentStructure": 0.86,
+        "formDetail": 0.83,
+        "materialSurface": 0.84,
+        "lightingCamera": 0.84
+      },
+      "featureReviews": [
+        {
+          "id": "skull-decal",
+          "score": 0.88,
+          "visible": true,
+          "notes": "Ink core L41.6 vs 45.6 after the env reduction (ink albedo compensated); crisp lettering; faint cranium sheen present."
+        },
+        {
+          "id": "enamel-palette",
+          "score": 0.85,
+          "visible": true,
+          "notes": "Cool white wall (224,225,227 vs 225,229,232); right-limb falloff 167.6 vs 168.6; handle outer 218.6 vs 214.8; shaded band under the bead now present (cavity/overhang AO bake). Rim region mean 49 vs 73: reference bead carries a bright narrow crown streak the render spreads thinner."
+        }
+      ],
+      "action": "continue",
+      "summary": "Lighting: rig fitted by tone probe (key -5,3.4,3.2 @2.6 cool-white; hemisphere 0.5 sky #cddbea; rim 0.5; env 0.3; exposure 1.2; table #76645e): wall lit 224.9/228.4, limb 167.6/168.6, table 133/138. Cavity + under-bead overhang AO baked in vertex colours (env/hemisphere fill has no occlusion). Camera: near-orthographic alternative tested and rejected by measurement (rim band 17 vs 10 px); rim-height model kept. Interior difference whole 0.067 -> 0.055, rim band 0.167 -> 0.138.",
+      "matched": [
+        "key/fill/rim structure and cool tint",
+        "right-limb falloff",
+        "under-bead shading band",
+        "contact shadow",
+        "shaded cup interior in orbit views"
+      ],
+      "mismatches": [
+        "rim crown streak narrower/brighter in reference",
+        "reference rim top edge frowns 4-7 px toward its ends (unmodelled, likely lens distortion)",
+        "photo bokeh background/table reflections not reproduced (out of scope for the model)"
+      ],
+      "specFixes": [],
+      "codeFixes": [
+        "analysis/lighting-final.json rig",
+        "applyCavityOcclusion (tools/patch_factory.py) lip 0.5 -> deep 0.22, overhang band y 0.788-0.812 ao 0.5",
+        "ink (62,62,70), rim #323238 to compensate the lower environment"
+      ],
+      "evidence": [
+        "renders/lighting-pass/tier1.json",
+        "renders/lighting-pass/multi-angle.json",
+        "renders/lighting-pass/turntable.json",
+        "renders/lighting-pass/self-intersection.json",
+        "renders/lighting-pass/interior-difference.json",
+        "renders/lighting-pass/tones.json",
+        "renders/lighting-iter",
+        "renders/lighting-pass/zoom.png",
+        "renders/lighting-pass/orbits-sheet.png",
+        "renders/lighting-pass/lookdev-neutral.png",
+        "renders/lighting-pass/lookdev-grazing-closeup.png",
+        "renders/lighting-pass/axis-long-x.png (long-axis)",
+        "renders/lighting-pass/axis-thickness-top.png (thickness-axis)"
+      ],
+      "mapStrippedRender": "renders/lighting-pass/map-stripped.png",
+      "reviewViewpoints": [
+        "reference",
+        "orbit-000",
+        "orbit-090",
+        "orbit-180",
+        "orbit-270",
+        "long-axis",
+        "thickness-axis",
+        "lookdev-neutral",
+        "lookdev-grazing-closeup"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "analysis/ref_view.png",
+        "renderScreenshot": "renders/lighting-pass/reference.png",
+        "comparisonImage": "renders/lighting-pass/cmp.png",
+        "cameraView": "reference",
+        "notes": "",
+        "aiVisionNotes": "Correction to the material-pass note: the camera-height refit (pitch 1) was re-tested against a near-orthographic 2.3 deg camera and kept on measured band thickness; the interior darkness is now also physically motivated by the AO bake rather than only hidden by the camera."
+      }
+    },
+    {
+      "timestamp": "2026-11-17T12:07:05.103525+00:00",
+      "passId": "interaction-pass",
+      "estimatedFidelity": 0.8,
+      "aiVisionScore": 0.87,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.93,
+        "componentStructure": 0.9,
+        "formDetail": 0.83,
+        "materialSurface": 0.84,
+        "lightingCamera": 0.84
+      },
+      "featureReviews": [
+        {
+          "id": "d-ring-handle",
+          "score": 0.86,
+          "visible": true,
+          "notes": "Handle is a pickable part (grab-target, grip-point socket, trigger collider rotated to the 64 deg plane); explodes outward with its wall strip and weld pads as separate parts."
+        },
+        {
+          "id": "skull-decal",
+          "score": 0.88,
+          "visible": true,
+          "notes": "Decal shell flagged explodeWithParent: rides the body in explode, a click on it resolves to body-shell."
+        },
+        {
+          "id": "enamel-palette",
+          "score": 0.85,
+          "visible": true,
+          "notes": "Unchanged from lighting-pass."
+        }
+      ],
+      "action": "continue",
+      "summary": "Interaction: src/mugInteraction.ts attached to the factory (explode = layout scale about the model centre + base clearance; pickPart resolves surface detail to its shell). 6 parts; all 8 picks resolve (decal/chip -> body-shell, embedded weld pads pickable when exploded). Pivots, sockets (rim, handle upper/lower, decal, grip-point), colliders and destruction groups present; check_part_coverage 0 errors.",
+      "matched": [
+        "explodable + clickable with one part definition",
+        "stable pivot nodes",
+        "sockets/colliders/destruction metadata",
+        "render unchanged (IoU 0.910)"
+      ],
+      "mismatches": [
+        "weld pads are hidden inside the strap ends until exploded (by design)"
+      ],
+      "specFixes": [],
+      "codeFixes": [
+        "tools/patch_factory.py: explodeWithParent on material-only/surface-relief components, attachInteraction(root)"
+      ],
+      "evidence": [
+        "renders/interaction-pass/interaction.json",
+        "renders/interaction-pass/explode.png",
+        "renders/interaction-pass/parts.json",
+        "renders/interaction-pass/part-coverage.txt",
+        "renders/interaction-pass/tier1.json",
+        "renders/interaction-pass/multi-angle.json",
+        "renders/interaction-pass/turntable.json",
+        "renders/interaction-pass/self-intersection.json",
+        "renders/interaction-pass/interior-difference.json",
+        "renders/interaction-pass/axis-long-x.png (long-axis)",
+        "renders/interaction-pass/axis-thickness-top.png (thickness-axis)"
+      ],
+      "mapStrippedRender": "renders/interaction-pass/map-stripped.png",
+      "reviewViewpoints": [
+        "reference",
+        "orbit-000",
+        "orbit-090",
+        "orbit-180",
+        "orbit-270",
+        "long-axis",
+        "thickness-axis",
+        "explode-orbit-30"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "analysis/ref_view.png",
+        "renderScreenshot": "renders/interaction-pass/reference.png",
+        "comparisonImage": "renders/interaction-pass/cmp.png",
+        "cameraView": "reference",
+        "notes": "",
+        "aiVisionNotes": "Explode capture inspected: rim lifts, handle/strip/pads separate, decal and chip ride the body; no part fused."
+      }
+    },
+    {
+      "timestamp": "2026-11-17T12:09:24.032826+00:00",
+      "passId": "optimization-pass",
+      "estimatedFidelity": 0.8,
+      "aiVisionScore": 0.87,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.93,
+        "componentStructure": 0.9,
+        "formDetail": 0.83,
+        "materialSurface": 0.84,
+        "lightingCamera": 0.84
+      },
+      "featureReviews": [
+        {
+          "id": "body-silhouette-proportion",
+          "score": 0.9,
+          "visible": true,
+          "notes": "IoU 0.910, height 437/436 px, width 431/432 px; unchanged by optimisation."
+        },
+        {
+          "id": "black-rim-bead",
+          "score": 0.82,
+          "visible": true,
+          "notes": "Band 245-255 vs 245-254 photo rows; crown streak narrower in the reference; end 'frown' unmodelled."
+        },
+        {
+          "id": "d-ring-handle",
+          "score": 0.86,
+          "visible": true,
+          "notes": "Unchanged geometry (3648 tris); zoom pair re-inspected."
+        },
+        {
+          "id": "skull-decal",
+          "score": 0.88,
+          "visible": true,
+          "notes": "Unchanged; decal shell 320 tris + 2048x1024 projected alpha."
+        },
+        {
+          "id": "enamel-palette",
+          "score": 0.85,
+          "visible": true,
+          "notes": "Unchanged tones (wall 223.6/228.4, limb 167.6/168.6)."
+        }
+      ],
+      "action": "continue",
+      "summary": "Optimization: weld pads + chip decimated 1216 -> 304 tris each and removed from the shadow pass; model 13600 -> 10864 tris (budget 60000), 8 meshes/main-pass draws (budget 12), 13 frame draws incl. 4 shadow + viewer table. No visible change (IoU 0.910, tones unchanged, zoom pair re-inspected).",
+      "matched": [
+        "budget met without removing reference-critical geometry",
+        "explode/pick unchanged"
+      ],
+      "mismatches": [
+        "none introduced",
+        "carried: rim crown streak, rim-end frown, photo bokeh/table reflection"
+      ],
+      "specFixes": [],
+      "codeFixes": [
+        "geometryDescriptor.decimate 0.25 + shadowCaster false on handle-*-weld-pad and base-chip"
+      ],
+      "evidence": [
+        "renders/optimization-pass/stats.json",
+        "renders/optimization-pass/tier1.json",
+        "renders/optimization-pass/multi-angle.json",
+        "renders/optimization-pass/turntable.json",
+        "renders/optimization-pass/self-intersection.json",
+        "renders/optimization-pass/interior-difference.json",
+        "renders/optimization-pass/interaction.json",
+        "renders/optimization-pass/zoom.png",
+        "renders/optimization-pass/axis-long-x.png (long-axis)",
+        "renders/optimization-pass/axis-thickness-top.png (thickness-axis)"
+      ],
+      "mapStrippedRender": "renders/optimization-pass/map-stripped.png",
+      "reviewViewpoints": [
+        "reference",
+        "orbit-000",
+        "orbit-090",
+        "orbit-180",
+        "orbit-270",
+        "long-axis",
+        "thickness-axis"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "analysis/ref_view.png",
+        "renderScreenshot": "renders/optimization-pass/reference.png",
+        "comparisonImage": "renders/optimization-pass/cmp.png",
+        "cameraView": "reference",
+        "notes": "",
+        "aiVisionNotes": "Final pass: optimisation verified visually neutral."
+      }
+    }
+  ],
+  "lodPlan": [
+    {
+      "tier": "near",
+      "distance": 0,
+      "strategy": "full component tree and material layers"
+    },
+    {
+      "tier": "far",
+      "distance": 30,
+      "strategy": "merge static components and reduce local feature geometry"
+    }
+  ],
+  "performanceBudget": {
+    "qualityPriority": "reference-fidelity",
+    "targetTriangles": 60000,
+    "maxDrawCalls": 12,
+    "textureSize": 2048,
+    "fpsTarget": 30,
+    "optimizationPolicy": "Reach accepted visual fidelity first, then optimize without removing reference-critical geometry or surface layers.",
+    "drawCallAccounting": "maxDrawCalls applies to the model's main-pass draws (8 measured, one per part); the viewer frame measures 13 = 8 main + 4 shadow-map draws (decal, chip and weld pads do not cast) + 1 viewer table plane (renders/optimization-pass/stats.json)"
+  },
+  "lightingFromPhoto": [
+    {
+      "id": "key",
+      "role": "key light",
+      "type": "directional",
+      "position": [
+        -5.0,
+        3.4,
+        3.2
+      ],
+      "intensity": 2.6,
+      "color": "#f7f9fd",
+      "castShadow": true,
+      "evidence": "large soft source front-left/above: left half of the wall brightest (228 luma), right limb shaded (169); lighting-pass iterations l0-l4 in renders/lighting-iter (tone_probe)"
+    },
+    {
+      "id": "fill",
+      "role": "fill light",
+      "type": "hemisphere",
+      "skyColor": "#cddbea",
+      "groundColor": "#4a3c34",
+      "intensity": 0.5,
+      "evidence": "shaded side never falls below ~130 luma; warm bounce from the wooden table"
+    },
+    {
+      "id": "rim",
+      "role": "rim light",
+      "type": "directional",
+      "position": [
+        3.5,
+        2.5,
+        -4.0
+      ],
+      "intensity": 0.5,
+      "color": "#e8eef5",
+      "castShadow": false,
+      "evidence": "thin bright edge on the handle outer side and bead top"
+    },
+    {
+      "id": "environment",
+      "role": "environment light",
+      "environmentIntensity": 0.3,
+      "evidence": "soft room reflections; intensity 0.3 so the right limb falls to ~170 like the reference (0.45 left it at 198)"
+    },
+    {
+      "id": "tone",
+      "role": "exposure / tone mapping",
+      "exposure": 1.2,
+      "toneMapping": "ACESFilmic"
+    },
+    {
+      "id": "ground",
+      "role": "background + contact shadow",
+      "tableColor": "#76645e",
+      "tableRoughness": 0.55,
+      "backgroundColor": "#8c8375",
+      "noTable": false,
+      "evidence": "table (148,136,131) front, background wall (145,128,106); soft contact shadow under the mug from the key's shadow map"
+    }
+  ],
+  "proceduralStrategy": [
+    "Block out macro silhouette first.",
+    "Add component hierarchy and joints.",
+    "Create stable pivot groups, sockets, collider proxies, and destruction metadata before visual polish.",
+    "Refine forms with bevels, tapers, bends, and procedural noise.",
+    "Run reference PBR extraction for important source-image materials and stop when confidence is below the target threshold.",
+    "Add material variation before adding expensive micro-geometry."
+  ],
+  "animationAnchors": [
+    "root pivot node supports whole-object translation, rotation, scale, and visibility changes",
+    "component pivot groups support later local transforms without rebuilding geometry"
+  ],
+  "destructionAnchors": [
+    "actionProfile.destruction.fractureGroup marks detachable or breakable component sets",
+    "component seams and sockets define plausible break points instead of random explosions"
+  ],
+  "risks": [],
+  "localSpecSearch": {
+    "collection": "core_3d",
+    "query": "Enamel mug enamel mug rolled rim handle vitreous enamel gloss white ceramic coating decal print label cylinder",
+    "index": {
+      "status": "hit",
+      "reason": "current",
+      "fingerprint": "62f2831e1d52eeb6dbb94a87c44fa25b1f4926626a7b1f8c2bcadc63e04e9471"
+    },
+    "matches": [
+      {
+        "record_id": "core.description-scene-graph-relational-triplets",
+        "file_path": "docs/raw/img2threejs-skill-dataset.json",
+        "heading": null,
+        "key_path": "categories.description_conventions[2]",
+        "score": 5.332972848899,
+        "snippets": [
+          "<Subject, Predicate, Object> statements capturing spatial/semantic relationships between parts (e.g. <blade, attached_to, handle>), plus per-node bounding box and class label. C\u00e1c ph\u00e1t bi\u1ec3u <Ch\u1ee7 th\u1ec3, V\u1ecb ng\u1eef, \u0110\u1ed1i t\u01b0\u1ee3ng> n\u1eafm b\u1eaft quan h\u1ec7 kh\u00f4ng ..."
+        ],
+        "source_refs": [
+          {
+            "path": "docs/raw/img2threejs-skill-dataset.json",
+            "heading": null,
+            "key_path": "categories.description_conventions[2]"
+          }
+        ],
+        "evidence_refs": [
+          {
+            "kind": "source",
+            "ref": "docs/raw/img2threejs-skill-dataset.json",
+            "note": "img2threejs NotebookLM research distillation"
+          }
+        ]
+      },
+      {
+        "record_id": "core.shader-mapping-torusgeometry-rings-loops",
+        "file_path": "docs/raw/img2threejs-skill-dataset.json",
+        "heading": null,
+        "key_path": "categories.rendering_shader_mapping[8]",
+        "score": 3.760685282793,
+        "snippets": [
+          "... circular features. \u00c1nh x\u1ea1 t\u1edbi c\u00e1c chi ti\u1ebft h\u00ecnh v\u00f2ng tr\u00f2n ki\u1ec3u donut. Recognition cues: Circular loop feature \u2014 bayonet handle ring, finger loop on a Talon knife, trigger guard loop, carrying handle D\u1ea5u hi\u1ec7u nh\u1eadn di\u1ec7n: Chi ti\u1ebft v\u00f2ng tr\u00f2n \u2014 ..."
+        ],
+        "source_refs": [
+          {
+            "path": "docs/raw/img2threejs-skill-dataset.json",
+            "heading": null,
+            "key_path": "categories.rendering_shader_mapping[8]"
+          }
+        ],
+        "evidence_refs": [
+          {
+            "kind": "source",
+            "ref": "docs/raw/img2threejs-skill-dataset.json",
+            "note": "img2threejs NotebookLM research distillation"
+          }
+        ]
+      },
+      {
+        "record_id": "core.pbr-clearcoat",
+        "file_path": "docs/raw/img2threejs-skill-dataset.json",
+        "heading": null,
+        "key_path": "categories.material_pbr[4]",
+        "score": 3.400790976589,
+        "snippets": [
+          "Secondary reflective coating layer on top of the base material, simulating varnish, lacquer, or automotive paint. L\u1edbp ph\u1ee7 ph\u1ea3n x\u1ea1 th\u1ee9 c\u1ea5p n\u1eb1m tr\u00ean v\u1eadt li\u1ec7u n\u1ec1n, m\u00f4 ph\u1ecfng vecni, s\u01a1n m\u00e0i ho\u1eb7c s\u01a1n xe h\u01a1i. Recognition cues: A distinct, sharp ..."
+        ],
+        "source_refs": [
+          {
+            "path": "docs/raw/img2threejs-skill-dataset.json",
+            "heading": null,
+            "key_path": "categories.material_pbr[4]"
+          }
+        ],
+        "evidence_refs": [
+          {
+            "kind": "source",
+            "ref": "docs/raw/img2threejs-skill-dataset.json",
+            "note": "img2threejs NotebookLM research distillation"
+          }
+        ]
+      }
+    ]
+  },
+  "tier1Results": [
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.9023,
+        "aspectRatioDelta": 0.0117,
+        "scaleDelta": 0.0358,
+        "bilateralSymmetryError": 0.2364,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 66.28,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 2.87
+            },
+            {
+              "componentId": null,
+              "deltaE": 64.32
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.87
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.87
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.87
+            },
+            {
+              "componentId": null,
+              "deltaE": 66.28
+            },
+            {
+              "componentId": null,
+              "deltaE": 58.38
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [],
+      "maskWarnings": [],
+      "renderHash": "e136f2651493d7ec",
+      "passId": "blockout",
+      "mapStrippedRender": "renders/blockout/map-stripped.png"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.9023,
+        "aspectRatioDelta": 0.0117,
+        "scaleDelta": 0.0358,
+        "bilateralSymmetryError": 0.2365,
+        "colorDelta": {
+          "checked": 8,
+          "maxDeltaE": 66.26,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 2.87
+            },
+            {
+              "componentId": null,
+              "deltaE": 64.3
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.87
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.87
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.87
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.87
+            },
+            {
+              "componentId": null,
+              "deltaE": 66.26
+            },
+            {
+              "componentId": null,
+              "deltaE": 58.36
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [],
+      "maskWarnings": [],
+      "renderHash": "812e43a0b3f9eacf",
+      "passId": "blockout",
+      "mapStrippedRender": "renders/blockout/map-stripped.png"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.9038,
+        "aspectRatioDelta": 0.0117,
+        "scaleDelta": 0.0358,
+        "bilateralSymmetryError": 0.2367,
+        "colorDelta": {
+          "checked": 8,
+          "maxDeltaE": 66.27,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 2.87
+            },
+            {
+              "componentId": null,
+              "deltaE": 64.31
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.87
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.87
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.87
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.87
+            },
+            {
+              "componentId": null,
+              "deltaE": 66.27
+            },
+            {
+              "componentId": null,
+              "deltaE": 58.36
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [],
+      "maskWarnings": [],
+      "renderHash": "7f5e0617f4a0ad88",
+      "passId": "blockout",
+      "mapStrippedRender": "renders/blockout/map-stripped.png"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.9095,
+        "aspectRatioDelta": 0.0,
+        "scaleDelta": 0.0,
+        "bilateralSymmetryError": 0.2406,
+        "colorDelta": {
+          "checked": 8,
+          "maxDeltaE": 15.25,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 3.34
+            },
+            {
+              "componentId": null,
+              "deltaE": 13.35
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.34
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.34
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.34
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.34
+            },
+            {
+              "componentId": null,
+              "deltaE": 15.25
+            },
+            {
+              "componentId": null,
+              "deltaE": 7.62
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [],
+      "maskWarnings": [],
+      "renderHash": "631ff49a119073f1",
+      "passId": "structural-pass"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.9095,
+        "aspectRatioDelta": 0.0,
+        "scaleDelta": 0.0,
+        "bilateralSymmetryError": 0.2406,
+        "colorDelta": {
+          "checked": 8,
+          "maxDeltaE": 15.25,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 3.34
+            },
+            {
+              "componentId": null,
+              "deltaE": 13.35
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.34
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.34
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.34
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.34
+            },
+            {
+              "componentId": null,
+              "deltaE": 15.25
+            },
+            {
+              "componentId": null,
+              "deltaE": 7.62
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [],
+      "maskWarnings": [],
+      "renderHash": "a0c775818d80be0f",
+      "passId": "structural-pass"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.9066,
+        "aspectRatioDelta": 0.0,
+        "scaleDelta": 0.0,
+        "bilateralSymmetryError": 0.2417,
+        "colorDelta": {
+          "checked": 8,
+          "maxDeltaE": 4.47,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.68
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.07
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.47
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [],
+      "maskWarnings": [],
+      "renderHash": "53f8c188d8e0e40e",
+      "passId": "form-refinement"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.9067,
+        "aspectRatioDelta": 0.0,
+        "scaleDelta": 0.0,
+        "bilateralSymmetryError": 0.2417,
+        "colorDelta": {
+          "checked": 8,
+          "maxDeltaE": 4.47,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.68
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.07
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.47
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [],
+      "maskWarnings": [],
+      "renderHash": "2defa0012fc94990",
+      "passId": "form-refinement"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.9066,
+        "aspectRatioDelta": 0.0,
+        "scaleDelta": 0.0,
+        "bilateralSymmetryError": 0.2417,
+        "colorDelta": {
+          "checked": 8,
+          "maxDeltaE": 4.48,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.68
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.07
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.48
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [],
+      "maskWarnings": [],
+      "renderHash": "e4a8bcc90b9d2ad0",
+      "passId": "form-refinement"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.9067,
+        "aspectRatioDelta": 0.0,
+        "scaleDelta": 0.0,
+        "bilateralSymmetryError": 0.2417,
+        "colorDelta": {
+          "checked": 8,
+          "maxDeltaE": 4.47,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 2.68
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.67
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.07
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.47
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [],
+      "maskWarnings": [],
+      "renderHash": "8dde1a7f3ea1d290",
+      "passId": "form-refinement"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.9115,
+        "aspectRatioDelta": 0.0,
+        "scaleDelta": 0.0,
+        "bilateralSymmetryError": 0.2433,
+        "colorDelta": {
+          "checked": 8,
+          "maxDeltaE": 15.84,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 3.61
+            },
+            {
+              "componentId": null,
+              "deltaE": 13.79
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.61
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.61
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.61
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.61
+            },
+            {
+              "componentId": null,
+              "deltaE": 15.84
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.03
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [],
+      "maskWarnings": [],
+      "renderHash": "42942db50ef8ebe3",
+      "passId": "material-pass"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.9124,
+        "aspectRatioDelta": 0.0,
+        "scaleDelta": 0.0,
+        "bilateralSymmetryError": 0.2426,
+        "colorDelta": {
+          "checked": 8,
+          "maxDeltaE": 15.51,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 3.6
+            },
+            {
+              "componentId": null,
+              "deltaE": 13.45
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.6
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.6
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.6
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.6
+            },
+            {
+              "componentId": null,
+              "deltaE": 15.51
+            },
+            {
+              "componentId": null,
+              "deltaE": 8.75
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [],
+      "maskWarnings": [],
+      "renderHash": "3ae3753108332afd",
+      "passId": "material-pass"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.9124,
+        "aspectRatioDelta": 0.0,
+        "scaleDelta": 0.0,
+        "bilateralSymmetryError": 0.2426,
+        "colorDelta": {
+          "checked": 8,
+          "maxDeltaE": 15.51,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 3.6
+            },
+            {
+              "componentId": null,
+              "deltaE": 13.45
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.6
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.6
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.6
+            },
+            {
+              "componentId": null,
+              "deltaE": 3.6
+            },
+            {
+              "componentId": null,
+              "deltaE": 15.51
+            },
+            {
+              "componentId": null,
+              "deltaE": 8.75
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [],
+      "maskWarnings": [],
+      "renderHash": "3ae3753108332afd",
+      "passId": "surface-pass"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.9103,
+        "aspectRatioDelta": 0.0,
+        "scaleDelta": 0.0,
+        "bilateralSymmetryError": 0.2453,
+        "colorDelta": {
+          "checked": 8,
+          "maxDeltaE": 17.99,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 4.17
+            },
+            {
+              "componentId": null,
+              "deltaE": 15.86
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.17
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.17
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.17
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.17
+            },
+            {
+              "componentId": null,
+              "deltaE": 17.99
+            },
+            {
+              "componentId": null,
+              "deltaE": 11.96
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [],
+      "maskWarnings": [],
+      "renderHash": "43039948b78adc63",
+      "passId": "lighting-pass"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.9103,
+        "aspectRatioDelta": 0.0,
+        "scaleDelta": 0.0,
+        "bilateralSymmetryError": 0.2453,
+        "colorDelta": {
+          "checked": 8,
+          "maxDeltaE": 17.99,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 4.17
+            },
+            {
+              "componentId": null,
+              "deltaE": 15.86
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.17
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.17
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.17
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.17
+            },
+            {
+              "componentId": null,
+              "deltaE": 17.99
+            },
+            {
+              "componentId": null,
+              "deltaE": 11.96
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [],
+      "maskWarnings": [],
+      "renderHash": "43039948b78adc63",
+      "passId": "interaction-pass"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.9103,
+        "aspectRatioDelta": 0.0,
+        "scaleDelta": 0.0,
+        "bilateralSymmetryError": 0.2453,
+        "colorDelta": {
+          "checked": 8,
+          "maxDeltaE": 18.0,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 4.17
+            },
+            {
+              "componentId": null,
+              "deltaE": 15.87
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.17
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.17
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.17
+            },
+            {
+              "componentId": null,
+              "deltaE": 4.17
+            },
+            {
+              "componentId": null,
+              "deltaE": 18.0
+            },
+            {
+              "componentId": null,
+              "deltaE": 11.96
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [],
+      "maskWarnings": [],
+      "renderHash": "b946eeb884d8b938",
+      "passId": "optimization-pass"
+    }
+  ]
+}

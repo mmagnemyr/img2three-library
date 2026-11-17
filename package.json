@@ -1,0 +1,19 @@
+{
+  "name": "img2three-library",
+  "private": true,
+  "description": "Procedural Three.js models rebuilt from photos by img2three runs, plus a gallery.",
+  "scripts": {
+    "bundle": "esbuild gallery/main.ts --bundle --format=iife --outdir=gallery/dist --log-level=warning",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "publish-run": "python tools/publish.py"
+  },
+  "dependencies": {
+    "simplebar": "6.2.7",
+    "three": "0.170.0"
+  },
+  "devDependencies": {
+    "@types/three": "0.170.0",
+    "esbuild": "0.24.0",
+    "typescript": "5.6.3"
+  }
+}

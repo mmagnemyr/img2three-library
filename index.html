@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>img2three-bibliotek</title>
+  <link rel="stylesheet" href="gallery/dist/main.css">
+</head>
+<body>
+  <aside>
+    <header>
+      <h1>img2three-bibliotek</h1>
+      <p>Procedurella Three.js-modeller byggda ur foton</p>
+    </header>
+    <div id="model-scroll"><ul id="model-list"></ul></div>
+  </aside>
+  <main>
+    <div id="stage"></div>
+    <section class="overlay" aria-live="polite">
+      <h2 id="model-title"></h2>
+      <dl id="model-facts"></dl>
+      <label id="explode-row">Explodera
+        <input id="explode" type="range" min="0" max="1.5" step="0.01" value="0">
+      </label>
+      <img id="reference" alt="Referensfoto">
+    </section>
+    <p class="hint">Dra för att rotera · scrolla för att zooma</p>
+  </main>
+  <script src="gallery/dist/main.js"></script>
+</body>
+</html>

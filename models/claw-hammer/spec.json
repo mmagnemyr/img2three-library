@@ -1,0 +1,7093 @@
+{
+ "targetName": "Claw hammer",
+ "targetId": "claw-hammer",
+ "schemaVersion": "2.1",
+ "terminologyProfile": {
+  "domain": "real-time procedural Three.js asset",
+  "geometryTerms": [
+   "silhouette",
+   "topology",
+   "primitive",
+   "bevel",
+   "chamfer",
+   "taper",
+   "bend",
+   "boolean cut",
+   "edge loop",
+   "surface normal",
+   "displacement"
+  ],
+  "materialTerms": [
+   "albedo",
+   "baseColor",
+   "roughness",
+   "metalness",
+   "normal map",
+   "bump map",
+   "ambient occlusion",
+   "cavity dirt",
+   "edge wear",
+   "clearcoat"
+  ],
+  "lightingTerms": [
+   "key light",
+   "fill light",
+   "rim light",
+   "HDRI/environment reflection",
+   "contact shadow"
+  ],
+  "descriptionRule": "Use measurable 3D graphics terms. Avoid vague words unless they are paired with concrete geometry/material/shader parameters."
+ },
+ "sourceImage": "reference/reference.jpg",
+ "referenceCamera": {
+  "solved": true,
+  "fovDegrees": 19.08,
+  "distance": 0.7163,
+  "target": [
+   0.1307,
+   0.0221,
+   0.0463
+  ],
+  "orientation": {
+   "yaw": 3.571,
+   "pitch": 40.265,
+   "roll": 0
+  },
+  "aspect": 1.4,
+  "note": "fitted by authoring/fit_camera.py, silhouette IoU 0.924 at 280x200 (evidence/camera-fit.json)"
+ },
+ "suitability": "pass",
+ "scores": {
+  "object_isolation": 3,
+  "silhouette_readability": 3,
+  "depth_inference": 2,
+  "primitive_decomposition": 3,
+  "material_procedurality": 3,
+  "occlusion_risk": 1,
+  "interaction_fit": 2
+ },
+ "preSpecAssessment": {
+  "objectClass": {
+   "primaryType": "claw hammer (curved claw, one-piece forged steel head+shank, moulded elastomer grip)",
+   "primaryDomain": "object",
+   "formLanguage": [
+    "hard-surface",
+    "mechanical"
+   ],
+   "structureKind": [
+    "compound object",
+    "layered shell"
+   ],
+   "motionPotential": [
+    "static prop",
+    "whole-object transform"
+   ],
+   "materialFamilies": [
+    "metal",
+    "rubber"
+   ],
+   "notes": "Observed: single forged steel head+shank, orange overmoulded grip. Bilateral symmetry about the hammer mid-plane."
+  },
+  "complexity": {
+   "tier": "moderate",
+   "scores": {
+    "silhouetteComplexity": 2,
+    "componentCount": 2,
+    "hierarchyDepth": 1,
+    "repetitionDensity": 2,
+    "materialLayerCount": 2,
+    "localDetailDensity": 2,
+    "occlusionRisk": 1,
+    "actionReadinessNeed": 1
+   },
+   "estimatedCounts": {
+    "macroComponents": 3,
+    "mesoComponents": 6,
+    "microFeatureGroups": 5,
+    "materialLayers": 4,
+    "repetitionSystems": 1
+   },
+   "reasoning": [
+    "Three macro parts (head, shank, grip) with clear sub-parts (face, neck, cheek, claw prongs, grip butt).",
+    "One repetition system: ~26 diagonal chevron rib grooves on the grip.",
+    "Material layers: satin forged steel, darker claw scale, white shank scuff patch, orange elastomer.",
+    "Hidden far side is inferred by bilateral symmetry; low occlusion risk."
+   ]
+  },
+  "specDepthDecision": {
+   "requiredDepth": "moderate",
+   "minimumComponentLevels": [
+    "macro",
+    "meso",
+    "micro"
+   ],
+   "needsRepetitionSystems": true,
+   "needsMaterialLocalOverrides": true,
+   "needsMultipleReviewViews": true,
+   "needsActionReadyHierarchy": true,
+   "rationale": "Moderate: few macro parts but identity depends on claw curvature, grip rib pattern and steel/orange material split."
+  },
+  "unknownsToResolveBeforeImplementation": [],
+  "detailInventory": {
+   "scanMethod": "grid-3x3",
+   "targetMinDetails": 6,
+   "note": "Enumerate every identity-defining small detail before authoring the spec. Each detail must map to a component.localFeatures entry or material.localOverrides entry, never prose only. Use forge/stage1_intake/build_detail_inventory.py to scan zones.",
+   "details": [
+    {
+     "id": "face-chamfer-ring",
+     "kind": "bevel",
+     "description": "Bright chamfer ring around the round striking face rim; face disc slightly lighter/rougher machined steel.",
+     "region": {
+      "x": 0.01,
+      "y": 0.42,
+      "width": 0.1,
+      "height": 0.2,
+      "units": "normalized"
+     },
+     "scale": "meso",
+     "affects": "geometry",
+     "mapsTo": {
+      "type": "component.localFeatures",
+      "ref": "face-chamfer",
+      "owner": "striking-face"
+     },
+     "evidenceRef": "evidence/zones/zone-r1c0.png",
+     "confidence": 0.85
+    },
+    {
+     "id": "claw-v-slot",
+     "kind": "hole",
+     "description": "Tapering V slot between the two claw prongs, open at the tips, closed at the cheek; background visible through it.",
+     "region": {
+      "x": 0.17,
+      "y": 0.05,
+      "width": 0.15,
+      "height": 0.2,
+      "units": "normalized"
+     },
+     "scale": "meso",
+     "affects": "geometry",
+     "mapsTo": {
+      "type": "component.localFeatures",
+      "ref": "claw-v-slot",
+      "owner": "claw-prong-upper"
+     },
+     "evidenceRef": "evidence/zones/zone-r0c0.png",
+     "confidence": 0.9
+    },
+    {
+     "id": "claw-dark-scale",
+     "kind": "stain",
+     "description": "Claw inner faces and slot walls are darker blackened forging scale (~#3a3c3e), rougher than the cheek.",
+     "region": {
+      "x": 0.17,
+      "y": 0.05,
+      "width": 0.15,
+      "height": 0.22,
+      "units": "normalized"
+     },
+     "scale": "meso",
+     "affects": "albedo,roughness",
+     "mapsTo": {
+      "type": "material.localOverrides",
+      "ref": "claw-dark-scale",
+      "owner": "forged-steel"
+     },
+     "evidenceRef": "evidence/zones/zone-r0c0.png",
+     "confidence": 0.8
+    },
+    {
+     "id": "cheek-stamp",
+     "kind": "decal",
+     "description": "Stamped monogram logo + '8-62633 16oz TAIWAN DK' text on the cheek, engraved-dark linework.",
+     "region": {
+      "x": 0.1,
+      "y": 0.21,
+      "width": 0.12,
+      "height": 0.12,
+      "units": "normalized"
+     },
+     "scale": "micro",
+     "affects": "albedo",
+     "mapsTo": {
+      "type": "material.localOverrides",
+      "ref": "cheek-stamp",
+      "owner": "forged-steel"
+     },
+     "evidenceRef": "evidence/zones/zone-r0c0.png",
+     "confidence": 0.7
+    },
+    {
+     "id": "shank-scuff-patch",
+     "kind": "stain",
+     "description": "Irregular white/light-grey mill-scale scuff patch along the upper shank between cheek and grip collar.",
+     "region": {
+      "x": 0.2,
+      "y": 0.3,
+      "width": 0.2,
+      "height": 0.18,
+      "units": "normalized"
+     },
+     "scale": "meso",
+     "affects": "albedo,roughness",
+     "mapsTo": {
+      "type": "material.localOverrides",
+      "ref": "shank-scuff-patch",
+      "owner": "forged-steel"
+     },
+     "evidenceRef": "evidence/zones/zone-r1c0.png",
+     "confidence": 0.85
+    },
+    {
+     "id": "shank-brushing",
+     "kind": "scratch",
+     "description": "Longitudinal grinding/brushing streaks along the shank and cheek (anisotropic satin highlights).",
+     "region": {
+      "x": 0.15,
+      "y": 0.25,
+      "width": 0.3,
+      "height": 0.25,
+      "units": "normalized"
+     },
+     "scale": "micro",
+     "affects": "roughness",
+     "mapsTo": {
+      "type": "material.localOverrides",
+      "ref": "longitudinal-brushing",
+      "owner": "forged-steel"
+     },
+     "evidenceRef": "evidence/zones/zone-r1c1.png",
+     "confidence": 0.65
+    },
+    {
+     "id": "grip-rib-grooves",
+     "kind": "groove",
+     "description": "~26 diagonal chevron rib grooves wrapping the grip, darker in the cavities, spacing ~3% of overall length.",
+     "region": {
+      "x": 0.45,
+      "y": 0.42,
+      "width": 0.5,
+      "height": 0.45,
+      "units": "normalized"
+     },
+     "scale": "meso",
+     "affects": "geometry",
+     "mapsTo": {
+      "type": "component.localFeatures",
+      "ref": "grip-rib-grooves",
+      "owner": "grip"
+     },
+     "evidenceRef": "evidence/zones/zone-r1c1.png",
+     "confidence": 0.85
+    },
+    {
+     "id": "grip-logo-panel",
+     "kind": "seam",
+     "description": "Recessed flat rectangular panel on the grip lateral face with a small embossed logo near its proximal end.",
+     "region": {
+      "x": 0.7,
+      "y": 0.6,
+      "width": 0.18,
+      "height": 0.12,
+      "units": "normalized"
+     },
+     "scale": "meso",
+     "affects": "geometry",
+     "mapsTo": {
+      "type": "component.localFeatures",
+      "ref": "grip-logo-panel",
+      "owner": "grip"
+     },
+     "evidenceRef": "evidence/zones/zone-r2c2.png",
+     "confidence": 0.75
+    },
+    {
+     "id": "lanyard-hole",
+     "kind": "hole",
+     "description": "Small round lanyard hole through the grip near the butt.",
+     "region": {
+      "x": 0.92,
+      "y": 0.72,
+      "width": 0.02,
+      "height": 0.04,
+      "units": "normalized"
+     },
+     "scale": "micro",
+     "affects": "geometry",
+     "mapsTo": {
+      "type": "component.localFeatures",
+      "ref": "lanyard-hole",
+      "owner": "grip"
+     },
+     "evidenceRef": "evidence/zones/zone-r2c2.png",
+     "confidence": 0.8
+    },
+    {
+     "id": "grip-butt-flare",
+     "kind": "ridge",
+     "description": "Grip flares to a bulbous oval butt with a flat end cap.",
+     "region": {
+      "x": 0.86,
+      "y": 0.68,
+      "width": 0.13,
+      "height": 0.28,
+      "units": "normalized"
+     },
+     "scale": "meso",
+     "affects": "geometry",
+     "mapsTo": {
+      "type": "component.localFeatures",
+      "ref": "butt-flare",
+      "owner": "grip-butt"
+     },
+     "evidenceRef": "evidence/zones/zone-r2c2.png",
+     "confidence": 0.85
+    },
+    {
+     "id": "grip-collar",
+     "kind": "seam",
+     "description": "Grip front collar where the steel shank enters the orange sleeve: a rounded lip.",
+     "region": {
+      "x": 0.42,
+      "y": 0.43,
+      "width": 0.05,
+      "height": 0.12,
+      "units": "normalized"
+     },
+     "scale": "micro",
+     "affects": "geometry",
+     "mapsTo": {
+      "type": "component.localFeatures",
+      "ref": "grip-collar",
+      "owner": "grip-collar"
+     },
+     "evidenceRef": "evidence/zones/zone-r1c1.png",
+     "confidence": 0.8
+    }
+   ]
+  },
+  "anatomy": {
+   "applies": false,
+   "styleHeads": 0.0,
+   "proportions": {
+    "headUnit": 0.0,
+    "torso": 0.0,
+    "legs": 0.0,
+    "shoulderWidth": 0.0,
+    "hipWidth": 0.0
+   },
+   "pose": {
+    "type": "unassessed",
+    "jointAngles": {}
+   },
+   "faceLandmarks": {
+    "eyeLine": 0.0,
+    "eyeSpacing": 0.0,
+    "noseBase": 0.0,
+    "mouthLine": 0.0,
+    "hairline": 0.0
+   },
+   "features": [],
+   "confidence": 0.0,
+   "note": "Only meaningful when objectClass.primaryDomain is character or hybrid. Set applies=true and fill from forge/stage1_intake/extract_landmarks.py. See grimoire/character/reconstruction.md and grimoire/character/likeness_maximization.md."
+  },
+  "sourceImage": "reference/reference.jpg",
+  "resolvedUnknowns": [
+   {
+    "unknown": "Absolute scale: assumed 330 mm overall length (standard 16 oz claw hammer); single photo has no ruler.",
+    "resolution": "resolved by stated assumption (spec.assumptions / RESULT.md); single image cannot do better"
+   },
+   {
+    "unknown": "Far-side cheek/grip hidden: inferred bilateral-symmetric.",
+    "resolution": "resolved by stated assumption (spec.assumptions / RESULT.md); single image cannot do better"
+   },
+   {
+    "unknown": "Shank cross-section (oval vs I-beam) inferred from shading: rounded oval.",
+    "resolution": "resolved by stated assumption (spec.assumptions / RESULT.md); single image cannot do better"
+   },
+   {
+    "unknown": "Exact claw curvature in the side plane is foreshortened by the slightly-from-above camera (+-10 deg).",
+    "resolution": "resolved by stated assumption (spec.assumptions / RESULT.md); single image cannot do better"
+   },
+   {
+    "unknown": "Stamped text legibility not reproducible; approximated by projected/decal marks.",
+    "resolution": "resolved by stated assumption (spec.assumptions / RESULT.md); single image cannot do better"
+   }
+  ]
+ },
+ "qualityContract": {
+  "qualityBar": "moderate",
+  "definitionOfDone": [
+   "Reference-view silhouette IoU >= 0.85 against the isolated reference: round face on a waisted neck, cheek block, two-prong curved claw with visible V slot, tapering shank, orange grip flaring to the butt.",
+   "Proportions: grip occupies ~55% of overall length; face diameter ~9% of length; claw tips reach back over the shank.",
+   "Materials: satin grey forged steel (metalness 1), darker claw scale, white shank scuff patch, vivid red-orange satin elastomer grip.",
+   "Grip shows the diagonal rib-groove repetition system, the logo panel and the lanyard hole."
+  ],
+  "minimumSpecDepth": {
+   "macroComponents": 3,
+   "mesoComponents": 4,
+   "microFeatureGroups": 3,
+   "materialLayers": 3,
+   "repetitionSystems": 1,
+   "reviewViewpoints": 3
+  },
+  "featureGroups": [
+   {
+    "id": "overall-silhouette",
+    "name": "Overall silhouette and proportions",
+    "required": true,
+    "qualityCriteria": [
+     "Bounding shape, dominant curves, negative spaces, and scale relationships are explicitly described."
+    ],
+    "evidenceRefs": [
+     "full-object"
+    ],
+    "failureModes": [
+     "model reads as a generic placeholder instead of the reference object",
+     "major proportions are guessed without evidence"
+    ]
+   },
+   {
+    "id": "primary-structure",
+    "name": "Primary structure and hierarchy",
+    "required": true,
+    "qualityCriteria": [
+     "Major parts, joints, seams, contact points, and parent-child relationships are named before code generation."
+    ],
+    "evidenceRefs": [
+     "full-object"
+    ],
+    "failureModes": [
+     "large visible parts are merged into one mesh",
+     "component hierarchy is too shallow for the observed complexity"
+    ]
+   },
+   {
+    "id": "attachment-joint-correctness",
+    "name": "Attachment and joint correctness",
+    "required": true,
+    "qualityCriteria": [
+     "Every visible child appendage, branch, limb, handle, connector, tube, cable, horn, wing, leg, or hinged part has an attachment contract with parent socket, localStart/localEnd, contact type, embed/overlap, and gap tolerance."
+    ],
+    "evidenceRefs": [
+     "full-object"
+    ],
+    "failureModes": [
+     "child part root floats away from the parent",
+     "branch/limb/tube is centered in space instead of pivoting from its root",
+     "parent-child transform mixes world and local coordinates"
+    ]
+   },
+   {
+    "id": "surface-material-response",
+    "name": "Surface material response",
+    "required": true,
+    "qualityCriteria": [
+     "Albedo zones, roughness, normal/bump/displacement intent, cavity dirt, edge wear, and local overrides are specified where visible.",
+     "Important materials define independent albedo, roughness, height/normal, and AO responses instead of reusing one texture for unrelated PBR channels.",
+     "Surface response is decomposed into macro, meso, and micro frequency bands with scale and amplitude tied to object scale."
+    ],
+    "evidenceRefs": [
+     "full-object"
+    ],
+    "failureModes": [
+     "surface looks like flat plastic",
+     "local material variation is missing or not tied to image evidence"
+    ]
+   },
+   {
+    "id": "reference-lookdev",
+    "name": "Reference color, material, and lighting response",
+    "required": true,
+    "qualityCriteria": [
+     "Material-pass names the reference-derived albedo palette, roughness variation, tactile normal/bump/displacement response, and local masks.",
+     "When a source image is available, run reference PBR extraction and require confidence >= 0.7 before treating maps as implementation-ready.",
+     "Lighting-pass names key/fill/rim or environment light, exposure, tone mapping, background, and contact shadow behavior.",
+     "Neutral, grazing-angle, and reference-matched renders prove that surface relief survives relighting and is not painted into albedo."
+    ],
+    "evidenceRefs": [
+     "full-object"
+    ],
+    "failureModes": [
+     "model has acceptable shape but reads as flat shaded or plastic",
+     "colors are a generic average instead of reference-observed local color zones",
+     "lighting is evenly ambient and cannot reproduce the source value range"
+    ]
+   },
+   {
+    "id": "claw-two-prong",
+    "name": "Curved two-prong claw with V slot",
+    "required": true,
+    "qualityCriteria": [
+     "Claw sweeps back over the shank in a smooth arc, two prongs separated by a tapering V slot open at the tips; tips are flat-cut wedges."
+    ],
+    "evidenceRefs": [
+     "head-region"
+    ],
+    "failureModes": [
+     "claw reads as one solid blade",
+     "claw curves the wrong way or is straight"
+    ]
+   },
+   {
+    "id": "striking-face-neck",
+    "name": "Round striking face on waisted neck",
+    "required": true,
+    "qualityCriteria": [
+     "Cylindrical face with chamfered rim, a waisted neck narrowing into the cheek; axis perpendicular to the shank."
+    ],
+    "evidenceRefs": [
+     "head-region"
+    ],
+    "failureModes": [
+     "face is a sphere or box",
+     "neck missing"
+    ]
+   },
+   {
+    "id": "grip-rib-pattern",
+    "name": "Orange grip with diagonal rib grooves",
+    "required": true,
+    "qualityCriteria": [
+     "Grip widens toward a flared oval butt; ~26 diagonal chevron grooves repeat along the length; recessed logo panel on the lateral face; lanyard hole near the butt."
+    ],
+    "evidenceRefs": [
+     "grip-region"
+    ],
+    "failureModes": [
+     "grip is a plain cylinder",
+     "grip colour desaturated/brown"
+    ]
+   }
+  ],
+  "visualDeltaChecks": [
+   "silhouette and negative-space delta",
+   "component hierarchy depth delta",
+   "repetition density and distribution delta",
+   "material albedo/roughness/normal response delta",
+   "local feature placement and scale delta"
+  ],
+  "antiShallowSpecRules": [
+   "Do not proceed to code if qualityContract.qualityBar is unassessed.",
+   "Do not proceed to code if the spec only contains a root component for a moderate or complex object.",
+   "Do not proceed to code if required featureGroups are not represented by componentTree, materials, or repetitionSystems.",
+   "Do not proceed to code if visible local features are described only in prose and not attached to components/materials/evidenceRefs.",
+   "Do not proceed past structural-pass if attached child parts lack attachment.parentSocket, localStart, localEnd, embedDepth/overlap, and gapTolerance.",
+   "Do not pass material look-dev when albedo is reused as roughness, height, normal, or AO.",
+   "Do not pass material look-dev without macro, meso, and micro surface frequency bands for close-up materials.",
+   "Do not pass reference-fidelity material look-dev from a source image without usable referencePbr maps or an explicit documented limitation.",
+   "Do not patch a spec with extracted PBR maps when extraction confidence is below the target threshold unless the user explicitly accepts lower fidelity.",
+   "Do not place adjacent separate-geometry parts below 0.02 world-unit seam overlap (source: grimoire/build/geometry_patterns.md).",
+   "Do not satisfy raised or recessed relief, fasteners, or grip structure with a map alone when the feature affects form; use geometry or displacement (source: grimoire/build/geometry_patterns.md).",
+   "Adjacent components must overlap by at least 0.02 world units at shared seams (source: grimoire/build/geometry_patterns.md).",
+   "Raised or recessed relief and fasteners must be geometry, instanced micro-parts, or displacement; a map alone is an approximation (source: grimoire/build/geometry_patterns.md)."
+  ],
+  "mustNotDo": [
+   "Do not proceed to code if qualityContract.qualityBar is unassessed.",
+   "Do not proceed to code if the spec only contains a root component for a moderate or complex object.",
+   "Do not proceed to code if required featureGroups are not represented by componentTree, materials, or repetitionSystems.",
+   "Do not proceed to code if visible local features are described only in prose and not attached to components/materials/evidenceRefs.",
+   "Do not proceed past structural-pass if attached child parts lack attachment.parentSocket, localStart, localEnd, embedDepth/overlap, and gapTolerance.",
+   "Do not pass material look-dev when albedo is reused as roughness, height, normal, or AO.",
+   "Do not pass material look-dev without macro, meso, and micro surface frequency bands for close-up materials.",
+   "Do not pass reference-fidelity material look-dev from a source image without usable referencePbr maps or an explicit documented limitation.",
+   "Do not patch a spec with extracted PBR maps when extraction confidence is below the target threshold unless the user explicitly accepts lower fidelity.",
+   "Do not place adjacent separate-geometry parts below 0.02 world-unit seam overlap (source: grimoire/build/geometry_patterns.md).",
+   "Do not satisfy raised or recessed relief, fasteners, or grip structure with a map alone when the feature affects form; use geometry or displacement (source: grimoire/build/geometry_patterns.md).",
+   "Adjacent components must overlap by at least 0.02 world units at shared seams (source: grimoire/build/geometry_patterns.md).",
+   "Raised or recessed relief and fasteners must be geometry, instanced micro-parts, or displacement; a map alone is an approximation (source: grimoire/build/geometry_patterns.md)."
+  ]
+ },
+ "qualityTargets": {
+  "targetFidelity": 0.7,
+  "mustMatch": [
+   "macro silhouette and proportions",
+   "primary material albedo/roughness response",
+   "reference-derived PBR material response at or above 0.7 confidence when source pixels are usable",
+   "most recognizable local features"
+  ],
+  "niceToHave": [
+   "micro scratches, stains, chips, and dirt masks",
+   "secondary lighting match"
+  ],
+  "fpsTarget": 60,
+  "reviewViewpoints": [
+   "front",
+   "three-quarter",
+   "side",
+   "thickness-axis",
+   "long-axis"
+  ]
+ },
+ "selfCorrectLoop": {
+  "enabled": true,
+  "visualAcceptance": {
+   "reviewer": "ai-vision",
+   "threshold": 0.7,
+   "comparisonArtifactRequired": true,
+   "layerScoresRequired": true,
+   "codePixelDiffIsAcceptanceAuthority": false,
+   "scoringRule": "AI vision must inspect a side-by-side reference/render sheet and score the current pass from 0 to 1. Pixel-diff code may assist diagnostics but cannot approve a pass.",
+   "requiredLayerScores": [
+    "silhouetteProportion",
+    "componentStructure",
+    "formDetail",
+    "materialSurface",
+    "lightingCamera"
+   ],
+   "featureReviewPolicy": {
+    "enabled": true,
+    "reviewUnit": "semantic-subsystem",
+    "maxCriticalFeaturesPerPass": 5,
+    "maxImportantFeaturesPerPass": 3,
+    "criticalDefaultThreshold": 0.8,
+    "importantAverageThreshold": 0.65,
+    "adaptiveEscalation": true,
+    "singleImagePairOnly": true,
+    "selectionRule": "Choose only the most visually salient, identity-defining, user-prioritized, or high-risk semantic systems. Group repeated parts instead of reviewing every mesh. AI vision scores every selected feature from the same full reference/render pair."
+   }
+  },
+  "reviewAfterPasses": [
+   "blockout",
+   "structural-pass",
+   "form-refinement",
+   "material-pass",
+   "surface-pass",
+   "lighting-pass",
+   "interaction-pass",
+   "optimization-pass"
+  ],
+  "allowedActions": [
+   "continue",
+   "refine-spec",
+   "refine-code",
+   "request-input",
+   "stop"
+  ],
+  "specRefineTriggers": [
+   "missing component",
+   "wrong primitive family",
+   "wrong proportions",
+   "material layer under-specified",
+   "local feature not traceable to viewEvidence",
+   "reference ambiguity discovered during implementation"
+  ],
+  "codeRefineTriggers": [
+   "spec is adequate but generated geometry/material does not match",
+   "browser render differs from reference",
+   "performance budget exceeded",
+   "lighting hides geometry or material response"
+  ],
+  "stopCriteria": [
+   "target fidelity reached or user accepts current approximation",
+   "remaining gaps require new reference images or manual art"
+  ],
+  "screenshotPolicy": {
+   "requiredForPasses": [
+    "blockout",
+    "structural-pass",
+    "form-refinement",
+    "material-pass",
+    "surface-pass",
+    "lighting-pass",
+    "interaction-pass"
+   ],
+   "preferredCapture": "in-app-browser-screenshot",
+   "fallbackCapture": "user-supplied-screenshot-path",
+   "minimumEvidence": "Each visual pass needs a reference image, rendered screenshot, side-by-side comparison sheet, AI vision score, layer scores, and critique before choosing continue.",
+   "reviewPairRule": "Compare the same camera/viewpoint whenever possible; do not judge a front reference against a random render angle.",
+   "acceptanceAuthority": "AI vision review of the comparison sheet. Code-generated pixel similarity is not sufficient evidence."
+  }
+ },
+ "featureReviewTargets": [
+  {
+   "id": "overall-silhouette",
+   "name": "Overall hammer silhouette: T head, long grip, proportions",
+   "tier": "critical",
+   "passIds": [
+    "blockout",
+    "structural-pass",
+    "form-refinement"
+   ],
+   "minimumScore": 0.8,
+   "mustPass": true,
+   "componentRefs": [
+    "head",
+    "shank",
+    "grip"
+   ],
+   "evidenceRefs": [
+    "full-object"
+   ]
+  },
+  {
+   "id": "claw-two-prong",
+   "name": "Curved two-prong claw with open V slot",
+   "tier": "critical",
+   "passIds": [
+    "blockout",
+    "structural-pass",
+    "form-refinement"
+   ],
+   "minimumScore": 0.75,
+   "mustPass": true,
+   "componentRefs": [
+    "claw-prong-upper",
+    "claw-prong-lower"
+   ],
+   "evidenceRefs": [
+    "head-region"
+   ]
+  },
+  {
+   "id": "striking-face-neck",
+   "name": "Round chamfered striking face on waisted neck",
+   "tier": "critical",
+   "passIds": [
+    "structural-pass",
+    "form-refinement"
+   ],
+   "minimumScore": 0.75,
+   "mustPass": true,
+   "componentRefs": [
+    "striking-face"
+   ],
+   "evidenceRefs": [
+    "head-region"
+   ]
+  },
+  {
+   "id": "grip-rib-pattern",
+   "name": "Orange grip: chevron rib grooves, flared butt, logo panel, lanyard hole",
+   "tier": "critical",
+   "passIds": [
+    "form-refinement",
+    "material-pass",
+    "surface-pass"
+   ],
+   "minimumScore": 0.75,
+   "mustPass": true,
+   "componentRefs": [
+    "grip",
+    "grip-butt",
+    "grip-logo-panel"
+   ],
+   "evidenceRefs": [
+    "grip-region"
+   ]
+  },
+  {
+   "id": "reference-material-system",
+   "name": "Satin steel vs vivid orange elastomer, scuff patch, dark claw",
+   "tier": "critical",
+   "passIds": [
+    "material-pass",
+    "surface-pass",
+    "lighting-pass"
+   ],
+   "minimumScore": 0.75,
+   "mustPass": true,
+   "componentRefs": [
+    "head",
+    "shank",
+    "grip",
+    "claw-prong-upper"
+   ],
+   "evidenceRefs": [
+    "full-object"
+   ]
+  },
+  {
+   "id": "cheek-stamp-marks",
+   "name": "Stamped cheek markings",
+   "tier": "important",
+   "passIds": [
+    "material-pass",
+    "surface-pass"
+   ],
+   "minimumScore": 0.5,
+   "mustPass": false,
+   "componentRefs": [
+    "cheek-stamp"
+   ],
+   "evidenceRefs": [
+    "head-region"
+   ]
+  }
+ ],
+ "sculptPipeline": {
+  "passGateMode": "locked-sequential",
+  "passOrder": [
+   "blockout",
+   "structural-pass",
+   "form-refinement",
+   "material-pass",
+   "surface-pass",
+   "lighting-pass",
+   "interaction-pass",
+   "optimization-pass"
+  ],
+  "currentPass": "complete",
+  "completedPasses": [
+   "blockout",
+   "structural-pass",
+   "form-refinement",
+   "material-pass",
+   "surface-pass",
+   "lighting-pass",
+   "interaction-pass",
+   "optimization-pass"
+  ],
+  "lastCompletedPass": "optimization-pass",
+  "blockedReason": "all build passes completed",
+  "nextRequiredEvidence": []
+ },
+ "lookDevTargets": {
+  "qualityPriority": "reference-fidelity",
+  "materialPass": {
+   "albedoPaletteRequired": true,
+   "roughnessVariationRequired": true,
+   "normalOrBumpRequired": true,
+   "localOverridesRequired": true,
+   "minimumTextureResolution": 1024,
+   "preferredTextureResolution": 2048,
+   "independentMapChannels": [
+    "albedo",
+    "roughness",
+    "height",
+    "normal",
+    "ambient-occlusion"
+   ],
+   "requiredSurfaceFrequencyBands": [
+    "macro",
+    "meso",
+    "micro"
+   ],
+   "geometryReliefRequiredWhenSilhouetteAffected": true,
+   "referencePbrExtraction": {
+    "requiredWhenSourceImagePresent": true,
+    "targetThreshold": 0.7,
+    "stopOnLowConfidence": true,
+    "script": "forge/stage1_intake/extract_pbr_evidence.py",
+    "acceptedLimitation": "single-image extraction is reference-derived inference, not exact photogrammetry"
+   },
+   "mustAvoid": [
+    "single flat albedo per material",
+    "uniform roughness",
+    "albedo texture reused as roughness/height/normal/AO",
+    "single-frequency random noise",
+    "plastic-looking smooth bark, stone, cloth, foliage, or aged material",
+    "local color/detail described only in prose without material masks",
+    "claiming exact PBR recovery when confidence is below the target threshold"
+   ]
+  },
+  "lightingPass": {
+   "requiredTerms": [
+    "key light",
+    "fill light",
+    "rim or environment light",
+    "exposure",
+    "tone mapping",
+    "background",
+    "contact shadow"
+   ],
+   "mustAvoid": [
+    "ambient-only lighting",
+    "flat value range",
+    "missing contact shadow",
+    "reference lighting copied without separating material readability"
+   ]
+  },
+  "screenshotReview": [
+   "Compare albedo palette and local color zones.",
+   "Compare roughness/normal/bump response under light.",
+   "Compare cavity dirt, edge wear, stains, moss, scratches, or other local masks.",
+   "Compare key/fill/rim structure, exposure, tone mapping, background, and contact shadows.",
+   "Capture a neutral-light render to verify material readability without reference lighting.",
+   "Capture a grazing-light close-up to expose flat normals, uniform roughness, tiling, and plastic highlights.",
+   "Capture a reference-matched render from the same camera framing as the source."
+  ]
+ },
+ "actionReadiness": {
+  "contract": "Every macro/meso component should be generated as a stable named Object3D pivot node with a mesh child, action metadata, optional sockets, collider proxy, and destruction metadata.",
+  "defaultRigType": "action-ready-static-rig",
+  "rootMotionNode": "root",
+  "requiredComponentFields": [
+   "id",
+   "parent",
+   "transform",
+   "attachment for child appendages, connectors, limbs, tubes, handles, legs, horns, wings, branches, or cables",
+   "actionProfile.animationRole",
+   "actionProfile.pivot",
+   "actionProfile.collider",
+   "actionProfile.destruction"
+  ],
+  "transformChannels": [
+   "translate",
+   "rotate",
+   "scale",
+   "bend",
+   "twist",
+   "detach",
+   "visibility",
+   "material-state"
+  ],
+  "authoringRules": [
+   "Do not collapse independently movable parts into one mesh.",
+   "Put transforms on component pivot groups, not only on raw meshes.",
+   "For attached child parts, put the pivot at the semantic root/socket and build visible geometry from localStart to localEnd.",
+   "Represent hinge, socket, detachable, and breakable intent even when no animation is implemented yet.",
+   "Use simplified collider proxies for runtime physics instead of visual mesh colliders by default."
+  ],
+  "destructionPolicy": {
+   "defaultBreakable": false,
+   "fractureGroupNaming": "Use stable semantic names such as body-shell, left-hinge, glass-panel, branch-segment.",
+   "debrisStrategy": "Prefer detachable component groups and a small number of procedural fragments over random mesh explosion."
+  }
+ },
+ "assumptions": [
+  "Overall length 0.335 m (standard 16 oz claw hammer).",
+  "Far side mirrors the visible side (bilateral).",
+  "Stamp text approximated by the projected reference pixels, not re-typeset."
+ ],
+ "coordinateFrame": {
+  "front": "+Y is the lateral cheek face that faces up/toward the camera in the reference (hammer lies on its side)",
+  "up": "+Y (world up; hammer mid-plane is horizontal XZ)",
+  "handleAxis": "+X toward the butt (hammer frame, before the root yaw)",
+  "headAxis": "+Z toward the striking face",
+  "scaleReference": "metres; overall length 0.335 m (assumed standard 16 oz claw hammer, no ruler in the photo)"
+ },
+ "silhouette": {
+  "boundingShape": "long T: head (0.145 m along Z incl. claw) perpendicular to a 0.33 m handle",
+  "aspectRatios": [
+   "overall length : head length ~ 2.3",
+   "grip length : overall ~ 0.62",
+   "face diameter : overall ~ 0.09"
+  ],
+  "symmetry": "bilateral about the hammer mid-plane (XZ); far side inferred",
+  "dominantCurves": [
+   "claw outer arc sweeping back toward the grip",
+   "throat U between claw and shank",
+   "grip flare to the butt"
+  ],
+  "negativeSpaces": [
+   "V slot between the claw prongs",
+   "throat between claw underside and shank"
+  ],
+  "landmarks": [
+   "face disc centre",
+   "claw tips",
+   "grip collar",
+   "butt end",
+   "lanyard hole"
+  ]
+ },
+ "viewEvidence": [
+  {
+   "id": "full-object",
+   "view": "primary",
+   "imageRegion": {
+    "x": 0,
+    "y": 0,
+    "width": 1,
+    "height": 1,
+    "units": "normalized"
+   },
+   "observations": [
+    "hammer lies on its side, seen from ~40 deg above, handle running to lower right"
+   ],
+   "confidence": 0.85
+  },
+  {
+   "id": "head-region",
+   "view": "primary",
+   "imageRegion": {
+    "x": 0.0,
+    "y": 0.0,
+    "width": 0.47,
+    "height": 0.66,
+    "units": "normalized"
+   },
+   "observations": [
+    "face disc, waisted neck, stamped cheek, two-prong claw, scuffed shank"
+   ],
+   "confidence": 0.85
+  },
+  {
+   "id": "grip-region",
+   "view": "primary",
+   "imageRegion": {
+    "x": 0.42,
+    "y": 0.4,
+    "width": 0.58,
+    "height": 0.6,
+    "units": "normalized"
+   },
+   "observations": [
+    "orange grip with chevron ribs, logo panel, lanyard hole, flared butt"
+   ],
+   "confidence": 0.85
+  },
+  {
+   "id": "zone-r0c0",
+   "view": "primary",
+   "imageRegion": {
+    "x": 0.0,
+    "y": 0.0,
+    "width": 0.3333,
+    "height": 0.3333,
+    "units": "normalized"
+   },
+   "observations": [
+    "detail-inventory zone crop evidence/zones/zone-r0c0.png"
+   ],
+   "confidence": 0.8
+  },
+  {
+   "id": "zone-r0c1",
+   "view": "primary",
+   "imageRegion": {
+    "x": 0.3333,
+    "y": 0.0,
+    "width": 0.3333,
+    "height": 0.3333,
+    "units": "normalized"
+   },
+   "observations": [
+    "detail-inventory zone crop evidence/zones/zone-r0c1.png"
+   ],
+   "confidence": 0.8
+  },
+  {
+   "id": "zone-r0c2",
+   "view": "primary",
+   "imageRegion": {
+    "x": 0.6667,
+    "y": 0.0,
+    "width": 0.3333,
+    "height": 0.3333,
+    "units": "normalized"
+   },
+   "observations": [
+    "detail-inventory zone crop evidence/zones/zone-r0c2.png"
+   ],
+   "confidence": 0.8
+  },
+  {
+   "id": "zone-r1c0",
+   "view": "primary",
+   "imageRegion": {
+    "x": 0.0,
+    "y": 0.3333,
+    "width": 0.3333,
+    "height": 0.3333,
+    "units": "normalized"
+   },
+   "observations": [
+    "detail-inventory zone crop evidence/zones/zone-r1c0.png"
+   ],
+   "confidence": 0.8
+  },
+  {
+   "id": "zone-r1c1",
+   "view": "primary",
+   "imageRegion": {
+    "x": 0.3333,
+    "y": 0.3333,
+    "width": 0.3333,
+    "height": 0.3333,
+    "units": "normalized"
+   },
+   "observations": [
+    "detail-inventory zone crop evidence/zones/zone-r1c1.png"
+   ],
+   "confidence": 0.8
+  },
+  {
+   "id": "zone-r1c2",
+   "view": "primary",
+   "imageRegion": {
+    "x": 0.6667,
+    "y": 0.3333,
+    "width": 0.3333,
+    "height": 0.3333,
+    "units": "normalized"
+   },
+   "observations": [
+    "detail-inventory zone crop evidence/zones/zone-r1c2.png"
+   ],
+   "confidence": 0.8
+  },
+  {
+   "id": "zone-r2c0",
+   "view": "primary",
+   "imageRegion": {
+    "x": 0.0,
+    "y": 0.6667,
+    "width": 0.3333,
+    "height": 0.3333,
+    "units": "normalized"
+   },
+   "observations": [
+    "detail-inventory zone crop evidence/zones/zone-r2c0.png"
+   ],
+   "confidence": 0.8
+  },
+  {
+   "id": "zone-r2c1",
+   "view": "primary",
+   "imageRegion": {
+    "x": 0.3333,
+    "y": 0.6667,
+    "width": 0.3333,
+    "height": 0.3333,
+    "units": "normalized"
+   },
+   "observations": [
+    "detail-inventory zone crop evidence/zones/zone-r2c1.png"
+   ],
+   "confidence": 0.8
+  },
+  {
+   "id": "zone-r2c2",
+   "view": "primary",
+   "imageRegion": {
+    "x": 0.6667,
+    "y": 0.6667,
+    "width": 0.3333,
+    "height": 0.3333,
+    "units": "normalized"
+   },
+   "observations": [
+    "detail-inventory zone crop evidence/zones/zone-r2c2.png"
+   ],
+   "confidence": 0.8
+  }
+ ],
+ "componentTree": [
+  {
+   "id": "head",
+   "name": "Forged head (cheek and eye block)",
+   "level": "macro",
+   "role": "body",
+   "importance": 1.0,
+   "confidence": 0.75,
+   "primitive": "tapered-sweep",
+   "topologyClass": "continuous-sculpt",
+   "topologyRationale": "One forged mass whose rounded-rectangle section varies smoothly from the claw root to the neck; a box/cylinder cannot follow the taper.",
+   "geometryDescriptor": {
+    "topologyIntent": "low-poly blockout with bevel-ready edges",
+    "edgeTreatment": {
+     "type": "rounded-section",
+     "bevelRadius": 0.003,
+     "segments": 4
+    },
+    "deformationStack": [],
+    "uvStrategy": "sweep u = around section, v = along head axis",
+    "normalStrategy": "vertex normals from generated geometry",
+    "taperedSweep": {
+     "stations": [
+      {
+       "position": [
+        0.0,
+        0.0,
+        -0.032
+       ],
+       "rx": 0.006,
+       "rz": 0.006,
+       "squareness": 2.0
+      },
+      {
+       "position": [
+        -0.001,
+        0.0,
+        -0.024
+       ],
+       "rx": 0.01404,
+       "rz": 0.0105,
+       "squareness": 3.0
+      },
+      {
+       "position": [
+        -0.001,
+        0.0,
+        -0.012
+       ],
+       "rx": 0.01782,
+       "rz": 0.0122,
+       "squareness": 3.5
+      },
+      {
+       "position": [
+        -0.001,
+        0.0,
+        0.004
+       ],
+       "rx": 0.0189,
+       "rz": 0.0126,
+       "squareness": 3.5
+      },
+      {
+       "position": [
+        -0.001,
+        0.0,
+        0.018
+       ],
+       "rx": 0.01728,
+       "rz": 0.0124,
+       "squareness": 3.0
+      },
+      {
+       "position": [
+        0.0,
+        0.0,
+        0.03
+       ],
+       "rx": 0.0128,
+       "rz": 0.0118,
+       "squareness": 2.5
+      },
+      {
+       "position": [
+        0.0,
+        0.0,
+        0.036
+       ],
+       "rx": 0.0112,
+       "rz": 0.011,
+       "squareness": 2.0
+      }
+     ],
+     "radialSegments": 36,
+     "capEnds": true
+    }
+   },
+   "parent": null,
+   "attachment": null,
+   "dimensions": {
+    "width": 1.0,
+    "height": 1.0,
+    "depth": 1.0,
+    "units": "metres (geometry authored in absolute units; unit scale)",
+    "confidence": 0.75
+   },
+   "transform": {
+    "position": [
+     0.0,
+     0.015,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     -0.3446,
+     0.0
+    ]
+   },
+   "actionProfile": {
+    "animationRole": "root",
+    "pivot": {
+     "mode": "center",
+     "localPosition": [
+      0,
+      0,
+      0
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "confidence": 0.7
+    },
+    "transformChannels": {
+     "translate": true,
+     "rotate": true,
+     "scale": true,
+     "bend": false,
+     "twist": false,
+     "detach": false,
+     "visibility": true,
+     "materialState": true
+    },
+    "sockets": [
+     {
+      "id": "socket-neck",
+      "localPosition": [
+       0,
+       0,
+       0.033
+      ],
+      "axis": [
+       0,
+       0,
+       1
+      ]
+     },
+     {
+      "id": "socket-claw-root",
+      "localPosition": [
+       0,
+       0,
+       -0.02
+      ],
+      "axis": [
+       0,
+       0,
+       -1
+      ]
+     },
+     {
+      "id": "socket-eye",
+      "localPosition": [
+       0.012,
+       0,
+       0
+      ],
+      "axis": [
+       1,
+       0,
+       0
+      ]
+     }
+    ],
+    "collider": {
+     "type": "box",
+     "offset": [
+      0,
+      0,
+      0.0
+     ],
+     "scale": [
+      0.036,
+      0.026,
+      0.11
+     ],
+     "isTrigger": false,
+     "notes": "head + claw + face box proxy"
+    },
+    "constraints": [],
+    "destruction": {
+     "breakable": false,
+     "fractureGroup": "forged-steel",
+     "seamRefs": [],
+     "detachableFragments": [],
+     "breakImpulse": 0.0,
+     "debrisMaterial": "forged-steel"
+    }
+   },
+   "material": "forged-steel",
+   "materialLayers": [
+    "forged-steel"
+   ],
+   "deformations": [],
+   "joints": [],
+   "seams": [],
+   "localFeatures": [
+    {
+     "id": "cheek-flat-sides",
+     "kind": "bevel",
+     "description": "Flat lateral cheek faces with rounded section corners (superellipse section).",
+     "geometryEffect": "rounded-rectangle sweep section",
+     "evidenceRefs": [
+      "zone-r0c0"
+     ],
+     "confidence": 0.7
+    }
+   ],
+   "surfaceDetail": {
+    "macroRoughness": 0.36,
+    "microRoughness": 0.12,
+    "bumpAmplitude": 0.12,
+    "normalPattern": "longitudinal grinding streaks along the head axis (P8 brushed bump)",
+    "displacementPattern": "none (silhouette from sweep)",
+    "occlusionPattern": "under-cheek throat cavity AO (P9 vertex colour)",
+    "edgeWearPattern": "brighter worn edges on the cheek top arc",
+    "notes": "stamp marks projected (P6)"
+   },
+   "evidenceRefs": [
+    "head-region",
+    "full-object"
+   ],
+   "details": [],
+   "fidelityTier": "blockout",
+   "colorMaterialRecipe": {
+    "componentId": "head",
+    "dominantAlbedo": "rgba(124, 119, 121, 1.0)",
+    "secondaryAlbedo": "rgba(164, 160, 160, 1.0)",
+    "materialClass": "metal",
+    "materialClassConfidence": 0.692,
+    "roughnessEstimate": 0.122,
+    "metalnessEstimate": 1.0,
+    "highlightEvidence": "sharp, tight specular hotspot \u2014 supports low roughness/high specularity",
+    "sourceCropPath": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/crops/c-steel-a.png",
+    "labClusterMeta": {
+     "clusterCount": 3,
+     "dominantClusterSharePct": 0.578
+    },
+    "agentOverrideNote": "extractor class confidence capped below 0.7 on crop material-evidence/crops/c-steel-a.png; class metal confirmed by agent vision (bare forged steel / moulded TPE); accepted with --allow-low-confidence"
+   }
+  },
+  {
+   "id": "striking-face",
+   "name": "Striking face, bell and waisted neck",
+   "level": "meso",
+   "role": "striking-face",
+   "importance": 0.7,
+   "confidence": 0.8,
+   "primitive": "lathe",
+   "topologyClass": "continuous-sculpt",
+   "topologyRationale": "Turned, rotationally symmetric form (waist, bell, chamfered face) -> lathe profile about the head axis.",
+   "geometryDescriptor": {
+    "topologyIntent": "low-poly blockout with bevel-ready edges",
+    "edgeTreatment": {
+     "type": "chamfer",
+     "bevelRadius": 0.0015,
+     "segments": 1
+    },
+    "deformationStack": [],
+    "uvStrategy": "lathe u around, v along profile",
+    "normalStrategy": "vertex normals from generated geometry",
+    "latheProfile": {
+     "points": [
+      [
+       0.0112,
+       0.0
+      ],
+      [
+       0.011,
+       0.004
+      ],
+      [
+       0.0112,
+       0.008
+      ],
+      [
+       0.0122,
+       0.012
+      ],
+      [
+       0.0136,
+       0.016
+      ],
+      [
+       0.0142,
+       0.02
+      ],
+      [
+       0.0143,
+       0.028
+      ],
+      [
+       0.0142,
+       0.0312
+      ],
+      [
+       0.0128,
+       0.033
+      ],
+      [
+       0.0119,
+       0.0333
+      ],
+      [
+       0.0076,
+       0.0337
+      ],
+      [
+       0.0001,
+       0.0339
+      ]
+     ],
+     "segments": 48
+    }
+   },
+   "parent": "head",
+   "attachment": {
+    "parentId": "head",
+    "parentSocket": "socket-neck",
+    "localStart": [
+     0.0,
+     0.0,
+     0.0335
+    ],
+    "localEnd": [
+     0.0,
+     0.0,
+     0.0674
+    ],
+    "contactType": "butt-forged",
+    "embedDepth": 0.004,
+    "gapTolerance": 0.0005,
+    "contactNormal": [
+     0,
+     0,
+     1
+    ],
+    "evidenceRefs": [
+     "full-object"
+    ]
+   },
+   "dimensions": {
+    "width": 1.0,
+    "height": 1.0,
+    "depth": 1.0,
+    "units": "metres (geometry authored in absolute units; unit scale)",
+    "confidence": 0.8
+   },
+   "transform": {
+    "position": [
+     0.0,
+     0.0,
+     0.0335
+    ],
+    "rotation": [
+     1.5708,
+     0.0,
+     0.0
+    ]
+   },
+   "actionProfile": {
+    "animationRole": "rigid-child",
+    "pivot": {
+     "mode": "socket",
+     "localPosition": [
+      0,
+      0,
+      0
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "confidence": 0.7
+    },
+    "transformChannels": {
+     "translate": true,
+     "rotate": true,
+     "scale": true,
+     "bend": false,
+     "twist": false,
+     "detach": true,
+     "visibility": true,
+     "materialState": true
+    },
+    "sockets": [
+     {
+      "id": "socket-strike",
+      "localPosition": [
+       0,
+       0.0339,
+       0
+      ],
+      "axis": [
+       0,
+       1,
+       0
+      ],
+      "purpose": "impact point: spark/dust effect and hit test"
+     }
+    ],
+    "collider": {
+     "type": "cylinder",
+     "offset": [
+      0,
+      0.02,
+      0
+     ],
+     "scale": [
+      0.03,
+      0.04,
+      0.03
+     ],
+     "isTrigger": false,
+     "notes": "primitive proxy (compound hammer collider)"
+    },
+    "constraints": [],
+    "destruction": {
+     "breakable": false,
+     "fractureGroup": "forged-steel",
+     "seamRefs": [],
+     "detachableFragments": [],
+     "breakImpulse": 0.0,
+     "debrisMaterial": "face-steel"
+    }
+   },
+   "material": "face-steel",
+   "materialLayers": [
+    "face-steel"
+   ],
+   "deformations": [],
+   "joints": [],
+   "seams": [],
+   "localFeatures": [
+    {
+     "id": "face-chamfer",
+     "kind": "bevel",
+     "description": "Bright chamfer ring around the face rim.",
+     "geometryEffect": "two-point chamfer in lathe profile",
+     "evidenceRefs": [
+      "zone-r1c0"
+     ],
+     "confidence": 0.85
+    },
+    {
+     "id": "neck-waist",
+     "kind": "taper",
+     "description": "Waisted neck between cheek and bell.",
+     "geometryEffect": "lathe profile minimum radius",
+     "evidenceRefs": [
+      "zone-r1c0"
+     ],
+     "confidence": 0.8
+    }
+   ],
+   "surfaceDetail": {
+    "macroRoughness": 0.5,
+    "microRoughness": 0.15,
+    "bumpAmplitude": 0.25,
+    "normalPattern": "mottled machined/struck face pitting",
+    "displacementPattern": "slightly domed face in lathe profile",
+    "occlusionPattern": "neck waist AO (P9)",
+    "edgeWearPattern": "bright chamfer ring",
+    "notes": ""
+   },
+   "evidenceRefs": [
+    "head-region"
+   ],
+   "details": [],
+   "fidelityTier": "blockout",
+   "colorMaterialRecipe": {
+    "componentId": "striking-face",
+    "dominantAlbedo": "rgba(134, 129, 129, 1.0)",
+    "secondaryAlbedo": "rgba(98, 93, 93, 1.0)",
+    "materialClass": "metal",
+    "materialClassConfidence": 0.66,
+    "roughnessEstimate": 0.162,
+    "metalnessEstimate": 1.0,
+    "highlightEvidence": "sharp, tight specular hotspot \u2014 supports low roughness/high specularity",
+    "sourceCropPath": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/crops/c-face.png",
+    "labClusterMeta": {
+     "clusterCount": 3,
+     "dominantClusterSharePct": 0.438
+    },
+    "agentOverrideNote": "extractor class confidence capped below 0.7 on crop material-evidence/crops/c-face.png; class metal confirmed by agent vision (bare forged steel / moulded TPE); accepted with --allow-low-confidence"
+   }
+  },
+  {
+   "id": "claw-prong-upper",
+   "name": "Claw prong (upper, +Y)",
+   "level": "meso",
+   "role": "claw-prong",
+   "importance": 0.7,
+   "confidence": 0.7,
+   "primitive": "extrude",
+   "topologyClass": "assembled-solid",
+   "topologyRationale": "Each forged prong has two flat parallel lateral faces and a flat-cut wedge tip (visible as crisp planar faces in the reference); the curvature is only in-plane, so an extruded outline IS the form (not a bent plane).",
+   "geometryDescriptor": {
+    "topologyIntent": "low-poly blockout with bevel-ready edges",
+    "edgeTreatment": {
+     "type": "none",
+     "bevelRadius": 0.0,
+     "segments": 1
+    },
+    "deformationStack": [],
+    "uvStrategy": "extrude planar",
+    "normalStrategy": "vertex normals from generated geometry",
+    "profile2D": {
+     "points": [
+      [
+       -0.0135,
+       0.01
+      ],
+      [
+       -0.0137,
+       0.026
+      ],
+      [
+       -0.0113,
+       0.04
+      ],
+      [
+       -0.006,
+       0.052
+      ],
+      [
+       0.0018,
+       0.061
+      ],
+      [
+       0.0118,
+       0.068
+      ],
+      [
+       0.0235,
+       0.0718
+      ],
+      [
+       0.0315,
+       0.073
+      ],
+      [
+       0.033,
+       0.0668
+      ],
+      [
+       0.0255,
+       0.0648
+      ],
+      [
+       0.0168,
+       0.0605
+      ],
+      [
+       0.0092,
+       0.0545
+      ],
+      [
+       0.0052,
+       0.0468
+      ],
+      [
+       0.0042,
+       0.039
+      ],
+      [
+       0.0058,
+       0.029
+      ],
+      [
+       0.008,
+       0.019
+      ],
+      [
+       0.004,
+       0.008
+      ]
+     ],
+     "depth": 0.0105
+    }
+   },
+   "parent": "head",
+   "attachment": {
+    "parentId": "head",
+    "parentSocket": "socket-claw-root",
+    "localStart": [
+     0.0,
+     0.0,
+     -0.012
+    ],
+    "localEnd": [
+     0.032,
+     0.0,
+     -0.07
+    ],
+    "contactType": "embed-forged",
+    "embedDepth": 0.008,
+    "gapTolerance": 0.0005,
+    "contactNormal": [
+     0,
+     0,
+     1
+    ],
+    "evidenceRefs": [
+     "full-object"
+    ]
+   },
+   "dimensions": {
+    "width": 1.0,
+    "height": 1.0,
+    "depth": 1.0,
+    "units": "metres (geometry authored in absolute units; unit scale)",
+    "confidence": 0.7
+   },
+   "transform": {
+    "position": [
+     0.0,
+     0.0008,
+     0.0
+    ],
+    "rotation": [
+     -1.5408,
+     0.0,
+     0.0
+    ]
+   },
+   "actionProfile": {
+    "animationRole": "rigid-child",
+    "pivot": {
+     "mode": "socket",
+     "localPosition": [
+      0,
+      0,
+      0
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "confidence": 0.7
+    },
+    "transformChannels": {
+     "translate": true,
+     "rotate": true,
+     "scale": true,
+     "bend": false,
+     "twist": false,
+     "detach": true,
+     "visibility": true,
+     "materialState": true
+    },
+    "sockets": [
+     {
+      "id": "socket-nail-slot",
+      "localPosition": [
+       0.03,
+       0.066,
+       -0.0009
+      ],
+      "axis": [
+       0,
+       1,
+       0
+      ],
+      "purpose": "nail-pulling contact point in the V slot (effect/IK target)"
+     }
+    ],
+    "collider": {
+     "type": "box",
+     "offset": [
+      0.012,
+      0.045,
+      0.005
+     ],
+     "scale": [
+      0.04,
+      0.07,
+      0.011
+     ],
+     "isTrigger": false,
+     "notes": "primitive proxy (compound hammer collider)"
+    },
+    "constraints": [],
+    "destruction": {
+     "breakable": false,
+     "fractureGroup": "forged-steel",
+     "seamRefs": [],
+     "detachableFragments": [],
+     "breakImpulse": 0.0,
+     "debrisMaterial": "claw-steel"
+    }
+   },
+   "material": "claw-steel",
+   "materialLayers": [
+    "claw-steel"
+   ],
+   "deformations": [],
+   "joints": [],
+   "seams": [],
+   "localFeatures": [
+    {
+     "id": "claw-v-slot",
+     "kind": "hole",
+     "description": "Tapering V slot between the two prongs, open at the tips.",
+     "geometryEffect": "prongs offset +-Y with a small splay angle",
+     "evidenceRefs": [
+      "zone-r0c0"
+     ],
+     "confidence": 0.85
+    }
+   ],
+   "surfaceDetail": {
+    "macroRoughness": 0.46,
+    "microRoughness": 0.08,
+    "bumpAmplitude": 0.08,
+    "normalPattern": "forging scale, fine brushing",
+    "displacementPattern": "none",
+    "occlusionPattern": "dark slot-facing inner face + slot root AO (P9)",
+    "edgeWearPattern": "0.4 mm bevel catches edge highlight",
+    "notes": ""
+   },
+   "evidenceRefs": [
+    "head-region"
+   ],
+   "details": [],
+   "fidelityTier": "blockout",
+   "colorMaterialRecipe": {
+    "componentId": "claw-prong-upper",
+    "dominantAlbedo": "rgba(92, 88, 89, 1.0)",
+    "secondaryAlbedo": "rgba(106, 102, 102, 1.0)",
+    "materialClass": "metal",
+    "materialClassConfidence": 0.683,
+    "roughnessEstimate": 0.134,
+    "metalnessEstimate": 1.0,
+    "highlightEvidence": "sharp, tight specular hotspot \u2014 supports low roughness/high specularity",
+    "sourceCropPath": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/crops/claw-faces.png",
+    "labClusterMeta": {
+     "clusterCount": 3,
+     "dominantClusterSharePct": 0.566
+    },
+    "agentOverrideNote": "re-extracted at material-pass from material-evidence/crops/claw-faces.png (a fully-inside-mask window on the lit claw faces, median closest to the measured claw-top #7d7c7e); the first crop (claw-steel.png) was dominated by slot shadow (dominant rgba(13,8,11)); class metal by agent vision, extractor confidence capped <0.7"
+   }
+  },
+  {
+   "id": "claw-prong-lower",
+   "name": "Claw prong (lower, -Y)",
+   "level": "meso",
+   "role": "claw-prong",
+   "importance": 0.7,
+   "confidence": 0.7,
+   "primitive": "extrude",
+   "topologyClass": "assembled-solid",
+   "topologyRationale": "Each forged prong has two flat parallel lateral faces and a flat-cut wedge tip (visible as crisp planar faces in the reference); the curvature is only in-plane, so an extruded outline IS the form (not a bent plane).",
+   "geometryDescriptor": {
+    "topologyIntent": "low-poly blockout with bevel-ready edges",
+    "edgeTreatment": {
+     "type": "none",
+     "bevelRadius": 0.0,
+     "segments": 1
+    },
+    "deformationStack": [],
+    "uvStrategy": "extrude planar",
+    "normalStrategy": "vertex normals from generated geometry",
+    "profile2D": {
+     "points": [
+      [
+       -0.0135,
+       0.01
+      ],
+      [
+       -0.0137,
+       0.026
+      ],
+      [
+       -0.0113,
+       0.04
+      ],
+      [
+       -0.006,
+       0.052
+      ],
+      [
+       0.0018,
+       0.061
+      ],
+      [
+       0.0118,
+       0.068
+      ],
+      [
+       0.0235,
+       0.0718
+      ],
+      [
+       0.0315,
+       0.073
+      ],
+      [
+       0.033,
+       0.0668
+      ],
+      [
+       0.0255,
+       0.0648
+      ],
+      [
+       0.0168,
+       0.0605
+      ],
+      [
+       0.0092,
+       0.0545
+      ],
+      [
+       0.0052,
+       0.0468
+      ],
+      [
+       0.0042,
+       0.039
+      ],
+      [
+       0.0058,
+       0.029
+      ],
+      [
+       0.008,
+       0.019
+      ],
+      [
+       0.004,
+       0.008
+      ]
+     ],
+     "depth": 0.0105
+    }
+   },
+   "parent": "head",
+   "attachment": {
+    "parentId": "head",
+    "parentSocket": "socket-claw-root",
+    "localStart": [
+     0.0,
+     0.0,
+     -0.012
+    ],
+    "localEnd": [
+     0.032,
+     0.0,
+     -0.07
+    ],
+    "contactType": "embed-forged",
+    "embedDepth": 0.008,
+    "gapTolerance": 0.0005,
+    "contactNormal": [
+     0,
+     0,
+     1
+    ],
+    "evidenceRefs": [
+     "full-object"
+    ]
+   },
+   "dimensions": {
+    "width": 1.0,
+    "height": 1.0,
+    "depth": 1.0,
+    "units": "metres (geometry authored in absolute units; unit scale)",
+    "confidence": 0.7
+   },
+   "transform": {
+    "position": [
+     0.0,
+     -0.0113,
+     0.0
+    ],
+    "rotation": [
+     -1.6008,
+     0.0,
+     0.0
+    ]
+   },
+   "actionProfile": {
+    "animationRole": "rigid-child",
+    "pivot": {
+     "mode": "socket",
+     "localPosition": [
+      0,
+      0,
+      0
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "confidence": 0.7
+    },
+    "transformChannels": {
+     "translate": true,
+     "rotate": true,
+     "scale": true,
+     "bend": false,
+     "twist": false,
+     "detach": true,
+     "visibility": true,
+     "materialState": true
+    },
+    "sockets": [],
+    "collider": {
+     "type": "box",
+     "offset": [
+      0.012,
+      0.045,
+      0.005
+     ],
+     "scale": [
+      0.04,
+      0.07,
+      0.011
+     ],
+     "isTrigger": false,
+     "notes": "primitive proxy (compound hammer collider)"
+    },
+    "constraints": [],
+    "destruction": {
+     "breakable": false,
+     "fractureGroup": "forged-steel",
+     "seamRefs": [],
+     "detachableFragments": [],
+     "breakImpulse": 0.0,
+     "debrisMaterial": "claw-steel"
+    }
+   },
+   "material": "claw-steel",
+   "materialLayers": [
+    "claw-steel"
+   ],
+   "deformations": [],
+   "joints": [],
+   "seams": [],
+   "localFeatures": [
+    {
+     "id": "claw-v-slot",
+     "kind": "hole",
+     "description": "Tapering V slot between the two prongs, open at the tips.",
+     "geometryEffect": "prongs offset +-Y with a small splay angle",
+     "evidenceRefs": [
+      "zone-r0c0"
+     ],
+     "confidence": 0.85
+    }
+   ],
+   "surfaceDetail": {
+    "macroRoughness": 0.46,
+    "microRoughness": 0.08,
+    "bumpAmplitude": 0.08,
+    "normalPattern": "forging scale, fine brushing",
+    "displacementPattern": "none",
+    "occlusionPattern": "dark slot-facing inner face + slot root AO (P9)",
+    "edgeWearPattern": "0.4 mm bevel catches edge highlight",
+    "notes": ""
+   },
+   "evidenceRefs": [
+    "head-region"
+   ],
+   "details": [],
+   "fidelityTier": "blockout",
+   "colorMaterialRecipe": {
+    "componentId": "claw-prong-lower",
+    "dominantAlbedo": "rgba(92, 88, 89, 1.0)",
+    "secondaryAlbedo": "rgba(106, 102, 102, 1.0)",
+    "materialClass": "metal",
+    "materialClassConfidence": 0.683,
+    "roughnessEstimate": 0.134,
+    "metalnessEstimate": 1.0,
+    "highlightEvidence": "sharp, tight specular hotspot \u2014 supports low roughness/high specularity",
+    "sourceCropPath": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/crops/claw-faces.png",
+    "labClusterMeta": {
+     "clusterCount": 3,
+     "dominantClusterSharePct": 0.566
+    },
+    "agentOverrideNote": "re-extracted at material-pass from material-evidence/crops/claw-faces.png (a fully-inside-mask window on the lit claw faces, median closest to the measured claw-top #7d7c7e); the first crop (claw-steel.png) was dominated by slot shadow (dominant rgba(13,8,11)); class metal by agent vision, extractor confidence capped <0.7"
+   }
+  },
+  {
+   "id": "shank",
+   "name": "Steel shank (one forging with the head)",
+   "level": "macro",
+   "role": "shank",
+   "importance": 1.0,
+   "confidence": 0.7,
+   "primitive": "tapered-sweep",
+   "topologyClass": "continuous-sculpt",
+   "topologyRationale": "Tapering oval/rounded-rect bar with a throat flare into the head: a sweep with varying section.",
+   "geometryDescriptor": {
+    "topologyIntent": "low-poly blockout with bevel-ready edges",
+    "edgeTreatment": {
+     "type": "none",
+     "bevelRadius": 0.0,
+     "segments": 1
+    },
+    "deformationStack": [],
+    "uvStrategy": "sweep u around, v along shank",
+    "normalStrategy": "vertex normals from generated geometry",
+    "taperedSweep": {
+     "stations": [
+      {
+       "position": [
+        0.004,
+        0.0,
+        -0.004
+       ],
+       "rx": 0.017,
+       "rz": 0.011,
+       "squareness": 2.6
+      },
+      {
+       "position": [
+        0.016,
+        0.0,
+        -0.003
+       ],
+       "rx": 0.0152,
+       "rz": 0.0098,
+       "squareness": 2.6
+      },
+      {
+       "position": [
+        0.03,
+        0.0,
+        -0.0015
+       ],
+       "rx": 0.0115,
+       "rz": 0.0086,
+       "squareness": 2.4
+      },
+      {
+       "position": [
+        0.05,
+        0.0,
+        0.0
+       ],
+       "rx": 0.0092,
+       "rz": 0.0078,
+       "squareness": 2.3
+      },
+      {
+       "position": [
+        0.08,
+        0.0,
+        0.0
+       ],
+       "rx": 0.0085,
+       "rz": 0.0074,
+       "squareness": 2.3
+      },
+      {
+       "position": [
+        0.115,
+        0.0,
+        0.0
+       ],
+       "rx": 0.0081,
+       "rz": 0.0072,
+       "squareness": 2.3
+      },
+      {
+       "position": [
+        0.13,
+        0.0,
+        0.0
+       ],
+       "rx": 0.0079,
+       "rz": 0.0071,
+       "squareness": 2.3
+      }
+     ],
+     "radialSegments": 32,
+     "capEnds": true
+    }
+   },
+   "parent": "head",
+   "attachment": {
+    "parentId": "head",
+    "parentSocket": "socket-eye",
+    "localStart": [
+     0.004,
+     0.0,
+     0.0
+    ],
+    "localEnd": [
+     0.13,
+     0.0,
+     0.0
+    ],
+    "contactType": "butt-forged",
+    "embedDepth": 0.01,
+    "gapTolerance": 0.0005,
+    "contactNormal": [
+     1,
+     0,
+     0
+    ],
+    "evidenceRefs": [
+     "full-object"
+    ]
+   },
+   "dimensions": {
+    "width": 1.0,
+    "height": 1.0,
+    "depth": 1.0,
+    "units": "metres (geometry authored in absolute units; unit scale)",
+    "confidence": 0.7
+   },
+   "transform": {
+    "position": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "actionProfile": {
+    "animationRole": "rigid-child",
+    "pivot": {
+     "mode": "socket",
+     "localPosition": [
+      0,
+      0,
+      0
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "confidence": 0.7
+    },
+    "transformChannels": {
+     "translate": true,
+     "rotate": true,
+     "scale": true,
+     "bend": false,
+     "twist": false,
+     "detach": true,
+     "visibility": true,
+     "materialState": true
+    },
+    "sockets": [
+     {
+      "id": "socket-grip",
+      "localPosition": [
+       0.104,
+       0,
+       0
+      ],
+      "axis": [
+       1,
+       0,
+       0
+      ]
+     }
+    ],
+    "collider": {
+     "type": "capsule",
+     "offset": [
+      0.06,
+      0,
+      0
+     ],
+     "scale": [
+      0.12,
+      0.02,
+      0.018
+     ],
+     "isTrigger": false,
+     "notes": "primitive proxy (compound hammer collider)"
+    },
+    "constraints": [],
+    "destruction": {
+     "breakable": false,
+     "fractureGroup": "forged-steel",
+     "seamRefs": [],
+     "detachableFragments": [],
+     "breakImpulse": 0.0,
+     "debrisMaterial": "forged-steel"
+    }
+   },
+   "material": "forged-steel",
+   "materialLayers": [
+    "forged-steel"
+   ],
+   "deformations": [],
+   "joints": [],
+   "seams": [],
+   "localFeatures": [
+    {
+     "id": "throat-flare",
+     "kind": "taper",
+     "description": "Shank flares into the head and up under the claw (throat).",
+     "geometryEffect": "large first-station section offset toward -Z",
+     "evidenceRefs": [
+      "zone-r0c0"
+     ],
+     "confidence": 0.7
+    }
+   ],
+   "surfaceDetail": {
+    "macroRoughness": 0.36,
+    "microRoughness": 0.12,
+    "bumpAmplitude": 0.12,
+    "normalPattern": "longitudinal grinding streaks",
+    "displacementPattern": "none",
+    "occlusionPattern": "throat fillet AO next to the eye (P9)",
+    "edgeWearPattern": "white mill-scale scuff patch (projected decal)",
+    "notes": ""
+   },
+   "evidenceRefs": [
+    "head-region",
+    "full-object"
+   ],
+   "details": [],
+   "fidelityTier": "blockout",
+   "colorMaterialRecipe": {
+    "componentId": "shank",
+    "dominantAlbedo": "rgba(124, 119, 121, 1.0)",
+    "secondaryAlbedo": "rgba(164, 160, 160, 1.0)",
+    "materialClass": "metal",
+    "materialClassConfidence": 0.692,
+    "roughnessEstimate": 0.122,
+    "metalnessEstimate": 1.0,
+    "highlightEvidence": "sharp, tight specular hotspot \u2014 supports low roughness/high specularity",
+    "sourceCropPath": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/crops/c-steel-a.png",
+    "labClusterMeta": {
+     "clusterCount": 3,
+     "dominantClusterSharePct": 0.578
+    },
+    "agentOverrideNote": "extractor class confidence capped below 0.7 on crop material-evidence/crops/c-steel-a.png; class metal confirmed by agent vision (bare forged steel / moulded TPE); accepted with --allow-low-confidence"
+   }
+  },
+  {
+   "id": "grip",
+   "name": "Orange elastomer grip sleeve",
+   "level": "macro",
+   "role": "grip",
+   "importance": 1.0,
+   "confidence": 0.8,
+   "primitive": "tapered-sweep",
+   "topologyClass": "continuous-sculpt",
+   "topologyRationale": "Moulded sleeve with rounded-rect section widening to a flared butt: varying-section sweep.",
+   "geometryDescriptor": {
+    "topologyIntent": "low-poly blockout with bevel-ready edges",
+    "edgeTreatment": {
+     "type": "none",
+     "bevelRadius": 0.0,
+     "segments": 1
+    },
+    "deformationStack": [],
+    "uvStrategy": "sweep u around, v along grip",
+    "normalStrategy": "vertex normals from generated geometry",
+    "taperedSweep": {
+     "stations": [
+      {
+       "position": [
+        0.104,
+        0.0,
+        0.0
+       ],
+       "rx": 0.0072,
+       "rz": 0.0066,
+       "squareness": 2.4
+      },
+      {
+       "position": [
+        0.11,
+        0.0,
+        0.0
+       ],
+       "rx": 0.0113,
+       "rz": 0.0099,
+       "squareness": 2.6
+      },
+      {
+       "position": [
+        0.118,
+        0.0,
+        0.0
+       ],
+       "rx": 0.0123,
+       "rz": 0.0107,
+       "squareness": 2.8
+      },
+      {
+       "position": [
+        0.15,
+        0.0,
+        0.0
+       ],
+       "rx": 0.0138,
+       "rz": 0.0118,
+       "squareness": 2.8
+      },
+      {
+       "position": [
+        0.2,
+        0.0,
+        0.0008
+       ],
+       "rx": 0.0143,
+       "rz": 0.0121,
+       "squareness": 2.8
+      },
+      {
+       "position": [
+        0.25,
+        0.0,
+        0.0018
+       ],
+       "rx": 0.015,
+       "rz": 0.0126,
+       "squareness": 2.8
+      },
+      {
+       "position": [
+        0.275,
+        0.0,
+        0.0025
+       ],
+       "rx": 0.016,
+       "rz": 0.0133,
+       "squareness": 2.8
+      },
+      {
+       "position": [
+        0.292,
+        0.0,
+        0.003
+       ],
+       "rx": 0.0175,
+       "rz": 0.0143,
+       "squareness": 2.8
+      },
+      {
+       "position": [
+        0.3,
+        0.0,
+        0.0032
+       ],
+       "rx": 0.0182,
+       "rz": 0.0148,
+       "squareness": 2.8
+      }
+     ],
+     "radialSegments": 48,
+     "capEnds": true
+    }
+   },
+   "parent": "shank",
+   "attachment": {
+    "parentId": "shank",
+    "parentSocket": "socket-grip",
+    "localStart": [
+     0.104,
+     0.0,
+     0.0
+    ],
+    "localEnd": [
+     0.3,
+     0.0,
+     0.0
+    ],
+    "contactType": "overlap-sleeve",
+    "embedDepth": 0.006,
+    "gapTolerance": 0.0005,
+    "contactNormal": [
+     1,
+     0,
+     0
+    ],
+    "evidenceRefs": [
+     "full-object"
+    ]
+   },
+   "dimensions": {
+    "width": 1.0,
+    "height": 1.0,
+    "depth": 1.0,
+    "units": "metres (geometry authored in absolute units; unit scale)",
+    "confidence": 0.8
+   },
+   "transform": {
+    "position": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "actionProfile": {
+    "animationRole": "rigid-child",
+    "pivot": {
+     "mode": "socket",
+     "localPosition": [
+      0,
+      0,
+      0
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "confidence": 0.7
+    },
+    "transformChannels": {
+     "translate": true,
+     "rotate": true,
+     "scale": true,
+     "bend": false,
+     "twist": false,
+     "detach": true,
+     "visibility": true,
+     "materialState": true
+    },
+    "sockets": [
+     {
+      "id": "socket-hand",
+      "localPosition": [
+       0.21,
+       0,
+       0
+      ],
+      "axis": [
+       1,
+       0,
+       0
+      ],
+      "purpose": "hand grip: swing pivot (wrist) for the strike animation"
+     }
+    ],
+    "collider": {
+     "type": "capsule",
+     "offset": [
+      0.21,
+      0,
+      0
+     ],
+     "scale": [
+      0.2,
+      0.03,
+      0.03
+     ],
+     "isTrigger": false,
+     "notes": "grip capsule proxy"
+    },
+    "constraints": [],
+    "destruction": {
+     "breakable": true,
+     "fractureGroup": "grip",
+     "seamRefs": [
+      "sleeve-shank interface (overmould bond)"
+     ],
+     "detachableFragments": [
+      "grip",
+      "grip-collar",
+      "grip-butt",
+      "grip-logo-panel",
+      "grip-print-marks"
+     ],
+     "breakImpulse": 120.0,
+     "debrisMaterial": "grip-elastomer"
+    }
+   },
+   "material": "grip-elastomer",
+   "materialLayers": [
+    "grip-elastomer"
+   ],
+   "deformations": [],
+   "joints": [],
+   "seams": [
+    {
+     "id": "sleeve-shank interface",
+     "between": [
+      "grip",
+      "shank"
+     ],
+     "type": "overmould bond",
+     "evidenceRefs": [
+      "grip-region"
+     ]
+    }
+   ],
+   "localFeatures": [
+    {
+     "id": "grip-rib-grooves",
+     "kind": "groove",
+     "description": "~26 chevron rib grooves (repetition system grip-rib-grooves).",
+     "geometryEffect": "carved radial displacement + cavity AO",
+     "evidenceRefs": [
+      "zone-r1c1"
+     ],
+     "confidence": 0.8
+    },
+    {
+     "id": "lanyard-hole",
+     "kind": "hole",
+     "description": "Lanyard hole near the butt.",
+     "geometryEffect": "real blind recess carved into the grip on both lateral faces (radius 0.0020 m, depth 0.0040 m) + cavity darkening",
+     "evidenceRefs": [
+      "zone-r2c2"
+     ],
+     "confidence": 0.75,
+     "recess": {
+      "x": 0.2863,
+      "z": -0.0011,
+      "radius": 0.002,
+      "depth": 0.004,
+      "cavityBoost": 1.75
+     }
+    },
+    {
+     "id": "grip-logo-panel",
+     "kind": "seam",
+     "description": "Recessed rectangular logo panel on the +Y face; grooves interrupted.",
+     "geometryEffect": "groove mask + inset",
+     "evidenceRefs": [
+      "zone-r2c2"
+     ],
+     "confidence": 0.7
+    }
+   ],
+   "surfaceDetail": {
+    "macroRoughness": 0.5,
+    "microRoughness": 0.05,
+    "bumpAmplitude": 0.0,
+    "normalPattern": "geometric rib grooves (carved), satin moulded skin",
+    "displacementPattern": "carved S-chevron grooves 0.6 mm deep, logo-panel inset 0.4 mm, lanyard recess 3 mm, parting line 0.35 mm",
+    "occlusionPattern": "groove/lanyard/parting-line cavity vertex colour (P2)",
+    "edgeWearPattern": "none observed",
+    "notes": ""
+   },
+   "evidenceRefs": [
+    "grip-region"
+   ],
+   "details": [],
+   "fidelityTier": "blockout",
+   "colorMaterialRecipe": {
+    "componentId": "grip",
+    "dominantAlbedo": "rgba(235, 84, 24, 1.0)",
+    "secondaryAlbedo": "rgba(239, 97, 42, 1.0)",
+    "materialClass": "rubber",
+    "materialClassConfidence": 0.6,
+    "roughnessEstimate": 0.123,
+    "metalnessEstimate": 0.0,
+    "highlightEvidence": "sharp, tight specular hotspot \u2014 supports low roughness/high specularity",
+    "sourceCropPath": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/crops/c-grip-b.png",
+    "labClusterMeta": {
+     "clusterCount": 3,
+     "dominantClusterSharePct": 0.515
+    },
+    "agentOverrideNote": "extractor class confidence capped below 0.7 on crop material-evidence/crops/c-grip-b.png; class rubber confirmed by agent vision (bare forged steel / moulded TPE); accepted with --allow-low-confidence"
+   }
+  },
+  {
+   "id": "grip-collar",
+   "name": "Grip front collar lip",
+   "level": "meso",
+   "role": "collar",
+   "importance": 0.7,
+   "confidence": 0.7,
+   "primitive": "tapered-sweep",
+   "topologyClass": "continuous-sculpt",
+   "topologyRationale": "Short rounded lip where the steel enters the sleeve.",
+   "geometryDescriptor": {
+    "topologyIntent": "low-poly blockout with bevel-ready edges",
+    "edgeTreatment": {
+     "type": "none",
+     "bevelRadius": 0.0,
+     "segments": 1
+    },
+    "deformationStack": [],
+    "uvStrategy": "generated procedural coordinates",
+    "normalStrategy": "vertex normals from generated geometry",
+    "taperedSweep": {
+     "stations": [
+      {
+       "position": [
+        0.103,
+        0.0,
+        0.0
+       ],
+       "rx": 0.0066,
+       "rz": 0.006,
+       "squareness": 2.2
+      },
+      {
+       "position": [
+        0.109,
+        0.0,
+        0.0
+       ],
+       "rx": 0.0116,
+       "rz": 0.0101,
+       "squareness": 2.6
+      },
+      {
+       "position": [
+        0.114,
+        0.0,
+        0.0
+       ],
+       "rx": 0.0121,
+       "rz": 0.0105,
+       "squareness": 2.6
+      },
+      {
+       "position": [
+        0.118,
+        0.0,
+        0.0
+       ],
+       "rx": 0.0121,
+       "rz": 0.0105,
+       "squareness": 2.6
+      }
+     ],
+     "radialSegments": 40,
+     "capEnds": true
+    }
+   },
+   "parent": "grip",
+   "attachment": {
+    "parentId": "grip",
+    "parentSocket": "socket-grip",
+    "localStart": [
+     0.103,
+     0.0,
+     0.0
+    ],
+    "localEnd": [
+     0.118,
+     0.0,
+     0.0
+    ],
+    "contactType": "overlap-sleeve",
+    "embedDepth": 0.003,
+    "gapTolerance": 0.0005,
+    "contactNormal": [
+     1,
+     0,
+     0
+    ],
+    "evidenceRefs": [
+     "full-object"
+    ]
+   },
+   "dimensions": {
+    "width": 1.0,
+    "height": 1.0,
+    "depth": 1.0,
+    "units": "metres (geometry authored in absolute units; unit scale)",
+    "confidence": 0.7
+   },
+   "transform": {
+    "position": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "actionProfile": {
+    "animationRole": "rigid-child",
+    "pivot": {
+     "mode": "socket",
+     "localPosition": [
+      0,
+      0,
+      0
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "confidence": 0.7
+    },
+    "transformChannels": {
+     "translate": true,
+     "rotate": true,
+     "scale": true,
+     "bend": false,
+     "twist": false,
+     "detach": true,
+     "visibility": true,
+     "materialState": true
+    },
+    "sockets": [],
+    "collider": {
+     "type": "cylinder",
+     "offset": [
+      0.11,
+      0,
+      0
+     ],
+     "scale": [
+      0.012,
+      0.026,
+      0.022
+     ],
+     "isTrigger": false,
+     "notes": "primitive proxy (compound hammer collider)"
+    },
+    "constraints": [],
+    "destruction": {
+     "breakable": false,
+     "fractureGroup": "grip",
+     "seamRefs": [],
+     "detachableFragments": [],
+     "breakImpulse": 0.0,
+     "debrisMaterial": "grip-elastomer"
+    }
+   },
+   "material": "grip-elastomer",
+   "materialLayers": [
+    "grip-elastomer"
+   ],
+   "deformations": [],
+   "joints": [],
+   "seams": [],
+   "localFeatures": [
+    {
+     "id": "grip-collar",
+     "kind": "seam",
+     "description": "Rounded lip at the sleeve mouth.",
+     "geometryEffect": "short sweep proud of the grip",
+     "evidenceRefs": [
+      "zone-r1c1"
+     ],
+     "confidence": 0.75
+    }
+   ],
+   "surfaceDetail": {
+    "macroRoughness": 0.5,
+    "microRoughness": 0.05,
+    "bumpAmplitude": 0.0,
+    "normalPattern": "smooth moulded lip",
+    "displacementPattern": "none",
+    "occlusionPattern": "groove/lanyard/parting-line cavity vertex colour (P2)",
+    "edgeWearPattern": "none observed",
+    "notes": ""
+   },
+   "evidenceRefs": [
+    "grip-region"
+   ],
+   "details": [],
+   "fidelityTier": "structural-pass",
+   "colorMaterialRecipe": {
+    "componentId": "grip-collar",
+    "dominantAlbedo": "rgba(231, 90, 38, 1.0)",
+    "secondaryAlbedo": "rgba(232, 87, 26, 1.0)",
+    "materialClass": "rubber",
+    "materialClassConfidence": 0.6,
+    "roughnessEstimate": 0.87,
+    "metalnessEstimate": 0.0,
+    "highlightEvidence": "broad, gradually-fading highlight \u2014 supports high roughness/diffuse response",
+    "sourceCropPath": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/crops/grip-collar.png",
+    "labClusterMeta": {
+     "clusterCount": 3,
+     "dominantClusterSharePct": 0.515
+    },
+    "agentOverrideNote": "extractor class confidence capped below 0.7 on crop material-evidence/crops/grip-collar.png; class rubber confirmed by agent vision (bare forged steel / moulded TPE); accepted with --allow-low-confidence"
+   }
+  },
+  {
+   "id": "grip-butt",
+   "name": "Grip butt flare and end cap",
+   "level": "meso",
+   "role": "butt",
+   "importance": 0.7,
+   "confidence": 0.75,
+   "primitive": "tapered-sweep",
+   "topologyClass": "continuous-sculpt",
+   "topologyRationale": "Bulbous oval butt rounding into a flat end cap.",
+   "geometryDescriptor": {
+    "topologyIntent": "low-poly blockout with bevel-ready edges",
+    "edgeTreatment": {
+     "type": "none",
+     "bevelRadius": 0.0,
+     "segments": 1
+    },
+    "deformationStack": [],
+    "uvStrategy": "generated procedural coordinates",
+    "normalStrategy": "vertex normals from generated geometry",
+    "taperedSweep": {
+     "stations": [
+      {
+       "position": [
+        0.294,
+        0.0,
+        0.0033
+       ],
+       "rx": 0.0179,
+       "rz": 0.0146,
+       "squareness": 2.8
+      },
+      {
+       "position": [
+        0.299,
+        0.0,
+        0.0033
+       ],
+       "rx": 0.0184,
+       "rz": 0.0149,
+       "squareness": 2.8
+      },
+      {
+       "position": [
+        0.3025,
+        0.0,
+        0.0033
+       ],
+       "rx": 0.0178,
+       "rz": 0.0144,
+       "squareness": 2.6
+      },
+      {
+       "position": [
+        0.3048,
+        0.0,
+        0.0033
+       ],
+       "rx": 0.016,
+       "rz": 0.0128,
+       "squareness": 2.4
+      },
+      {
+       "position": [
+        0.3058,
+        0.0,
+        0.0033
+       ],
+       "rx": 0.009,
+       "rz": 0.0072,
+       "squareness": 2.0
+      }
+     ],
+     "radialSegments": 48,
+     "capEnds": true
+    }
+   },
+   "parent": "grip",
+   "attachment": {
+    "parentId": "grip",
+    "parentSocket": "socket-hand",
+    "localStart": [
+     0.294,
+     0.0,
+     0.0
+    ],
+    "localEnd": [
+     0.3058,
+     0.0,
+     0.0
+    ],
+    "contactType": "overlap-moulded",
+    "embedDepth": 0.004,
+    "gapTolerance": 0.0005,
+    "contactNormal": [
+     1,
+     0,
+     0
+    ],
+    "evidenceRefs": [
+     "full-object"
+    ]
+   },
+   "dimensions": {
+    "width": 1.0,
+    "height": 1.0,
+    "depth": 1.0,
+    "units": "metres (geometry authored in absolute units; unit scale)",
+    "confidence": 0.75
+   },
+   "transform": {
+    "position": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "actionProfile": {
+    "animationRole": "rigid-child",
+    "pivot": {
+     "mode": "socket",
+     "localPosition": [
+      0,
+      0,
+      0
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "confidence": 0.7
+    },
+    "transformChannels": {
+     "translate": true,
+     "rotate": true,
+     "scale": true,
+     "bend": false,
+     "twist": false,
+     "detach": true,
+     "visibility": true,
+     "materialState": true
+    },
+    "sockets": [],
+    "collider": {
+     "type": "capsule",
+     "offset": [
+      0.3,
+      0,
+      0.003
+     ],
+     "scale": [
+      0.014,
+      0.037,
+      0.03
+     ],
+     "isTrigger": false,
+     "notes": "primitive proxy (compound hammer collider)"
+    },
+    "constraints": [],
+    "destruction": {
+     "breakable": false,
+     "fractureGroup": "grip",
+     "seamRefs": [],
+     "detachableFragments": [],
+     "breakImpulse": 0.0,
+     "debrisMaterial": "grip-elastomer"
+    }
+   },
+   "material": "grip-elastomer",
+   "materialLayers": [
+    "grip-elastomer"
+   ],
+   "deformations": [],
+   "joints": [],
+   "seams": [],
+   "localFeatures": [
+    {
+     "id": "butt-flare",
+     "kind": "ridge",
+     "description": "Flared oval butt with flat end cap.",
+     "geometryEffect": "sweep stations widen then round off",
+     "evidenceRefs": [
+      "zone-r2c2"
+     ],
+     "confidence": 0.8
+    }
+   ],
+   "surfaceDetail": {
+    "macroRoughness": 0.5,
+    "microRoughness": 0.05,
+    "bumpAmplitude": 0.0,
+    "normalPattern": "smooth moulded end cap",
+    "displacementPattern": "none",
+    "occlusionPattern": "groove/lanyard/parting-line cavity vertex colour (P2)",
+    "edgeWearPattern": "none observed",
+    "notes": ""
+   },
+   "evidenceRefs": [
+    "grip-region"
+   ],
+   "details": [],
+   "fidelityTier": "structural-pass",
+   "colorMaterialRecipe": {
+    "componentId": "grip-butt",
+    "dominantAlbedo": "rgba(238, 89, 28, 1.0)",
+    "secondaryAlbedo": "rgba(230, 105, 69, 1.0)",
+    "materialClass": "rubber",
+    "materialClassConfidence": 0.6,
+    "roughnessEstimate": 0.362,
+    "metalnessEstimate": 0.0,
+    "highlightEvidence": "moderate hotspot spread \u2014 mid-range roughness",
+    "sourceCropPath": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/crops/grip-butt.png",
+    "labClusterMeta": {
+     "clusterCount": 3,
+     "dominantClusterSharePct": 0.686
+    },
+    "agentOverrideNote": "extractor class confidence capped below 0.7 on crop material-evidence/crops/grip-butt.png; class rubber confirmed by agent vision (bare forged steel / moulded TPE); accepted with --allow-low-confidence"
+   }
+  },
+  {
+   "id": "grip-logo-panel",
+   "name": "Grip logo panel",
+   "level": "micro",
+   "role": "panel",
+   "importance": 0.4,
+   "confidence": 0.6,
+   "primitive": "box",
+   "topologyClass": "surface-relief",
+   "topologyRationale": "Flat rectangular panel on the grip face; a thin plate sitting flush with the rib crests.",
+   "geometryDescriptor": {
+    "topologyIntent": "low-poly blockout with bevel-ready edges",
+    "edgeTreatment": {
+     "type": "chamfer",
+     "bevelRadius": 0.0005,
+     "segments": 1
+    },
+    "deformationStack": [],
+    "uvStrategy": "generated procedural coordinates",
+    "normalStrategy": "vertex normals from generated geometry"
+   },
+   "parent": "grip",
+   "attachment": {
+    "parentId": "grip",
+    "parentSocket": "socket-hand",
+    "localStart": [
+     0.2075,
+     0.0112,
+     0.004
+    ],
+    "localEnd": [
+     0.2825,
+     0.0112,
+     0.004
+    ],
+    "contactType": "flush-inset",
+    "embedDepth": 0.0004,
+    "gapTolerance": 0.0005,
+    "contactNormal": [
+     0,
+     1,
+     0
+    ],
+    "evidenceRefs": [
+     "full-object"
+    ]
+   },
+   "dimensions": {
+    "width": 0.075,
+    "height": 0.0012,
+    "depth": 0.01,
+    "units": "metres",
+    "confidence": 0.6
+   },
+   "transform": {
+    "position": [
+     0.245,
+     0.0112,
+     0.004
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "actionProfile": {
+    "animationRole": "rigid-child",
+    "pivot": {
+     "mode": "socket",
+     "localPosition": [
+      0,
+      0,
+      0
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "confidence": 0.7
+    },
+    "transformChannels": {
+     "translate": true,
+     "rotate": true,
+     "scale": true,
+     "bend": false,
+     "twist": false,
+     "detach": true,
+     "visibility": true,
+     "materialState": true
+    },
+    "sockets": [],
+    "collider": {
+     "type": "none",
+     "offset": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      0,
+      0,
+      0
+     ],
+     "isTrigger": false,
+     "notes": "surface detail rides its parent's collider"
+    },
+    "constraints": [],
+    "destruction": {
+     "breakable": false,
+     "fractureGroup": "grip",
+     "seamRefs": [],
+     "detachableFragments": [],
+     "breakImpulse": 0.0,
+     "debrisMaterial": "grip-elastomer"
+    }
+   },
+   "material": "grip-elastomer",
+   "materialLayers": [
+    "grip-elastomer"
+   ],
+   "deformations": [],
+   "joints": [],
+   "seams": [],
+   "localFeatures": [
+    {
+     "id": "grip-logo-panel",
+     "kind": "seam",
+     "description": "Recessed rectangular panel with small embossed logo.",
+     "geometryEffect": "thin flush plate; grooves masked under it",
+     "evidenceRefs": [
+      "zone-r2c2"
+     ],
+     "confidence": 0.7
+    }
+   ],
+   "surfaceDetail": {
+    "macroRoughness": 0.0,
+    "microRoughness": 0.0,
+    "bumpAmplitude": 0.0,
+    "normalPattern": "",
+    "displacementPattern": "",
+    "occlusionPattern": "",
+    "edgeWearPattern": "",
+    "notes": ""
+   },
+   "evidenceRefs": [
+    "grip-region"
+   ],
+   "details": [],
+   "fidelityTier": "form-refinement",
+   "colorMaterialRecipe": {
+    "componentId": "grip-logo-panel",
+    "dominantAlbedo": "rgba(235, 88, 26, 1.0)",
+    "secondaryAlbedo": "rgba(254, 252, 250, 1.0)",
+    "materialClass": "rubber",
+    "materialClassConfidence": 0.6,
+    "roughnessEstimate": 0.334,
+    "metalnessEstimate": 0.0,
+    "highlightEvidence": "sharp, tight specular hotspot \u2014 supports low roughness/high specularity",
+    "sourceCropPath": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/crops/logo-panel.png",
+    "labClusterMeta": {
+     "clusterCount": 3,
+     "dominantClusterSharePct": 0.778
+    },
+    "agentOverrideNote": "extractor class confidence capped below 0.7 on crop material-evidence/crops/logo-panel.png; class rubber confirmed by agent vision (bare forged steel / moulded TPE); accepted with --allow-low-confidence"
+   }
+  },
+  {
+   "id": "cheek-stamp",
+   "name": "Stamped cheek markings decal",
+   "level": "micro",
+   "role": "decal",
+   "importance": 0.4,
+   "confidence": 0.5,
+   "primitive": "plane-card",
+   "topologyClass": "material-only",
+   "topologyRationale": "Printed/stamped marks ride on the cheek surface; a thin carrier shell for the stamp texture.",
+   "geometryDescriptor": {
+    "topologyIntent": "low-poly blockout with bevel-ready edges",
+    "edgeTreatment": {
+     "type": "none",
+     "bevelRadius": 0.0,
+     "segments": 1
+    },
+    "deformationStack": [],
+    "uvStrategy": "orthographic projection of the reference crop (patched, see tools/patch_factory.py)",
+    "normalStrategy": "vertex normals from generated geometry"
+   },
+   "parent": "head",
+   "attachment": {
+    "parentId": "head",
+    "parentSocket": "socket-eye",
+    "localStart": [
+     -0.003,
+     0.0128,
+     0.014
+    ],
+    "localEnd": [
+     -0.003,
+     0.0128,
+     0.034
+    ],
+    "contactType": "decal-on-surface",
+    "embedDepth": 0.0002,
+    "gapTolerance": 0.0005,
+    "contactNormal": [
+     0,
+     1,
+     0
+    ],
+    "evidenceRefs": [
+     "full-object"
+    ]
+   },
+   "dimensions": {
+    "width": 0.02,
+    "height": 0.02,
+    "depth": 1.0,
+    "units": "metres",
+    "confidence": 0.5
+   },
+   "transform": {
+    "position": [
+     -0.003,
+     0.0128,
+     0.014
+    ],
+    "rotation": [
+     -1.5708,
+     0.0,
+     0.0
+    ]
+   },
+   "actionProfile": {
+    "animationRole": "rigid-child",
+    "pivot": {
+     "mode": "socket",
+     "localPosition": [
+      0,
+      0,
+      0
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "confidence": 0.7
+    },
+    "transformChannels": {
+     "translate": true,
+     "rotate": true,
+     "scale": true,
+     "bend": false,
+     "twist": false,
+     "detach": true,
+     "visibility": true,
+     "materialState": true
+    },
+    "sockets": [],
+    "collider": {
+     "type": "none",
+     "offset": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      0,
+      0,
+      0
+     ],
+     "isTrigger": false,
+     "notes": "surface detail rides its parent's collider"
+    },
+    "constraints": [],
+    "destruction": {
+     "breakable": false,
+     "fractureGroup": "forged-steel",
+     "seamRefs": [],
+     "detachableFragments": [],
+     "breakImpulse": 0.0,
+     "debrisMaterial": "stamp-ink"
+    }
+   },
+   "material": "stamp-ink",
+   "materialLayers": [
+    "stamp-ink"
+   ],
+   "deformations": [],
+   "joints": [],
+   "seams": [],
+   "localFeatures": [
+    {
+     "id": "cheek-stamp",
+     "kind": "decal",
+     "description": "Stamped monogram + '8-62633 16oz TAIWAN DK'.",
+     "geometryEffect": "decal shell",
+     "evidenceRefs": [
+      "zone-r0c0"
+     ],
+     "confidence": 0.6
+    }
+   ],
+   "surfaceDetail": {
+    "macroRoughness": 0.0,
+    "microRoughness": 0.0,
+    "bumpAmplitude": 0.0,
+    "normalPattern": "",
+    "displacementPattern": "",
+    "occlusionPattern": "",
+    "edgeWearPattern": "",
+    "notes": ""
+   },
+   "evidenceRefs": [
+    "head-region"
+   ],
+   "details": [],
+   "fidelityTier": "material-pass",
+   "colorMaterialRecipe": {
+    "componentId": "cheek-stamp",
+    "dominantAlbedo": "rgba(106, 102, 103, 1.0)",
+    "secondaryAlbedo": "rgba(158, 154, 155, 1.0)",
+    "materialClass": "metal",
+    "materialClassConfidence": 0.684,
+    "roughnessEstimate": 0.133,
+    "metalnessEstimate": 1.0,
+    "highlightEvidence": "sharp, tight specular hotspot \u2014 supports low roughness/high specularity",
+    "sourceCropPath": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/crops/stamp-ink.png",
+    "labClusterMeta": {
+     "clusterCount": 3,
+     "dominantClusterSharePct": 0.478
+    },
+    "agentOverrideNote": "extractor class confidence capped below 0.7 on crop material-evidence/crops/stamp-ink.png; class metal confirmed by agent vision (bare forged steel / moulded TPE); accepted with --allow-low-confidence"
+   }
+  },
+  {
+   "id": "shank-scuff",
+   "name": "Shank mill-scale scuff patch decal",
+   "level": "micro",
+   "role": "decal",
+   "importance": 0.4,
+   "confidence": 0.7,
+   "primitive": "plane-card",
+   "topologyClass": "material-only",
+   "topologyRationale": "Wear mark riding on the shank surface; thin conforming carrier for the projected reference pixels.",
+   "geometryDescriptor": {
+    "topologyIntent": "low-poly blockout with bevel-ready edges",
+    "edgeTreatment": {
+     "type": "none",
+     "bevelRadius": 0.0,
+     "segments": 1
+    },
+    "deformationStack": [],
+    "uvStrategy": "camera projection of the reference crop (tools/patch_factory.py P6)",
+    "normalStrategy": "vertex normals from generated geometry"
+   },
+   "parent": "shank",
+   "attachment": {
+    "parentId": "shank",
+    "parentSocket": "socket-eye",
+    "localStart": [
+     0.01,
+     0.009,
+     0.0
+    ],
+    "localEnd": [
+     0.1,
+     0.009,
+     0.0
+    ],
+    "contactType": "decal-on-surface",
+    "embedDepth": 0.0002,
+    "gapTolerance": 0.0005,
+    "contactNormal": [
+     0,
+     1,
+     0
+    ],
+    "evidenceRefs": [
+     "full-object"
+    ]
+   },
+   "dimensions": {
+    "width": 0.09,
+    "height": 0.02,
+    "depth": 1.0,
+    "units": "metres",
+    "confidence": 0.5
+   },
+   "transform": {
+    "position": [
+     0.05,
+     0.009,
+     0.0
+    ],
+    "rotation": [
+     -1.5708,
+     0.0,
+     0.0
+    ]
+   },
+   "actionProfile": {
+    "animationRole": "rigid-child",
+    "pivot": {
+     "mode": "socket",
+     "localPosition": [
+      0,
+      0,
+      0
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "confidence": 0.7
+    },
+    "transformChannels": {
+     "translate": true,
+     "rotate": true,
+     "scale": true,
+     "bend": false,
+     "twist": false,
+     "detach": true,
+     "visibility": true,
+     "materialState": true
+    },
+    "sockets": [],
+    "collider": {
+     "type": "none",
+     "offset": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      0,
+      0,
+      0
+     ],
+     "isTrigger": false,
+     "notes": "surface detail rides its parent's collider"
+    },
+    "constraints": [],
+    "destruction": {
+     "breakable": false,
+     "fractureGroup": "forged-steel",
+     "seamRefs": [],
+     "detachableFragments": [],
+     "breakImpulse": 0.0,
+     "debrisMaterial": "scuff-zinc"
+    }
+   },
+   "material": "scuff-zinc",
+   "materialLayers": [
+    "scuff-zinc"
+   ],
+   "deformations": [],
+   "joints": [],
+   "seams": [],
+   "localFeatures": [
+    {
+     "id": "shank-scuff-patch",
+     "kind": "stain",
+     "description": "White mill-scale/zinc scuff along the upper shank.",
+     "geometryEffect": "projected decal shell",
+     "evidenceRefs": [
+      "zone-r1c0"
+     ],
+     "confidence": 0.8
+    }
+   ],
+   "surfaceDetail": {
+    "macroRoughness": 0.0,
+    "microRoughness": 0.0,
+    "bumpAmplitude": 0.0,
+    "normalPattern": "",
+    "displacementPattern": "",
+    "occlusionPattern": "",
+    "edgeWearPattern": "",
+    "notes": ""
+   },
+   "evidenceRefs": [
+    "head-region"
+   ],
+   "details": [],
+   "fidelityTier": "material-pass"
+  },
+  {
+   "id": "grip-print-marks",
+   "name": "Grip panel logo and lanyard-hole shading decal",
+   "level": "micro",
+   "role": "decal",
+   "importance": 0.4,
+   "confidence": 0.6,
+   "primitive": "plane-card",
+   "topologyClass": "material-only",
+   "topologyRationale": "Low-relief logo and the hole's dark interior as seen in the photo; thin conforming carrier for projected reference pixels over the carved recess.",
+   "geometryDescriptor": {
+    "topologyIntent": "low-poly blockout with bevel-ready edges",
+    "edgeTreatment": {
+     "type": "none",
+     "bevelRadius": 0.0,
+     "segments": 1
+    },
+    "deformationStack": [],
+    "uvStrategy": "camera projection of the reference crop (tools/patch_factory.py P6)",
+    "normalStrategy": "vertex normals from generated geometry"
+   },
+   "parent": "grip",
+   "attachment": {
+    "parentId": "grip",
+    "parentSocket": "socket-hand",
+    "localStart": [
+     0.2,
+     0.013,
+     0.0
+    ],
+    "localEnd": [
+     0.3,
+     0.013,
+     0.0
+    ],
+    "contactType": "decal-on-surface",
+    "embedDepth": 0.0002,
+    "gapTolerance": 0.0005,
+    "contactNormal": [
+     0,
+     1,
+     0
+    ],
+    "evidenceRefs": [
+     "full-object"
+    ]
+   },
+   "dimensions": {
+    "width": 0.1,
+    "height": 0.03,
+    "depth": 1.0,
+    "units": "metres",
+    "confidence": 0.5
+   },
+   "transform": {
+    "position": [
+     0.245,
+     0.013,
+     0.0
+    ],
+    "rotation": [
+     -1.5708,
+     0.0,
+     0.0
+    ]
+   },
+   "actionProfile": {
+    "animationRole": "rigid-child",
+    "pivot": {
+     "mode": "socket",
+     "localPosition": [
+      0,
+      0,
+      0
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "confidence": 0.7
+    },
+    "transformChannels": {
+     "translate": true,
+     "rotate": true,
+     "scale": true,
+     "bend": false,
+     "twist": false,
+     "detach": true,
+     "visibility": true,
+     "materialState": true
+    },
+    "sockets": [],
+    "collider": {
+     "type": "none",
+     "offset": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      0,
+      0,
+      0
+     ],
+     "isTrigger": false,
+     "notes": "surface detail rides its parent's collider"
+    },
+    "constraints": [],
+    "destruction": {
+     "breakable": false,
+     "fractureGroup": "forged-steel",
+     "seamRefs": [],
+     "detachableFragments": [],
+     "breakImpulse": 0.0,
+     "debrisMaterial": "grip-marks-ink"
+    }
+   },
+   "material": "grip-marks-ink",
+   "materialLayers": [
+    "grip-marks-ink"
+   ],
+   "deformations": [],
+   "joints": [],
+   "seams": [],
+   "localFeatures": [
+    {
+     "id": "grip-logo",
+     "kind": "decal",
+     "description": "Small embossed logo at the panel's proximal end.",
+     "geometryEffect": "projected decal",
+     "evidenceRefs": [
+      "zone-r2c2"
+     ],
+     "confidence": 0.5
+    },
+    {
+     "id": "lanyard-hole-shading",
+     "kind": "hole",
+     "description": "Dark interior of the lanyard hole (over the carved recess).",
+     "geometryEffect": "projected decal",
+     "evidenceRefs": [
+      "zone-r2c2"
+     ],
+     "confidence": 0.7
+    }
+   ],
+   "surfaceDetail": {
+    "macroRoughness": 0.0,
+    "microRoughness": 0.0,
+    "bumpAmplitude": 0.0,
+    "normalPattern": "",
+    "displacementPattern": "",
+    "occlusionPattern": "",
+    "edgeWearPattern": "",
+    "notes": ""
+   },
+   "evidenceRefs": [
+    "grip-region"
+   ],
+   "details": [],
+   "fidelityTier": "surface-pass"
+  }
+ ],
+ "materials": [
+  {
+   "id": "forged-steel",
+   "name": "Satin forged steel (head, shank)",
+   "type": "physical",
+   "shaderModel": "MeshPhysicalMaterial / PBR",
+   "baseColor": "#9c989a",
+   "color": "#9c989a",
+   "albedo": {
+    "dominant": "#9c989a",
+    "secondary": [
+     "#6f7275",
+     "#b4b6b8"
+    ],
+    "samplingNotes": "sampled from reference crops (evidence/material-evidence)"
+   },
+   "colorVariation": {
+    "palette": [
+     "#9c989a",
+     "#6f7275",
+     "#b4b6b8"
+    ],
+    "pattern": "streaked",
+    "amplitude": 0.06,
+    "heightCorrelation": 0.2
+   },
+   "textureResolution": 1024,
+   "textureProjection": {
+    "mode": "uv",
+    "repeat": [
+     2.0,
+     2.0
+    ],
+    "anisotropy": 8,
+    "texelDensityIntent": "Preserve stable world/object-scale detail; do not stretch micro detail with component scale."
+   },
+   "surfaceFrequencyBands": [
+    {
+     "id": "macro",
+     "frequency": 2.0,
+     "amplitude": 0.1,
+     "role": "broad forging tone shifts along the shank"
+    },
+    {
+     "id": "meso",
+     "frequency": 14.0,
+     "amplitude": 0.08,
+     "role": "longitudinal grinding streaks"
+    },
+    {
+     "id": "micro",
+     "frequency": 64.0,
+     "amplitude": 0.04,
+     "role": "fine brushing scratches visible in highlights"
+    }
+   ],
+   "roughness": {
+    "base": 0.38,
+    "variation": 0.12,
+    "map": "independent-procedural-field",
+    "localResponse": "see localOverrides"
+   },
+   "metalness": {
+    "base": 1.0,
+    "variation": 0.0
+   },
+   "normal": {
+    "pattern": "derived-from-independent-height-field",
+    "strength": 0.2,
+    "scale": 24.0,
+    "space": "tangent"
+   },
+   "bump": {
+    "pattern": "none",
+    "amplitude": 0.0,
+    "scale": 1.0
+   },
+   "displacement": {
+    "pattern": "none",
+    "amplitude": 0.0,
+    "scale": 1.0,
+    "silhouetteAffects": false
+   },
+   "ambientOcclusion": {
+    "cavityStrength": 0.25,
+    "contactShadowBias": 0.35,
+    "notes": "Darken creases, seams, intersections, and recessed local features."
+   },
+   "wear": {
+    "edgeWear": 0.0,
+    "scratches": [],
+    "chips": []
+   },
+   "dirt": {
+    "amount": 0.0,
+    "cavityBias": 0.0,
+    "color": "#2F2A22"
+   },
+   "localOverrides": [
+    {
+     "id": "shank-scuff-patch",
+     "kind": "stain",
+     "region": "shank, x 0.02-0.10 m, +Y and -Z faces",
+     "description": "White mill-scale/zinc scuff patch: light grey albedo, rougher, low metalness.",
+     "evidenceRefs": [
+      "zone-r1c0"
+     ],
+     "color": "#d6d6d2",
+     "roughness": 0.75,
+     "metalness": 0.2,
+     "fadedMask": true
+    },
+    {
+     "id": "claw-dark-scale",
+     "kind": "stain",
+     "region": "claw inner faces / slot walls",
+     "description": "Darker blackened forging scale on the claw.",
+     "evidenceRefs": [
+      "zone-r0c0"
+     ],
+     "color": "#3c3e40",
+     "roughness": 0.55,
+     "dirtAmount": 0.5,
+     "cavityBias": 0.6
+    },
+    {
+     "id": "cheek-stamp",
+     "kind": "decal",
+     "region": "cheek +Y face near the neck",
+     "description": "Stamped monogram and text, dark ink in engraved marks.",
+     "evidenceRefs": [
+      "zone-r0c0"
+     ],
+     "color": "#2a2a2a",
+     "decal": true
+    },
+    {
+     "id": "longitudinal-brushing",
+     "kind": "scratch",
+     "region": "head and shank",
+     "description": "Longitudinal grinding streaks.",
+     "evidenceRefs": [
+      "zone-r1c1"
+     ],
+     "orientation": "along shank / head axis",
+     "roughness": 0.32
+    }
+   ],
+   "shaderNotes": [
+    "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+    "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+    "Use normal/bump/displacement only when they map to observed surface relief.",
+    "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+   ],
+   "notes": "Satin forged steel, metalness 1 (bare metal), grey neutral; values from reference crop, see evidence/material-evidence.",
+   "referencePbr": {
+    "usable": true,
+    "confidence": 0.749,
+    "targetThreshold": 0.7,
+    "maps": {
+     "albedo": {
+      "path": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/pbr-forged-steel/forged-steel_albedo.png",
+      "url": "../material-evidence/pbr-forged-steel/forged-steel_albedo.png",
+      "channel": "albedo",
+      "source": "reference-pixel-extraction"
+     },
+     "roughness": {
+      "path": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/pbr-forged-steel/forged-steel_roughness.png",
+      "url": "../material-evidence/pbr-forged-steel/forged-steel_roughness.png",
+      "channel": "roughness",
+      "source": "reference-pixel-extraction"
+     },
+     "height": {
+      "path": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/pbr-forged-steel/forged-steel_height.png",
+      "url": "../material-evidence/pbr-forged-steel/forged-steel_height.png",
+      "channel": "height",
+      "source": "reference-pixel-extraction"
+     },
+     "normal": {
+      "path": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/pbr-forged-steel/forged-steel_normal.png",
+      "url": "../material-evidence/pbr-forged-steel/forged-steel_normal.png",
+      "channel": "normal",
+      "source": "reference-pixel-extraction"
+     },
+     "ao": {
+      "path": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/pbr-forged-steel/forged-steel_ao.png",
+      "url": "../material-evidence/pbr-forged-steel/forged-steel_ao.png",
+      "channel": "ao",
+      "source": "reference-pixel-extraction"
+     }
+    },
+    "palette": [
+     "#7E797B",
+     "#706C6E",
+     "#ACA8A9",
+     "#635E60",
+     "#918D8E"
+    ],
+    "sourceImage": "material-evidence/crops/forged-steel.png",
+    "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+   },
+   "analyzeTextureReadOnly": {
+    "file": "material-evidence/analyze-forged-steel.json",
+    "rejected": "finishClass 'worn-composite', metalness 0, roughness 0.9 -- misclassified bare steel (CLAUDE.md lessons 4/14); values above are agent-set from the crop: metalness 1 (bare forged steel), roughness from highlight spread"
+   }
+  },
+  {
+   "id": "face-steel",
+   "name": "Machined striking face steel",
+   "type": "physical",
+   "shaderModel": "MeshPhysicalMaterial / PBR",
+   "baseColor": "#787272",
+   "color": "#787272",
+   "albedo": {
+    "dominant": "#787272",
+    "secondary": [
+     "#7d7d7a",
+     "#b8b8b4"
+    ],
+    "samplingNotes": "sampled from reference crops (evidence/material-evidence)"
+   },
+   "colorVariation": {
+    "palette": [
+     "#787272",
+     "#7d7d7a",
+     "#b8b8b4"
+    ],
+    "pattern": "streaked",
+    "amplitude": 0.06,
+    "heightCorrelation": 0.2
+   },
+   "textureResolution": 1024,
+   "textureProjection": {
+    "mode": "uv",
+    "repeat": [
+     2.0,
+     2.0
+    ],
+    "anisotropy": 8,
+    "texelDensityIntent": "Preserve stable world/object-scale detail; do not stretch micro detail with component scale."
+   },
+   "surfaceFrequencyBands": [
+    {
+     "id": "macro",
+     "frequency": 2.0,
+     "amplitude": 0.1,
+     "role": "broad forging tone shifts along the shank"
+    },
+    {
+     "id": "meso",
+     "frequency": 14.0,
+     "amplitude": 0.08,
+     "role": "longitudinal grinding streaks"
+    },
+    {
+     "id": "micro",
+     "frequency": 64.0,
+     "amplitude": 0.04,
+     "role": "fine brushing scratches visible in highlights"
+    }
+   ],
+   "roughness": {
+    "base": 0.48,
+    "variation": 0.15,
+    "map": "independent-procedural-field",
+    "localResponse": "see localOverrides"
+   },
+   "metalness": {
+    "base": 1.0,
+    "variation": 0.0
+   },
+   "normal": {
+    "pattern": "derived-from-independent-height-field",
+    "strength": 0.2,
+    "scale": 24.0,
+    "space": "tangent"
+   },
+   "bump": {
+    "pattern": "none",
+    "amplitude": 0.0,
+    "scale": 1.0
+   },
+   "displacement": {
+    "pattern": "none",
+    "amplitude": 0.0,
+    "scale": 1.0,
+    "silhouetteAffects": false
+   },
+   "ambientOcclusion": {
+    "cavityStrength": 0.25,
+    "contactShadowBias": 0.35,
+    "notes": "Darken creases, seams, intersections, and recessed local features."
+   },
+   "wear": {
+    "edgeWear": 0.0,
+    "scratches": [],
+    "chips": []
+   },
+   "dirt": {
+    "amount": 0.0,
+    "cavityBias": 0.0,
+    "color": "#2F2A22"
+   },
+   "localOverrides": [
+    {
+     "id": "face-chamfer-bright",
+     "kind": "gloss",
+     "region": "face chamfer ring",
+     "description": "Bright polished chamfer ring.",
+     "evidenceRefs": [
+      "zone-r1c0"
+     ],
+     "roughness": 0.25
+    }
+   ],
+   "shaderNotes": [
+    "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+    "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+    "Use normal/bump/displacement only when they map to observed surface relief.",
+    "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+   ],
+   "notes": "Machined face: lighter, rougher than the cheek.",
+   "referencePbr": {
+    "usable": true,
+    "confidence": 0.735,
+    "targetThreshold": 0.7,
+    "maps": {
+     "albedo": {
+      "path": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/pbr-face-steel/face-steel_albedo.png",
+      "url": "../material-evidence/pbr-face-steel/face-steel_albedo.png",
+      "channel": "albedo",
+      "source": "reference-pixel-extraction"
+     },
+     "roughness": {
+      "path": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/pbr-face-steel/face-steel_roughness.png",
+      "url": "../material-evidence/pbr-face-steel/face-steel_roughness.png",
+      "channel": "roughness",
+      "source": "reference-pixel-extraction"
+     },
+     "height": {
+      "path": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/pbr-face-steel/face-steel_height.png",
+      "url": "../material-evidence/pbr-face-steel/face-steel_height.png",
+      "channel": "height",
+      "source": "reference-pixel-extraction"
+     },
+     "normal": {
+      "path": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/pbr-face-steel/face-steel_normal.png",
+      "url": "../material-evidence/pbr-face-steel/face-steel_normal.png",
+      "channel": "normal",
+      "source": "reference-pixel-extraction"
+     },
+     "ao": {
+      "path": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/pbr-face-steel/face-steel_ao.png",
+      "url": "../material-evidence/pbr-face-steel/face-steel_ao.png",
+      "channel": "ao",
+      "source": "reference-pixel-extraction"
+     }
+    },
+    "palette": [
+     "#8B8686",
+     "#7E7878",
+     "#706A6A",
+     "#5A5555",
+     "#9C9696"
+    ],
+    "sourceImage": "material-evidence/crops/face-steel.png",
+    "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+   },
+   "analyzeTextureReadOnly": {
+    "file": "material-evidence/analyze-face-steel.json",
+    "rejected": "finishClass 'worn-composite', metalness 0, roughness 0.9 -- misclassified bare steel (CLAUDE.md lessons 4/14); values above are agent-set from the crop: metalness 1 (bare forged steel), roughness from highlight spread"
+   }
+  },
+  {
+   "id": "claw-steel",
+   "name": "Darker claw steel (forging scale)",
+   "type": "physical",
+   "shaderModel": "MeshPhysicalMaterial / PBR",
+   "baseColor": "#7c7e82",
+   "color": "#7c7e82",
+   "albedo": {
+    "dominant": "#7c7e82",
+    "secondary": [
+     "#27242a",
+     "#5a5c60"
+    ],
+    "samplingNotes": "sampled from reference crops (evidence/material-evidence)"
+   },
+   "colorVariation": {
+    "palette": [
+     "#7c7e82",
+     "#27242a",
+     "#5a5c60"
+    ],
+    "pattern": "streaked",
+    "amplitude": 0.06,
+    "heightCorrelation": 0.2
+   },
+   "textureResolution": 1024,
+   "textureProjection": {
+    "mode": "uv",
+    "repeat": [
+     2.0,
+     2.0
+    ],
+    "anisotropy": 8,
+    "texelDensityIntent": "Preserve stable world/object-scale detail; do not stretch micro detail with component scale."
+   },
+   "surfaceFrequencyBands": [
+    {
+     "id": "macro",
+     "frequency": 2.0,
+     "amplitude": 0.1,
+     "role": "broad forging tone shifts along the shank"
+    },
+    {
+     "id": "meso",
+     "frequency": 14.0,
+     "amplitude": 0.08,
+     "role": "longitudinal grinding streaks"
+    },
+    {
+     "id": "micro",
+     "frequency": 64.0,
+     "amplitude": 0.04,
+     "role": "fine brushing scratches visible in highlights"
+    }
+   ],
+   "roughness": {
+    "base": 0.46,
+    "variation": 0.1,
+    "map": "independent-procedural-field",
+    "localResponse": "see localOverrides"
+   },
+   "metalness": {
+    "base": 1.0,
+    "variation": 0.0
+   },
+   "normal": {
+    "pattern": "derived-from-independent-height-field",
+    "strength": 0.2,
+    "scale": 24.0,
+    "space": "tangent"
+   },
+   "bump": {
+    "pattern": "none",
+    "amplitude": 0.0,
+    "scale": 1.0
+   },
+   "displacement": {
+    "pattern": "none",
+    "amplitude": 0.0,
+    "scale": 1.0,
+    "silhouetteAffects": false
+   },
+   "ambientOcclusion": {
+    "cavityStrength": 0.25,
+    "contactShadowBias": 0.35,
+    "notes": "Darken creases, seams, intersections, and recessed local features."
+   },
+   "wear": {
+    "edgeWear": 0.0,
+    "scratches": [],
+    "chips": []
+   },
+   "dirt": {
+    "amount": 0.0,
+    "cavityBias": 0.0,
+    "color": "#2F2A22"
+   },
+   "localOverrides": [
+    {
+     "id": "claw-edge-wear",
+     "kind": "chip",
+     "region": "claw top edges",
+     "description": "Lighter worn steel on the claw's top edges.",
+     "evidenceRefs": [
+      "zone-r0c0"
+     ],
+     "color": "#7c7f82"
+    }
+   ],
+   "shaderNotes": [
+    "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+    "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+    "Use normal/bump/displacement only when they map to observed surface relief.",
+    "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+   ],
+   "notes": "Blackened forging scale on the claw.",
+   "referencePbr": {
+    "usable": true,
+    "confidence": 0.86,
+    "targetThreshold": 0.7,
+    "maps": {
+     "albedo": {
+      "path": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/pbr-claw-steel/claw-steel_albedo.png",
+      "url": "../material-evidence/pbr-claw-steel/claw-steel_albedo.png",
+      "channel": "albedo",
+      "source": "reference-pixel-extraction"
+     },
+     "roughness": {
+      "path": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/pbr-claw-steel/claw-steel_roughness.png",
+      "url": "../material-evidence/pbr-claw-steel/claw-steel_roughness.png",
+      "channel": "roughness",
+      "source": "reference-pixel-extraction"
+     },
+     "height": {
+      "path": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/pbr-claw-steel/claw-steel_height.png",
+      "url": "../material-evidence/pbr-claw-steel/claw-steel_height.png",
+      "channel": "height",
+      "source": "reference-pixel-extraction"
+     },
+     "normal": {
+      "path": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/pbr-claw-steel/claw-steel_normal.png",
+      "url": "../material-evidence/pbr-claw-steel/claw-steel_normal.png",
+      "channel": "normal",
+      "source": "reference-pixel-extraction"
+     },
+     "ao": {
+      "path": "/mnt/c/repos/img2three-runs/claw-hammer-20261117-132359/material-evidence/pbr-claw-steel/claw-steel_ao.png",
+      "url": "../material-evidence/pbr-claw-steel/claw-steel_ao.png",
+      "channel": "ao",
+      "source": "reference-pixel-extraction"
+     }
+    },
+    "palette": [
+     "#151014",
+     "#0F090D",
+     "#1D181B",
+     "#070204",
+     "#848082"
+    ],
+    "sourceImage": "material-evidence/crops/claw-steel.png",
+    "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+   },
+   "analyzeTextureReadOnly": {
+    "file": "material-evidence/analyze-claw-steel.json",
+    "rejected": "finishClass 'worn-composite', metalness 0, roughness 0.9 -- misclassified bare steel (CLAUDE.md lessons 4/14); values above are agent-set from the crop: metalness 1 (bare forged steel), roughness from highlight spread"
+   }
+  },
+  {
+   "id": "grip-elastomer",
+   "name": "Orange TPE grip",
+   "type": "physical",
+   "shaderModel": "MeshPhysicalMaterial / PBR",
+   "baseColor": "#e64e08",
+   "color": "#e64e08",
+   "albedo": {
+    "dominant": "#e64e08",
+    "secondary": [
+     "#dc3c0a",
+     "#f3632e"
+    ],
+    "samplingNotes": "sampled from reference crops (evidence/material-evidence)"
+   },
+   "colorVariation": {
+    "palette": [
+     "#e64e08",
+     "#dc3c0a",
+     "#f3632e"
+    ],
+    "pattern": "mottled",
+    "amplitude": 0.04,
+    "heightCorrelation": 0.2
+   },
+   "roughness": {
+    "base": 0.5,
+    "variation": 0.08,
+    "map": "independent-procedural-field",
+    "localResponse": "see localOverrides"
+   },
+   "metalness": {
+    "base": 0.0,
+    "variation": 0.0
+   },
+   "ambientOcclusion": {
+    "cavityStrength": 0.25,
+    "contactShadowBias": 0.35,
+    "notes": "Darken creases, seams, intersections, and recessed local features."
+   },
+   "wear": {
+    "edgeWear": 0.0,
+    "scratches": [],
+    "chips": []
+   },
+   "dirt": {
+    "amount": 0.0,
+    "cavityBias": 0.0,
+    "color": "#2F2A22"
+   },
+   "localOverrides": [
+    {
+     "id": "rib-groove-cavity",
+     "kind": "groove",
+     "region": "grip rib grooves",
+     "description": "Darker cavity shading inside the rib grooves (vertex AO).",
+     "evidenceRefs": [
+      "zone-r1c1"
+     ],
+     "dirtAmount": 0.35,
+     "cavityBias": 1.0
+    }
+   ],
+   "shaderNotes": [
+    "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+    "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+    "Use normal/bump/displacement only when they map to observed surface relief.",
+    "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+   ],
+   "notes": "Vivid red-orange TPE, dielectric, satin.",
+   "envMapIntensity": 0.3,
+   "textureless": {
+    "declared": true,
+    "evidence": [
+     "material-evidence/pbr-grip-elastomer.json: valueRange 0.18 on a 100x60 crop, and that variation is the rib-groove cavity shading (carved geometry), not albedo/print",
+     "agent vision: solid moulded orange TPE with uniform satin finish; no print/grain except the small logo panel (geometry)"
+    ]
+   }
+  },
+  {
+   "id": "stamp-ink",
+   "name": "Stamp decal carrier",
+   "type": "physical",
+   "shaderModel": "MeshPhysicalMaterial / PBR",
+   "baseColor": "#2a2a2a",
+   "color": "#2a2a2a",
+   "albedo": {
+    "dominant": "#2a2a2a",
+    "secondary": [],
+    "samplingNotes": "sampled from reference crops (evidence/material-evidence)"
+   },
+   "colorVariation": {
+    "palette": [
+     "#2a2a2a"
+    ],
+    "pattern": "streaked",
+    "amplitude": 0.06,
+    "heightCorrelation": 0.2
+   },
+   "roughness": {
+    "base": 0.5,
+    "variation": 0.05,
+    "map": "independent-procedural-field",
+    "localResponse": "see localOverrides"
+   },
+   "metalness": {
+    "base": 0.6,
+    "variation": 0.0
+   },
+   "ambientOcclusion": {
+    "cavityStrength": 0.25,
+    "contactShadowBias": 0.35,
+    "notes": "Darken creases, seams, intersections, and recessed local features."
+   },
+   "wear": {
+    "edgeWear": 0.0,
+    "scratches": [],
+    "chips": []
+   },
+   "dirt": {
+    "amount": 0.0,
+    "cavityBias": 0.0,
+    "color": "#2F2A22"
+   },
+   "localOverrides": [
+    {
+     "id": "stamp-ink",
+     "kind": "decal",
+     "region": "cheek stamp",
+     "description": "Dark stamped marks.",
+     "evidenceRefs": [
+      "zone-r0c0"
+     ],
+     "color": "#262626"
+    }
+   ],
+   "shaderNotes": [
+    "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+    "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+    "Use normal/bump/displacement only when they map to observed surface relief.",
+    "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+   ],
+   "notes": "Carrier for the projected stamp marks; transparent except the ink.",
+   "textureless": {
+    "declared": true,
+    "evidence": [
+     "carrier only: the stamp marks are the projected reference pixels (tools/patch_factory.py); no tiling texture"
+    ]
+   }
+  },
+  {
+   "id": "scuff-zinc",
+   "name": "Shank scuff patch (projected)",
+   "type": "physical",
+   "shaderModel": "MeshPhysicalMaterial / PBR",
+   "baseColor": "#d2d0d1",
+   "color": "#d2d0d1",
+   "albedo": {
+    "dominant": "#d2d0d1",
+    "secondary": [
+     "#c6c4c6",
+     "#d9d7d9"
+    ],
+    "samplingNotes": "sampled from reference crops (evidence/material-evidence)"
+   },
+   "colorVariation": {
+    "palette": [
+     "#d2d0d1",
+     "#c6c4c6",
+     "#d9d7d9"
+    ],
+    "pattern": "mottled",
+    "amplitude": 0.04,
+    "heightCorrelation": 0.2
+   },
+   "roughness": {
+    "base": 0.8,
+    "variation": 0.05,
+    "map": "independent-procedural-field",
+    "localResponse": "see localOverrides"
+   },
+   "metalness": {
+    "base": 0.0,
+    "variation": 0.0
+   },
+   "ambientOcclusion": {
+    "cavityStrength": 0.25,
+    "contactShadowBias": 0.35,
+    "notes": "Darken creases, seams, intersections, and recessed local features."
+   },
+   "wear": {
+    "edgeWear": 0.0,
+    "scratches": [],
+    "chips": []
+   },
+   "dirt": {
+    "amount": 0.0,
+    "cavityBias": 0.0,
+    "color": "#2F2A22"
+   },
+   "localOverrides": [
+    {
+     "id": "shank-scuff-patch",
+     "kind": "stain",
+     "region": "shank",
+     "description": "Projected white mill-scale scuff.",
+     "evidenceRefs": [
+      "zone-r1c0"
+     ],
+     "color": "#d2d0d1",
+     "roughness": 0.8
+    }
+   ],
+   "shaderNotes": [
+    "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+    "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+    "Use normal/bump/displacement only when they map to observed surface relief.",
+    "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+   ],
+   "notes": "Carrier for the projected scuff pixels; matte, low metalness (material-evidence/crops/shank-scuff.png median #d2d0d1).",
+   "textureless": {
+    "declared": true,
+    "evidence": [
+     "carrier only: the scuff colours are the projected reference pixels (evidence/stamp/scuff.png, authoring/make_scuff.py)"
+    ]
+   }
+  },
+  {
+   "id": "grip-marks-ink",
+   "name": "Grip marks (projected)",
+   "type": "physical",
+   "shaderModel": "MeshPhysicalMaterial / PBR",
+   "baseColor": "#5a1a06",
+   "color": "#5a1a06",
+   "albedo": {
+    "dominant": "#5a1a06",
+    "secondary": [],
+    "samplingNotes": "sampled from reference crops (evidence/material-evidence)"
+   },
+   "colorVariation": {
+    "palette": [
+     "#5a1a06"
+    ],
+    "pattern": "mottled",
+    "amplitude": 0.04,
+    "heightCorrelation": 0.2
+   },
+   "roughness": {
+    "base": 0.6,
+    "variation": 0.05,
+    "map": "independent-procedural-field",
+    "localResponse": "see localOverrides"
+   },
+   "metalness": {
+    "base": 0.0,
+    "variation": 0.0
+   },
+   "ambientOcclusion": {
+    "cavityStrength": 0.25,
+    "contactShadowBias": 0.35,
+    "notes": "Darken creases, seams, intersections, and recessed local features."
+   },
+   "wear": {
+    "edgeWear": 0.0,
+    "scratches": [],
+    "chips": []
+   },
+   "dirt": {
+    "amount": 0.0,
+    "cavityBias": 0.0,
+    "color": "#2F2A22"
+   },
+   "localOverrides": [
+    {
+     "id": "lanyard-hole-shading",
+     "kind": "hole",
+     "region": "lanyard hole",
+     "description": "Dark hole interior from the photo.",
+     "evidenceRefs": [
+      "zone-r2c2"
+     ],
+     "color": "#5a1a06"
+    }
+   ],
+   "shaderNotes": [
+    "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+    "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+    "Use normal/bump/displacement only when they map to observed surface relief.",
+    "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+   ],
+   "notes": "Carrier for projected grip logo / lanyard-hole interior pixels.",
+   "textureless": {
+    "declared": true,
+    "evidence": [
+     "carrier only: logo/hole colours are the projected reference pixels (evidence/stamp/grip_marks.png, authoring/make_grip_marks.py)"
+    ]
+   }
+  }
+ ],
+ "repetitionSystems": [
+  {
+   "id": "grip-rib-grooves",
+   "name": "Grip chevron rib grooves",
+   "level": "meso",
+   "parent": "grip",
+   "primitive": "torus",
+   "material": "grip-elastomer",
+   "count": 0,
+   "evidenceRefs": [
+    "zone-r1c1",
+    "grip-region"
+   ],
+   "distribution": "linear along the grip axis, chevron bow toward the head",
+   "carved": {
+    "count": 24,
+    "xStart": 0.15,
+    "xEnd": 0.2846,
+    "depth": 0.0006,
+    "halfWidthFrac": 0.145,
+    "chevronBow": 0.028,
+    "bowRange": [
+     0.08,
+     1.0
+    ],
+    "bowCurve": "ease-out",
+    "edgeFade": [
+     0.08,
+     0.2
+    ],
+    "step": 0.00045,
+    "radialSegments": 72,
+    "panel": {
+     "x0": 0.205,
+     "x1": 0.286,
+     "u0": 0.47,
+     "u1": 0.74,
+     "inset": 0.0005
+    },
+    "cavityDarken": 0.55,
+    "partingLine": {
+     "x0": 0.112,
+     "x1": 0.296,
+     "depth": 0.00035,
+     "halfWidth": 0.00045
+    }
+   },
+   "notes": "count=0 on the generator's radial InstancedMesh emitter (radial only); the grooves are CARVED into the grip geometry by tools/patch_factory.py from the `carved` block -- this spec block is the single source of truth."
+  }
+ ],
+ "buildPasses": [
+  {
+   "id": "blockout",
+   "goal": "Match macro silhouette and proportions.",
+   "componentRefs": [
+    "head",
+    "striking-face",
+    "claw-prong-upper",
+    "claw-prong-lower",
+    "shank",
+    "grip"
+   ],
+   "acceptance": [
+    "Silhouette reads correctly without materials.",
+    "Quality contract has named all required macro feature groups before code generation.",
+    "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+   ]
+  },
+  {
+   "id": "structural-pass",
+   "goal": "Build the component hierarchy implied by the pre-spec complexity assessment.",
+   "componentRefs": [
+    "head",
+    "striking-face",
+    "claw-prong-upper",
+    "claw-prong-lower",
+    "shank",
+    "grip",
+    "grip-collar",
+    "grip-butt"
+   ],
+   "acceptance": [
+    "Macro, meso, and repeated structures meet qualityContract.minimumSpecDepth.",
+    "Parent-child relations, joints, seams, sockets, and contact points are explicit.",
+    "Every attached child appendage/connector has parentSocket, localStart/localEnd, contactType, embedDepth or overlap, and gapTolerance.",
+    "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+   ]
+  },
+  {
+   "id": "form-refinement",
+   "goal": "Refine shape, deformation, bevels, tapers, curves, asymmetry, and visible local geometry.",
+   "componentRefs": [
+    "head",
+    "striking-face",
+    "claw-prong-upper",
+    "claw-prong-lower",
+    "shank",
+    "grip",
+    "grip-collar",
+    "grip-butt",
+    "grip-logo-panel",
+    "cheek-stamp",
+    "shank-scuff",
+    "grip-print-marks"
+   ],
+   "acceptance": [
+    "Important visible forms are represented in component geometryDescriptor, deformations, localFeatures, or repetitionSystems.",
+    "Endpoint-based child parts are rooted at their attachment sockets and do not visibly float away from parents.",
+    "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+   ]
+  },
+  {
+   "id": "material-pass",
+   "goal": "Match material color, roughness, bump, and local variation.",
+   "componentRefs": [
+    "head",
+    "striking-face",
+    "claw-prong-upper",
+    "claw-prong-lower",
+    "shank",
+    "grip",
+    "grip-collar",
+    "grip-butt",
+    "grip-logo-panel",
+    "cheek-stamp",
+    "shank-scuff",
+    "grip-print-marks"
+   ],
+   "acceptance": [
+    "Reference-derived albedo palette records dominant, secondary, and accent colors per visible material.",
+    "Each important material defines roughness variation and at least one normal/bump/displacement response.",
+    "Local material overrides, dirt/wear/stains/moss/chips/scratches or equivalent masks are tied to evidenceRefs.",
+    "Thin, transparent, reflective, wet, or fibrous materials document alpha/transmission/clearcoat/metalness/fiber response when relevant.",
+    "Generated preview uses procedural albedo/roughness/bump texture or vertex color variation instead of one flat color.",
+    "Generated preview uses independent PBR maps at 1024px or higher for the quality-first tier.",
+    "If source pixels are available, referencePbr extraction passed at confidence >= 0.7 or the pass is stopped/requesting better references.",
+    "Macro, meso, and micro surface frequency bands are visible at the intended review distance without obvious tiling.",
+    "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+   ]
+  },
+  {
+   "id": "surface-pass",
+   "goal": "Add procedural surface locality such as normal/bump/displacement, AO, dirt, stains, chips, grain, moss, scratches, and wear.",
+   "componentRefs": [
+    "head",
+    "striking-face",
+    "claw-prong-upper",
+    "claw-prong-lower",
+    "shank",
+    "grip",
+    "grip-collar",
+    "grip-butt",
+    "grip-logo-panel",
+    "cheek-stamp",
+    "shank-scuff",
+    "grip-print-marks"
+   ],
+   "acceptance": [
+    "Every required material feature group has local overrides or surfaceDetail tied to evidenceRefs.",
+    "A grazing-angle close-up proves that normal/height detail breaks highlights naturally and does not read as smooth plastic.",
+    "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+   ]
+  },
+  {
+   "id": "lighting-pass",
+   "goal": "Make material and form readable under neutral turntable lighting plus optional reference lighting.",
+   "componentRefs": [
+    "head",
+    "striking-face",
+    "claw-prong-upper",
+    "claw-prong-lower",
+    "shank",
+    "grip",
+    "grip-collar",
+    "grip-butt",
+    "grip-logo-panel",
+    "cheek-stamp",
+    "shank-scuff",
+    "grip-print-marks"
+   ],
+   "acceptance": [
+    "lightingFromPhoto identifies key light direction/color/intensity, fill light, rim or environment light, and ambient color.",
+    "Exposure, tone mapping, background color/gradient, shadow softness, and contact shadow behavior are specified.",
+    "Lighting does not hide geometry/material gaps and screenshots can be compared fairly to the reference.",
+    "Neutral, grazing, and reference-matched lighting checks distinguish material errors from lighting errors.",
+    "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+   ]
+  },
+  {
+   "id": "interaction-pass",
+   "goal": "Make the model ready for future animation, transformation, physics, or destruction.",
+   "componentRefs": [
+    "head",
+    "striking-face",
+    "claw-prong-upper",
+    "claw-prong-lower",
+    "shank",
+    "grip",
+    "grip-collar",
+    "grip-butt",
+    "grip-logo-panel",
+    "cheek-stamp",
+    "shank-scuff",
+    "grip-print-marks"
+   ],
+   "acceptance": [
+    "Macro and movable meso components have stable pivot nodes.",
+    "Sockets, collider proxies, and destruction metadata are present for future runtime actions.",
+    "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+   ]
+  },
+  {
+   "id": "optimization-pass",
+   "goal": "Protect runtime performance after visual fidelity is accepted.",
+   "componentRefs": [
+    "head",
+    "striking-face",
+    "claw-prong-upper",
+    "claw-prong-lower",
+    "shank",
+    "grip",
+    "grip-collar",
+    "grip-butt",
+    "grip-logo-panel",
+    "cheek-stamp",
+    "shank-scuff",
+    "grip-print-marks"
+   ],
+   "acceptance": [
+    "Triangle count, draw calls, instancing, LOD strategy, and FPS target are documented or verified.",
+    "Repeated detail is instanced or simplified where possible without breaking silhouette/material believability."
+   ]
+  }
+ ],
+ "visualEvidence": [
+  {
+   "timestamp": "2026-11-17T12:47:44.749575+00:00",
+   "passId": "blockout",
+   "estimatedFidelity": 0.72,
+   "aiVisionScore": 0.74,
+   "visualAcceptanceThreshold": 0.7,
+   "layerScores": {
+    "silhouetteProportion": 0.86,
+    "componentStructure": 0.75,
+    "formDetail": 0.55,
+    "materialSurface": 0.45,
+    "lightingCamera": 0.75
+   },
+   "featureReviews": [
+    {
+     "id": "overall-silhouette",
+     "score": 0.85,
+     "visible": true,
+     "notes": "T silhouette, grip length ratio and butt flare match; Tier-1 IoU 0.921, aspect delta 0.005. Head back arc ~1-2 px small, face disc ~3% large toward lower-left."
+    },
+    {
+     "id": "claw-two-prong",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Two prongs with open V slot, curving back toward the grip, flat-cut tips; tips ~2 px long; outline faceted (17-point polygon) and claw albedo far too black (material pass)."
+    }
+   ],
+   "referenceScreenshot": "evidence/ref_840.png",
+   "renderScreenshot": "renders/blockout/reference.png",
+   "comparisonImage": "renders/blockout/cmp.png",
+   "cameraView": "reference",
+   "notes": "",
+   "aiVisionNotes": "Judged against the blockout goal (macro silhouette/proportion). Silhouette and camera are right; materials and micro form deliberately deferred. Orbits (tight-000..270) show a coherent 3D form with no holes; top-down axis view shows the claw curvature profile."
+  },
+  {
+   "timestamp": "2026-11-17T12:50:14.723527+00:00",
+   "passId": "structural-pass",
+   "estimatedFidelity": 0.74,
+   "aiVisionScore": 0.75,
+   "visualAcceptanceThreshold": 0.7,
+   "layerScores": {
+    "silhouetteProportion": 0.86,
+    "componentStructure": 0.82,
+    "formDetail": 0.58,
+    "materialSurface": 0.45,
+    "lightingCamera": 0.75
+   },
+   "featureReviews": [
+    {
+     "id": "overall-silhouette",
+     "score": 0.85,
+     "visible": true,
+     "notes": "IoU 0.912 incl. collar and butt cap; butt cap shortened 12 mm after first capture overshot the reference end by ~15 px."
+    },
+    {
+     "id": "claw-two-prong",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Two prongs, open slot, correct sweep; outline still faceted; albedo near-black (material pass)."
+    },
+    {
+     "id": "striking-face-neck",
+     "score": 0.78,
+     "visible": true,
+     "notes": "Round face with chamfer on a waisted neck, perpendicular to the shank; disc ~3% oversized toward lower-left; bell transition coarse (lathe 12 points)."
+    }
+   ],
+   "referenceScreenshot": "evidence/ref_840.png",
+   "renderScreenshot": "renders/structural-pass/reference.png",
+   "comparisonImage": "renders/structural-pass/cmp.png",
+   "cameraView": "reference",
+   "notes": "",
+   "aiVisionNotes": "Structure judged on orbits tight-000..270 + thickness-axis: no floating parts, collar and butt seat on the grip, prongs separated in Y with the slot visible from 90/270."
+  },
+  {
+   "timestamp": "2026-11-17T12:58:14.829473+00:00",
+   "passId": "form-refinement",
+   "estimatedFidelity": 0.76,
+   "aiVisionScore": 0.76,
+   "visualAcceptanceThreshold": 0.7,
+   "layerScores": {
+    "silhouetteProportion": 0.86,
+    "componentStructure": 0.84,
+    "formDetail": 0.74,
+    "materialSurface": 0.45,
+    "lightingCamera": 0.75
+   },
+   "featureReviews": [
+    {
+     "id": "overall-silhouette",
+     "score": 0.85,
+     "visible": true,
+     "notes": "Tier-1 IoU 0.911, aspect delta 0.0015, scale delta 0.017."
+    },
+    {
+     "id": "claw-two-prong",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Spline outline (no facets), 0.4 mm bevel, prongs 10.5 mm thick each so the claw runs flush with the cheek, V slot opens 1.6 -> ~5.9 mm at the tips. Colour still near-black (material pass)."
+    },
+    {
+     "id": "striking-face-neck",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Neck shortened, bell radius 14.3 mm, chamfer ring visible; disc still slightly large."
+    },
+    {
+     "id": "grip-rib-pattern",
+     "score": 0.78,
+     "visible": true,
+     "notes": "24 carved S-grooves, pitch 21.5 px vs reference 21.8 px, slant measured (authoring/groove_slant.py) -20 px/45 px vs reference -29 px/60 px; smooth zone after the collar, logo-panel inset, lanyard recess, flared butt. Groove contrast and grip colour too pale (material pass)."
+    }
+   ],
+   "referenceScreenshot": "evidence/ref_840.png",
+   "renderScreenshot": "renders/form-refinement/reference.png",
+   "comparisonImage": "renders/form-refinement/cmp.png",
+   "cameraView": "reference",
+   "notes": "",
+   "aiVisionNotes": "Form judged on 2x crops (renders/scratch z-grip/z-head) and orbits; the 2D gates cannot see groove slant, so it was measured with authoring/groove_slant.py."
+  },
+  {
+   "timestamp": "2026-11-17T13:07:10.246266+00:00",
+   "passId": "material-pass",
+   "estimatedFidelity": 0.8,
+   "aiVisionScore": 0.8,
+   "visualAcceptanceThreshold": 0.7,
+   "layerScores": {
+    "silhouetteProportion": 0.86,
+    "componentStructure": 0.85,
+    "formDetail": 0.76,
+    "materialSurface": 0.76,
+    "lightingCamera": 0.76
+   },
+   "featureReviews": [
+    {
+     "id": "grip-rib-pattern",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Grip colour within ~1-8% of the reference in R/G (render #e9602a vs #ec591b mid-grip); grooves read with cavity darkening; lanyard recess still faint; parting-line notches absent."
+    },
+    {
+     "id": "reference-material-system",
+     "score": 0.78,
+     "visible": true,
+     "notes": "Satin brushed steel (procedural longitudinal brushing, palette/roughness from the reference crops) vs vivid orange elastomer; cheek luminance ratio 0.98, face 1.01, claw 0.87; projected scuff patch present; claw-slot interior and under-cheek cavity not dark enough (surface pass)."
+    },
+    {
+     "id": "cheek-stamp-marks",
+     "score": 0.72,
+     "visible": true,
+     "notes": "Reference ink pixels projected through the fitted camera onto a conforming cheek shell: monogram + text legible at 2x and in the right place; softer than the photo."
+    }
+   ],
+   "referenceScreenshot": "evidence/ref_840.png",
+   "renderScreenshot": "renders/material-pass/reference.png",
+   "comparisonImage": "renders/material-pass/cmp.png",
+   "cameraView": "reference",
+   "notes": "",
+   "aiVisionNotes": "Colours verified numerically (renders/material-pass/region-colors.txt) before review; interior difference dropped 0.203 -> 0.089."
+  },
+  {
+   "timestamp": "2026-11-17T13:13:29.377364+00:00",
+   "passId": "surface-pass",
+   "estimatedFidelity": 0.8,
+   "aiVisionScore": 0.8,
+   "visualAcceptanceThreshold": 0.7,
+   "layerScores": {
+    "silhouetteProportion": 0.86,
+    "componentStructure": 0.86,
+    "formDetail": 0.78,
+    "materialSurface": 0.78,
+    "lightingCamera": 0.76
+   },
+   "featureReviews": [
+    {
+     "id": "grip-rib-pattern",
+     "score": 0.81,
+     "visible": true,
+     "notes": "Lanyard hole now reads as a dark hole (carved 3 mm recess placed by ray-casting the reference hole pixel, plus projected hole-interior pixels); logo panel band re-centred; mould parting line along the +Z edge."
+    },
+    {
+     "id": "reference-material-system",
+     "score": 0.78,
+     "visible": true,
+     "notes": "Cavity AO: claw slot inner faces 0.32, throat 0.6-0.7, neck waist 0.72. Claw top arc darker than the photo (luminance ratio 0.78) -- lighting pass."
+    },
+    {
+     "id": "cheek-stamp-marks",
+     "score": 0.72,
+     "visible": true,
+     "notes": "Unchanged from material pass; legible at 2x."
+    }
+   ],
+   "referenceScreenshot": "evidence/ref_840.png",
+   "renderScreenshot": "renders/surface-pass/reference.png",
+   "comparisonImage": "renders/surface-pass/cmp.png",
+   "cameraView": "reference",
+   "notes": "",
+   "aiVisionNotes": "Checked on 2x crops of head and butt; self_intersection skipped 3 open decal shells by design (listed in meshes.json)."
+  },
+  {
+   "timestamp": "2026-11-17T13:16:41.781900+00:00",
+   "passId": "lighting-pass",
+   "estimatedFidelity": 0.81,
+   "aiVisionScore": 0.81,
+   "visualAcceptanceThreshold": 0.7,
+   "layerScores": {
+    "silhouetteProportion": 0.86,
+    "componentStructure": 0.86,
+    "formDetail": 0.78,
+    "materialSurface": 0.8,
+    "lightingCamera": 0.8
+   },
+   "featureReviews": [
+    {
+     "id": "reference-material-system",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Cheek 0.97, face 1.02, grip-mid R/G 0.98/1.07 of the reference; claw lateral faces now dark forging scale (#38393b vs #211e1f) with lighter edges, as in the photo; shank scuff still ~11% bright (photo pixels re-lit)."
+    }
+   ],
+   "referenceScreenshot": "evidence/ref_840.png",
+   "renderScreenshot": "renders/lighting-pass/reference.png",
+   "comparisonImage": "renders/lighting-pass/cmp.png",
+   "cameraView": "reference",
+   "notes": "",
+   "aiVisionNotes": "Region colours measured before and after (renders/lighting-pass/region-colors.txt); an invalid 'claw-top' sample window (it covered the throat background) was replaced by a claw-face window."
+  },
+  {
+   "timestamp": "2026-11-17T13:19:26.648012+00:00",
+   "passId": "interaction-pass",
+   "estimatedFidelity": 0.81,
+   "aiVisionScore": 0.81,
+   "visualAcceptanceThreshold": 0.7,
+   "layerScores": {
+    "silhouetteProportion": 0.86,
+    "componentStructure": 0.88,
+    "formDetail": 0.78,
+    "materialSurface": 0.8,
+    "lightingCamera": 0.8
+   },
+   "featureReviews": [
+    {
+     "id": "overall-silhouette",
+     "score": 0.85,
+     "visible": true,
+     "notes": "Unchanged geometry; Tier-1 IoU 0.911."
+    },
+    {
+     "id": "reference-material-system",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Unchanged from lighting pass."
+    }
+   ],
+   "referenceScreenshot": "evidence/ref_840.png",
+   "renderScreenshot": "renders/interaction-pass/reference.png",
+   "comparisonImage": "renders/interaction-pass/cmp.png",
+   "cameraView": "reference",
+   "notes": "",
+   "aiVisionNotes": "Visual unchanged vs lighting pass (same IoU/interior numbers); this pass is judged on renders/interaction-pass/interaction.json + explode captures."
+  },
+  {
+   "timestamp": "2026-11-17T13:22:49.419586+00:00",
+   "passId": "optimization-pass",
+   "estimatedFidelity": 0.81,
+   "aiVisionScore": 0.81,
+   "visualAcceptanceThreshold": 0.7,
+   "layerScores": {
+    "silhouetteProportion": 0.86,
+    "componentStructure": 0.88,
+    "formDetail": 0.78,
+    "materialSurface": 0.8,
+    "lightingCamera": 0.8
+   },
+   "featureReviews": [
+    {
+     "id": "overall-silhouette",
+     "score": 0.85,
+     "visible": true,
+     "notes": "Tier-1 IoU 0.911 after optimisation (0.911 before)."
+    },
+    {
+     "id": "grip-rib-pattern",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Groove phase identical at offset 0 (16,37,58,...) after reducing grip density; grooves 4% wider to remove a 1-vertex fold."
+    },
+    {
+     "id": "reference-material-system",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Unchanged."
+    }
+   ],
+   "referenceScreenshot": "evidence/ref_840.png",
+   "renderScreenshot": "renders/optimization-pass/reference.png",
+   "comparisonImage": "renders/optimization-pass/cmp.png",
+   "cameraView": "reference",
+   "notes": "",
+   "aiVisionNotes": "Optimisation judged by before/after parity crops plus stats.json."
+  }
+ ],
+ "reviewHistory": [
+  {
+   "timestamp": "2026-11-17T12:47:44.749575+00:00",
+   "passId": "blockout",
+   "estimatedFidelity": 0.72,
+   "aiVisionScore": 0.74,
+   "visualAcceptanceThreshold": 0.7,
+   "layerScores": {
+    "silhouetteProportion": 0.86,
+    "componentStructure": 0.75,
+    "formDetail": 0.55,
+    "materialSurface": 0.45,
+    "lightingCamera": 0.75
+   },
+   "featureReviews": [
+    {
+     "id": "overall-silhouette",
+     "score": 0.85,
+     "visible": true,
+     "notes": "T silhouette, grip length ratio and butt flare match; Tier-1 IoU 0.921, aspect delta 0.005. Head back arc ~1-2 px small, face disc ~3% large toward lower-left."
+    },
+    {
+     "id": "claw-two-prong",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Two prongs with open V slot, curving back toward the grip, flat-cut tips; tips ~2 px long; outline faceted (17-point polygon) and claw albedo far too black (material pass)."
+    }
+   ],
+   "action": "continue",
+   "summary": "Blockout: macro silhouette and proportions match the fitted reference view (IoU 0.921); hammer lies on its side, camera pitch 40 deg, fov 19.1 deg.",
+   "matched": [
+    "T silhouette",
+    "grip ~62% of length with flared butt",
+    "two-prong curved claw with open slot",
+    "waisted neck + round face",
+    "tapering shank"
+   ],
+   "mismatches": [
+    "claw outline faceted (polygon) and albedo near-black",
+    "steel reference texture tiles as a woven pattern",
+    "grip orange too pale/pastel vs vivid red-orange",
+    "grooves read as straight rings not S-chevrons",
+    "head cheek blocky at station kinks",
+    "no collar/butt cap/panel yet (later passes)"
+   ],
+   "specFixes": [],
+   "codeFixes": [
+    "densify sweep stations and smooth claw outline (form-refinement)",
+    "chevron bow visibility"
+   ],
+   "evidence": [
+    "renders/blockout/tier1.json",
+    "renders/blockout/multi-angle.json",
+    "renders/blockout/turntable.json",
+    "renders/blockout/self-intersection.json",
+    "renders/blockout/attachment.json",
+    "renders/blockout/interior.json"
+   ],
+   "mapStrippedRender": "renders/blockout/mapstripped.png",
+   "reviewViewpoints": [
+    "reference",
+    "three-quarter",
+    "front",
+    "side",
+    "orbit-000",
+    "orbit-090",
+    "orbit-180",
+    "orbit-270",
+    "long-axis",
+    "thickness-axis"
+   ],
+   "visualEvidence": {
+    "referenceScreenshot": "evidence/ref_840.png",
+    "renderScreenshot": "renders/blockout/reference.png",
+    "comparisonImage": "renders/blockout/cmp.png",
+    "cameraView": "reference",
+    "notes": "",
+    "aiVisionNotes": "Judged against the blockout goal (macro silhouette/proportion). Silhouette and camera are right; materials and micro form deliberately deferred. Orbits (tight-000..270) show a coherent 3D form with no holes; top-down axis view shows the claw curvature profile."
+   }
+  },
+  {
+   "timestamp": "2026-11-17T12:50:14.723527+00:00",
+   "passId": "structural-pass",
+   "estimatedFidelity": 0.74,
+   "aiVisionScore": 0.75,
+   "visualAcceptanceThreshold": 0.7,
+   "layerScores": {
+    "silhouetteProportion": 0.86,
+    "componentStructure": 0.82,
+    "formDetail": 0.58,
+    "materialSurface": 0.45,
+    "lightingCamera": 0.75
+   },
+   "featureReviews": [
+    {
+     "id": "overall-silhouette",
+     "score": 0.85,
+     "visible": true,
+     "notes": "IoU 0.912 incl. collar and butt cap; butt cap shortened 12 mm after first capture overshot the reference end by ~15 px."
+    },
+    {
+     "id": "claw-two-prong",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Two prongs, open slot, correct sweep; outline still faceted; albedo near-black (material pass)."
+    },
+    {
+     "id": "striking-face-neck",
+     "score": 0.78,
+     "visible": true,
+     "notes": "Round face with chamfer on a waisted neck, perpendicular to the shank; disc ~3% oversized toward lower-left; bell transition coarse (lathe 12 points)."
+    }
+   ],
+   "action": "continue",
+   "summary": "Structural pass: component hierarchy complete (head root; striking-face, claw prongs, shank; grip -> collar, butt). All sockets/attachments declared; gates green; IoU 0.912.",
+   "matched": [
+    "hierarchy head->shank->grip with collar and butt children",
+    "prongs mirrored in Y about the mid-plane",
+    "butt end position (after fix)",
+    "lanyard recess visible from orbit 180"
+   ],
+   "mismatches": [
+    "claw outline faceted, near-black",
+    "steel texture tiling",
+    "grip pale orange",
+    "grooves straight rings",
+    "sweep station kinks on head/neck"
+   ],
+   "specFixes": [],
+   "codeFixes": [
+    "butt stations x 0.298-0.318 -> 0.294-0.3058 (overshoot 15 px)",
+    "lanyard x 0.2955 -> 0.287 (was under the butt cap)"
+   ],
+   "evidence": [
+    "renders/structural-pass/tier1.json",
+    "renders/structural-pass/multi-angle.json",
+    "renders/structural-pass/turntable.json",
+    "renders/structural-pass/self-intersection.json",
+    "renders/structural-pass/attachment.json",
+    "renders/structural-pass/interior.json"
+   ],
+   "mapStrippedRender": "renders/structural-pass/mapstripped.png",
+   "reviewViewpoints": [
+    "reference",
+    "three-quarter",
+    "front",
+    "side",
+    "orbit-000",
+    "orbit-090",
+    "orbit-180",
+    "orbit-270",
+    "long-axis",
+    "thickness-axis"
+   ],
+   "visualEvidence": {
+    "referenceScreenshot": "evidence/ref_840.png",
+    "renderScreenshot": "renders/structural-pass/reference.png",
+    "comparisonImage": "renders/structural-pass/cmp.png",
+    "cameraView": "reference",
+    "notes": "",
+    "aiVisionNotes": "Structure judged on orbits tight-000..270 + thickness-axis: no floating parts, collar and butt seat on the grip, prongs separated in Y with the slot visible from 90/270."
+   }
+  },
+  {
+   "timestamp": "2026-11-17T12:58:14.829473+00:00",
+   "passId": "form-refinement",
+   "estimatedFidelity": 0.76,
+   "aiVisionScore": 0.76,
+   "visualAcceptanceThreshold": 0.7,
+   "layerScores": {
+    "silhouetteProportion": 0.86,
+    "componentStructure": 0.84,
+    "formDetail": 0.74,
+    "materialSurface": 0.45,
+    "lightingCamera": 0.75
+   },
+   "featureReviews": [
+    {
+     "id": "overall-silhouette",
+     "score": 0.85,
+     "visible": true,
+     "notes": "Tier-1 IoU 0.911, aspect delta 0.0015, scale delta 0.017."
+    },
+    {
+     "id": "claw-two-prong",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Spline outline (no facets), 0.4 mm bevel, prongs 10.5 mm thick each so the claw runs flush with the cheek, V slot opens 1.6 -> ~5.9 mm at the tips. Colour still near-black (material pass)."
+    },
+    {
+     "id": "striking-face-neck",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Neck shortened, bell radius 14.3 mm, chamfer ring visible; disc still slightly large."
+    },
+    {
+     "id": "grip-rib-pattern",
+     "score": 0.78,
+     "visible": true,
+     "notes": "24 carved S-grooves, pitch 21.5 px vs reference 21.8 px, slant measured (authoring/groove_slant.py) -20 px/45 px vs reference -29 px/60 px; smooth zone after the collar, logo-panel inset, lanyard recess, flared butt. Groove contrast and grip colour too pale (material pass)."
+    }
+   ],
+   "action": "continue",
+   "summary": "Form refinement: Catmull-Rom densified sweeps (no station kinks), spline claw outline with bevel, thicker prongs, shorter neck/bigger bell, carved S-chevron grip grooves matched to reference pitch and slant, camera-projected cheek stamp shell.",
+   "matched": [
+    "groove pitch 21.5 vs 21.8 px",
+    "groove slant sign and slope",
+    "smooth zone after collar",
+    "claw flush with cheek",
+    "stamp lands on the cheek in the reference view"
+   ],
+   "mismatches": [
+    "claw albedo near-black (referencePbr crop is mostly slot shadow)",
+    "steel reference crop tiles as woven pattern",
+    "grip orange pale/pastel",
+    "groove/lanyard cavity contrast low",
+    "no shank scuff patch yet"
+   ],
+   "specFixes": [],
+   "codeFixes": [
+    "P4 densify sweeps",
+    "P5 spline claw",
+    "P6 stamp projection",
+    "grip carve params (count 24, xStart 0.150, bow 0.028 ease-out, edge fade)"
+   ],
+   "evidence": [
+    "renders/form-refinement/tier1.json",
+    "renders/form-refinement/multi-angle.json",
+    "renders/form-refinement/turntable.json",
+    "renders/form-refinement/self-intersection.json",
+    "renders/form-refinement/attachment.json",
+    "renders/form-refinement/interior.json"
+   ],
+   "mapStrippedRender": "renders/form-refinement/mapstripped.png",
+   "reviewViewpoints": [
+    "reference",
+    "three-quarter",
+    "front",
+    "side",
+    "orbit-000",
+    "orbit-090",
+    "orbit-180",
+    "orbit-270",
+    "long-axis",
+    "thickness-axis"
+   ],
+   "visualEvidence": {
+    "referenceScreenshot": "evidence/ref_840.png",
+    "renderScreenshot": "renders/form-refinement/reference.png",
+    "comparisonImage": "renders/form-refinement/cmp.png",
+    "cameraView": "reference",
+    "notes": "",
+    "aiVisionNotes": "Form judged on 2x crops (renders/scratch z-grip/z-head) and orbits; the 2D gates cannot see groove slant, so it was measured with authoring/groove_slant.py."
+   }
+  },
+  {
+   "timestamp": "2026-11-17T13:07:10.246266+00:00",
+   "passId": "material-pass",
+   "estimatedFidelity": 0.8,
+   "aiVisionScore": 0.8,
+   "visualAcceptanceThreshold": 0.7,
+   "layerScores": {
+    "silhouetteProportion": 0.86,
+    "componentStructure": 0.85,
+    "formDetail": 0.76,
+    "materialSurface": 0.76,
+    "lightingCamera": 0.76
+   },
+   "featureReviews": [
+    {
+     "id": "grip-rib-pattern",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Grip colour within ~1-8% of the reference in R/G (render #e9602a vs #ec591b mid-grip); grooves read with cavity darkening; lanyard recess still faint; parting-line notches absent."
+    },
+    {
+     "id": "reference-material-system",
+     "score": 0.78,
+     "visible": true,
+     "notes": "Satin brushed steel (procedural longitudinal brushing, palette/roughness from the reference crops) vs vivid orange elastomer; cheek luminance ratio 0.98, face 1.01, claw 0.87; projected scuff patch present; claw-slot interior and under-cheek cavity not dark enough (surface pass)."
+    },
+    {
+     "id": "cheek-stamp-marks",
+     "score": 0.72,
+     "visible": true,
+     "notes": "Reference ink pixels projected through the fitted camera onto a conforming cheek shell: monogram + text legible at 2x and in the right place; softer than the photo."
+    }
+   ],
+   "action": "continue",
+   "summary": "Material pass: grip albedo/env calibrated (P7 binds envMapIntensity, which three r170 ignores under scene.environment), procedural brushed steel replaces the weave-tiling reference crops (P8), claw recipe re-extracted from lit claw faces (dE 41.5 -> 6.3), reference-pixel scuff patch and stamp projected through the fitted camera.",
+   "matched": [
+    "grip colour (dE 8.8)",
+    "cheek/face luminance ratios 0.98/1.01",
+    "stamp legible and placed",
+    "scuff patch location",
+    "steel reads as satin metal"
+   ],
+   "mismatches": [
+    "claw slot interior and under-cheek throat lack cavity darkness",
+    "lanyard hole faint",
+    "steel tonal contrast lower than photo",
+    "grip butt slightly washed (lit)"
+   ],
+   "specFixes": [],
+   "codeFixes": [
+    "lights key 2.2->1.3, fill 0.8->0.45, hemi 0.6->0.35",
+    "grip #e64e08 envMapIntensity 0.3",
+    "forged-steel #9c989a",
+    "face #787272",
+    "claw #6a6c70",
+    "P7 env binding",
+    "P8 brushed steel",
+    "scuff decal component"
+   ],
+   "evidence": [
+    "renders/material-pass/tier1.json",
+    "renders/material-pass/multi-angle.json",
+    "renders/material-pass/turntable.json",
+    "renders/material-pass/self-intersection.json",
+    "renders/material-pass/attachment.json",
+    "renders/material-pass/interior.json",
+    "renders/material-pass/region-colors.txt"
+   ],
+   "mapStrippedRender": "renders/material-pass/mapstripped.png",
+   "reviewViewpoints": [
+    "reference",
+    "three-quarter",
+    "front",
+    "side",
+    "orbit-000",
+    "orbit-090",
+    "orbit-180",
+    "orbit-270",
+    "long-axis",
+    "thickness-axis"
+   ],
+   "visualEvidence": {
+    "referenceScreenshot": "evidence/ref_840.png",
+    "renderScreenshot": "renders/material-pass/reference.png",
+    "comparisonImage": "renders/material-pass/cmp.png",
+    "cameraView": "reference",
+    "notes": "",
+    "aiVisionNotes": "Colours verified numerically (renders/material-pass/region-colors.txt) before review; interior difference dropped 0.203 -> 0.089."
+   }
+  },
+  {
+   "timestamp": "2026-11-17T13:13:29.377364+00:00",
+   "passId": "surface-pass",
+   "estimatedFidelity": 0.8,
+   "aiVisionScore": 0.8,
+   "visualAcceptanceThreshold": 0.7,
+   "layerScores": {
+    "silhouetteProportion": 0.86,
+    "componentStructure": 0.86,
+    "formDetail": 0.78,
+    "materialSurface": 0.78,
+    "lightingCamera": 0.76
+   },
+   "featureReviews": [
+    {
+     "id": "grip-rib-pattern",
+     "score": 0.81,
+     "visible": true,
+     "notes": "Lanyard hole now reads as a dark hole (carved 3 mm recess placed by ray-casting the reference hole pixel, plus projected hole-interior pixels); logo panel band re-centred; mould parting line along the +Z edge."
+    },
+    {
+     "id": "reference-material-system",
+     "score": 0.78,
+     "visible": true,
+     "notes": "Cavity AO: claw slot inner faces 0.32, throat 0.6-0.7, neck waist 0.72. Claw top arc darker than the photo (luminance ratio 0.78) -- lighting pass."
+    },
+    {
+     "id": "cheek-stamp-marks",
+     "score": 0.72,
+     "visible": true,
+     "notes": "Unchanged from material pass; legible at 2x."
+    }
+   ],
+   "action": "continue",
+   "summary": "Surface pass: P9 analytic cavity AO (claw slot, throat, neck waist), grip parting line, lanyard recess re-placed by ray-cast + projected hole/logo decal, surfaceDetail authored for every component; decal shells flagged open so self_intersection skips them (reported, not hidden).",
+   "matched": [
+    "dark claw slot interior",
+    "lanyard hole position and darkness",
+    "panel band position",
+    "cheek/face luminance 0.97/1.02"
+   ],
+   "mismatches": [
+    "claw top arc too dark (0.78)",
+    "steel tonal range narrower than photo",
+    "grip butt slightly washed",
+    "panel logo barely visible (as in the photo)"
+   ],
+   "specFixes": [],
+   "codeFixes": [
+    "P9 cavityAO",
+    "grip partingLine",
+    "lanyard x 0.2863 z -0.0011 r 2 mm depth 4 mm",
+    "grip-print-marks decal",
+    "decal shells parameters.openEnded"
+   ],
+   "evidence": [
+    "renders/surface-pass/tier1.json",
+    "renders/surface-pass/multi-angle.json",
+    "renders/surface-pass/turntable.json",
+    "renders/surface-pass/self-intersection.json",
+    "renders/surface-pass/attachment.json",
+    "renders/surface-pass/interior.json",
+    "renders/surface-pass/region-colors.txt"
+   ],
+   "mapStrippedRender": "renders/surface-pass/mapstripped.png",
+   "reviewViewpoints": [
+    "reference",
+    "three-quarter",
+    "front",
+    "side",
+    "orbit-000",
+    "orbit-090",
+    "orbit-180",
+    "orbit-270",
+    "long-axis",
+    "thickness-axis"
+   ],
+   "visualEvidence": {
+    "referenceScreenshot": "evidence/ref_840.png",
+    "renderScreenshot": "renders/surface-pass/reference.png",
+    "comparisonImage": "renders/surface-pass/cmp.png",
+    "cameraView": "reference",
+    "notes": "",
+    "aiVisionNotes": "Checked on 2x crops of head and butt; self_intersection skipped 3 open decal shells by design (listed in meshes.json)."
+   }
+  },
+  {
+   "timestamp": "2026-11-17T13:16:41.781900+00:00",
+   "passId": "lighting-pass",
+   "estimatedFidelity": 0.81,
+   "aiVisionScore": 0.81,
+   "visualAcceptanceThreshold": 0.7,
+   "layerScores": {
+    "silhouetteProportion": 0.86,
+    "componentStructure": 0.86,
+    "formDetail": 0.78,
+    "materialSurface": 0.8,
+    "lightingCamera": 0.8
+   },
+   "featureReviews": [
+    {
+     "id": "reference-material-system",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Cheek 0.97, face 1.02, grip-mid R/G 0.98/1.07 of the reference; claw lateral faces now dark forging scale (#38393b vs #211e1f) with lighter edges, as in the photo; shank scuff still ~11% bright (photo pixels re-lit)."
+    }
+   ],
+   "action": "continue",
+   "summary": "Lighting pass: softer, more overhead studio key (1.1) + fill 0.4 + hemi 0.35 on a white no-table sweep; ACES exposure 1.0. Claw lateral faces darkened via normal-based vertex shade (P9 normalAxis fix: extrude lateral normals are +-Z in geometry frame); re-lit photo decals tinted.",
+   "matched": [
+    "top faces brightest like the photo",
+    "grip saturation kept under ACES (envMapIntensity 0.3 now honoured)",
+    "claw face/edge contrast"
+   ],
+   "mismatches": [
+    "shank scuff 11% bright",
+    "steel tonal range still narrower than photo (no studio softbox reflections)",
+    "grip butt B channel high (ACES desaturation)"
+   ],
+   "specFixes": [],
+   "codeFixes": [
+    "key pos [-0.4,2.4,0.8] i 1.1",
+    "fill 0.4",
+    "claw base #7c7e82 with lateral shade 0.24/0.3",
+    "decal tint"
+   ],
+   "evidence": [
+    "renders/lighting-pass/tier1.json",
+    "renders/lighting-pass/multi-angle.json",
+    "renders/lighting-pass/turntable.json",
+    "renders/lighting-pass/self-intersection.json",
+    "renders/lighting-pass/attachment.json",
+    "renders/lighting-pass/interior.json",
+    "renders/lighting-pass/region-colors.txt"
+   ],
+   "mapStrippedRender": "renders/lighting-pass/mapstripped.png",
+   "reviewViewpoints": [
+    "reference",
+    "three-quarter",
+    "front",
+    "side",
+    "orbit-000",
+    "orbit-090",
+    "orbit-180",
+    "orbit-270",
+    "long-axis",
+    "thickness-axis"
+   ],
+   "visualEvidence": {
+    "referenceScreenshot": "evidence/ref_840.png",
+    "renderScreenshot": "renders/lighting-pass/reference.png",
+    "comparisonImage": "renders/lighting-pass/cmp.png",
+    "cameraView": "reference",
+    "notes": "",
+    "aiVisionNotes": "Region colours measured before and after (renders/lighting-pass/region-colors.txt); an invalid 'claw-top' sample window (it covered the throat background) was replaced by a claw-face window."
+   }
+  },
+  {
+   "timestamp": "2026-11-17T13:19:26.648012+00:00",
+   "passId": "interaction-pass",
+   "estimatedFidelity": 0.81,
+   "aiVisionScore": 0.81,
+   "visualAcceptanceThreshold": 0.7,
+   "layerScores": {
+    "silhouetteProportion": 0.86,
+    "componentStructure": 0.88,
+    "formDetail": 0.78,
+    "materialSurface": 0.8,
+    "lightingCamera": 0.8
+   },
+   "featureReviews": [
+    {
+     "id": "overall-silhouette",
+     "score": 0.85,
+     "visible": true,
+     "notes": "Unchanged geometry; Tier-1 IoU 0.911."
+    },
+    {
+     "id": "reference-material-system",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Unchanged from lighting pass."
+    }
+   ],
+   "action": "continue",
+   "summary": "Interaction pass: sculptRuntime gains parts/explode/pick/partOf (P10, one shared part definition; decals ride their parts), nail-slot/strike/hand sockets, per-part primitive colliders, grip-sleeve detachable destruction group with an overmould seam, swing/nail-pull/explode animation anchors. Browser-verified: all 12 meshes pick to the right part, explode(1) separates 9 parts.",
+   "matched": [
+    "explode layout readable (renders/interaction-pass/explode-orbit.png)",
+    "pick resolves decals to head/shank/grip",
+    "7 sockets",
+    "2 destruction groups"
+   ],
+   "mismatches": [
+    "no physics engine wired (collider intent only)",
+    "exploded layout is not framed by the fixed reference camera (viewer concern)"
+   ],
+   "specFixes": [],
+   "codeFixes": [
+    "P10 attachHammerInteraction",
+    "spec sockets/colliders/destruction/animationAnchors",
+    "logo panel lowered under the inset floor"
+   ],
+   "evidence": [
+    "renders/interaction-pass/interaction.json",
+    "renders/interaction-pass/explode-orbit.png",
+    "renders/interaction-pass/interactive.png",
+    "renders/interaction-pass/tier1.json",
+    "renders/interaction-pass/turntable.json",
+    "renders/interaction-pass/self-intersection.json"
+   ],
+   "mapStrippedRender": "renders/interaction-pass/mapstripped.png",
+   "reviewViewpoints": [
+    "reference",
+    "three-quarter",
+    "front",
+    "side",
+    "orbit-000",
+    "orbit-090",
+    "orbit-180",
+    "orbit-270",
+    "long-axis",
+    "thickness-axis"
+   ],
+   "visualEvidence": {
+    "referenceScreenshot": "evidence/ref_840.png",
+    "renderScreenshot": "renders/interaction-pass/reference.png",
+    "comparisonImage": "renders/interaction-pass/cmp.png",
+    "cameraView": "reference",
+    "notes": "",
+    "aiVisionNotes": "Visual unchanged vs lighting pass (same IoU/interior numbers); this pass is judged on renders/interaction-pass/interaction.json + explode captures."
+   }
+  },
+  {
+   "timestamp": "2026-11-17T13:22:49.419586+00:00",
+   "passId": "optimization-pass",
+   "estimatedFidelity": 0.81,
+   "aiVisionScore": 0.81,
+   "visualAcceptanceThreshold": 0.7,
+   "layerScores": {
+    "silhouetteProportion": 0.86,
+    "componentStructure": 0.88,
+    "formDetail": 0.78,
+    "materialSurface": 0.8,
+    "lightingCamera": 0.8
+   },
+   "featureReviews": [
+    {
+     "id": "overall-silhouette",
+     "score": 0.85,
+     "visible": true,
+     "notes": "Tier-1 IoU 0.911 after optimisation (0.911 before)."
+    },
+    {
+     "id": "grip-rib-pattern",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Groove phase identical at offset 0 (16,37,58,...) after reducing grip density; grooves 4% wider to remove a 1-vertex fold."
+    },
+    {
+     "id": "reference-material-system",
+     "score": 0.8,
+     "visible": true,
+     "notes": "Unchanged."
+    }
+   ],
+   "action": "continue",
+   "summary": "Optimisation: 132,578 -> 91,256 triangles (budget 120k), 12 draw calls (budget 24): grip sweep 88->72 radial, 0.40->0.45 mm rings; grip-marks decal limited to hole/logo windows (20.8k -> ~1k tris). No visible change (renders/scratch/z-opt.png); a 1-vertex groove fold found by self_intersection fixed (edge fade 0.08-0.2, groove width 0.145 pitch).",
+   "matched": [
+    "visual parity with interaction pass",
+    "all gates green",
+    "explode/pick re-verified"
+   ],
+   "mismatches": [
+    "self_intersection samples 18,429 of 52,902 vertices (stride) -- not exhaustive"
+   ],
+   "specFixes": [],
+   "codeFixes": [
+    "grip step 0.00045 radial 72",
+    "decal regions",
+    "groove halfWidthFrac 0.145 edgeFade [0.08,0.2]"
+   ],
+   "evidence": [
+    "renders/optimization-pass/stats.json",
+    "renders/optimization-pass/tier1.json",
+    "renders/optimization-pass/turntable.json",
+    "renders/optimization-pass/self-intersection.json",
+    "renders/optimization-pass/interaction.json"
+   ],
+   "mapStrippedRender": "renders/optimization-pass/mapstripped.png",
+   "reviewViewpoints": [
+    "reference",
+    "three-quarter",
+    "front",
+    "side",
+    "orbit-000",
+    "orbit-090",
+    "orbit-180",
+    "orbit-270",
+    "long-axis",
+    "thickness-axis"
+   ],
+   "visualEvidence": {
+    "referenceScreenshot": "evidence/ref_840.png",
+    "renderScreenshot": "renders/optimization-pass/reference.png",
+    "comparisonImage": "renders/optimization-pass/cmp.png",
+    "cameraView": "reference",
+    "notes": "",
+    "aiVisionNotes": "Optimisation judged by before/after parity crops plus stats.json."
+   }
+  }
+ ],
+ "lodPlan": [
+  {
+   "tier": "near",
+   "distance": 0,
+   "strategy": "full component tree and material layers"
+  },
+  {
+   "tier": "far",
+   "distance": 30,
+   "strategy": "merge static components and reduce local feature geometry"
+  }
+ ],
+ "performanceBudget": {
+  "qualityPriority": "reference-fidelity",
+  "targetTriangles": 120000,
+  "maxDrawCalls": 24,
+  "textureSize": 2048,
+  "fpsTarget": 60,
+  "optimizationPolicy": "Reach accepted visual fidelity first, then optimize without removing reference-critical geometry or surface layers."
+ },
+ "lightingFromPhoto": [
+  {
+   "id": "key",
+   "type": "directional",
+   "position": [
+    -0.4,
+    2.4,
+    0.8
+   ],
+   "intensity": 1.1,
+   "color": "#ffffff",
+   "castShadow": false,
+   "notes": "soft overhead studio key (photo: top faces brightest, no cast shadow on the white sweep)"
+  },
+  {
+   "id": "fill",
+   "type": "directional",
+   "position": [
+    1.5,
+    0.8,
+    1.5
+   ],
+   "intensity": 0.4,
+   "color": "#ffffff"
+  },
+  {
+   "id": "hemi",
+   "type": "hemisphere",
+   "skyColor": "#ffffff",
+   "groundColor": "#d8d8d8",
+   "intensity": 0.35
+  },
+  {
+   "id": "environment",
+   "environmentIntensity": 1.0
+  },
+  {
+   "id": "tone",
+   "exposure": 1.0,
+   "notes": "ACES filmic tone mapping (viewer), exposure 1.0"
+  },
+  {
+   "id": "ground",
+   "backgroundColor": "#ffffff",
+   "noTable": true,
+   "tableColor": "#ffffff",
+   "tableRoughness": 0.9,
+   "notes": "seamless white studio sweep, no table plane; contact shadow / ambient occlusion baked as vertex-colour cavity AO in the factory patch"
+  }
+ ],
+ "proceduralStrategy": [
+  "Block out macro silhouette first.",
+  "Add component hierarchy and joints.",
+  "Create stable pivot groups, sockets, collider proxies, and destruction metadata before visual polish.",
+  "Refine forms with bevels, tapers, bends, and procedural noise.",
+  "Run reference PBR extraction for important source-image materials and stop when confidence is below the target threshold.",
+  "Add material variation before adding expensive micro-geometry."
+ ],
+ "animationAnchors": [
+  "root pivot (node 'head') supports whole-object translate/rotate/scale/visibility",
+  "swing: rotate the model about sockets['grip:socket-hand'] (wrist) around the hammer-frame Y axis; strike contact at sockets['striking-face:socket-strike']",
+  "nail pull: sockets['claw-prong-upper:socket-nail-slot'] is the lever contact; rotate about the head's claw-root socket",
+  "explode: root.userData.sculptRuntime.explode(t) (layout scale x2 about the model centre + 12 mm clearance; decal shells ride their part)",
+  "pick: root.userData.sculptRuntime.pick(raycaster) / partOf(object) -> component id (same part definition as explode)"
+ ],
+ "destructionAnchors": [
+  "fractureGroup 'forged-steel': head, striking-face, claw prongs, shank (one forging; not breakable)",
+  "fractureGroup 'grip': sleeve detaches from the shank along the overmould seam (grip.seams), carrying collar, butt, panel and print decal"
+ ],
+ "risks": [
+  "Claw curvature foreshortened in the single view (+-10 deg).",
+  "Shank section inferred from shading.",
+  "Generator emits the rib grooves only via the factory patch (radial-only repetition emitter)."
+ ],
+ "localSpecSearch": {
+  "collection": "core_3d",
+  "query": "Claw hammer forged steel hammer head claw rubber elastomer grip orange satin brushed steel metal roughness tool handle lofted sweep",
+  "index": {
+   "status": "hit",
+   "reason": "current",
+   "fingerprint": "62f2831e1d52eeb6dbb94a87c44fa25b1f4926626a7b1f8c2bcadc63e04e9471"
+  },
+  "matches": [
+   {
+    "record_id": "core.pbr-anisotropy",
+    "file_path": "docs/raw/img2threejs-skill-dataset.json",
+    "heading": null,
+    "key_path": "categories.material_pbr[6]",
+    "score": 9.76951435799,
+    "snippets": [
+     "Directional specular stretching seen on brushed or grooved metal, where reflections elongate along the grain direction. Hi\u1ec7n t\u01b0\u1ee3ng ph\u1ea3n x\u1ea1 specular k\u00e9o d\u00e0i theo m\u1ed9t h\u01b0\u1edbng, th\u1ea5y tr\u00ean kim lo\u1ea1i \u0111\u01b0\u1ee3c ch\u1ea3i x\u01b0\u1edbc ho\u1eb7c c\u00f3 r\u00e3nh, ph\u1ea3n x\u1ea1 k\u00e9o d\u00e0i theo ..."
+    ],
+    "source_refs": [
+     {
+      "path": "docs/raw/img2threejs-skill-dataset.json",
+      "heading": null,
+      "key_path": "categories.material_pbr[6]"
+     }
+    ],
+    "evidence_refs": [
+     {
+      "kind": "source",
+      "ref": "docs/raw/img2threejs-skill-dataset.json",
+      "note": "img2threejs NotebookLM research distillation"
+     }
+    ]
+   },
+   {
+    "record_id": "core.description-controlled-vocabulary-aat-facets",
+    "file_path": "docs/raw/img2threejs-skill-dataset.json",
+    "heading": null,
+    "key_path": "categories.description_conventions[5]",
+    "score": 5.0821426136,
+    "snippets": [
+     "... h\u1ed3 ho\u1eb7c kh\u00f4ng nh\u1ea5t qu\u00e1n. Recognition cues: Material/attribute terms should be drawn from a fixed enumerated list (e.g. 'brushed steel', 'anodized aluminum') rather than free-form phrasing that varies between descriptions of the same ..."
+    ],
+    "source_refs": [
+     {
+      "path": "docs/raw/img2threejs-skill-dataset.json",
+      "heading": null,
+      "key_path": "categories.description_conventions[5]"
+     }
+    ],
+    "evidence_refs": [
+     {
+      "kind": "source",
+      "ref": "docs/raw/img2threejs-skill-dataset.json",
+      "note": "img2threejs NotebookLM research distillation"
+     }
+    ]
+   },
+   {
+    "record_id": "core.shader-mapping-lathegeometry-turnedradially-symmetric-parts",
+    "file_path": "docs/raw/img2threejs-skill-dataset.json",
+    "heading": null,
+    "key_path": "categories.rendering_shader_mapping[9]",
+    "score": 4.620542819458,
+    "snippets": [
+     "... c\u00e1ch xoay m\u1ed9t bi\u00ean d\u1ea1ng 2D quanh m\u1ed9t tr\u1ee5c. Recognition cues: Contoured, fully radially-symmetric part \u2014 turned wood/metal handle, some muzzle device shapes, adjustment knobs D\u1ea5u hi\u1ec7u nh\u1eadn di\u1ec7n: B\u1ed9 ph\u1eadn c\u00f3 bi\u00ean d\u1ea1ng, \u0111\u1ed1i x\u1ee9ng tr\u1ee5c ho\u00e0n ..."
+    ],
+    "source_refs": [
+     {
+      "path": "docs/raw/img2threejs-skill-dataset.json",
+      "heading": null,
+      "key_path": "categories.rendering_shader_mapping[9]"
+     }
+    ],
+    "evidence_refs": [
+     {
+      "kind": "source",
+      "ref": "docs/raw/img2threejs-skill-dataset.json",
+      "note": "img2threejs NotebookLM research distillation"
+     }
+    ]
+   }
+  ]
+ },
+ "tier1Results": [
+  {
+   "passed": true,
+   "checks": {
+    "silhouetteIoU": 0.9214,
+    "aspectRatioDelta": 0.0046,
+    "scaleDelta": 0.0046,
+    "bilateralSymmetryError": 0.2333,
+    "colorDelta": {
+     "checked": 10,
+     "maxDeltaE": 21.11,
+     "perComponent": [
+      {
+       "componentId": "head",
+       "deltaE": 6.42
+      },
+      {
+       "componentId": "striking-face",
+       "deltaE": 2.61
+      },
+      {
+       "componentId": "claw-prong-upper",
+       "deltaE": 1.27
+      },
+      {
+       "componentId": "claw-prong-lower",
+       "deltaE": 1.27
+      },
+      {
+       "componentId": "shank",
+       "deltaE": 6.42
+      },
+      {
+       "componentId": "grip",
+       "deltaE": 21.11
+      },
+      {
+       "componentId": "grip-collar",
+       "deltaE": 15.81
+      },
+      {
+       "componentId": "grip-butt",
+       "deltaE": 19.75
+      },
+      {
+       "componentId": "grip-logo-panel",
+       "deltaE": 19.54
+      },
+      {
+       "componentId": "cheek-stamp",
+       "deltaE": 13.35
+      }
+     ],
+     "gated": false
+    }
+   },
+   "failures": [],
+   "maskWarnings": [],
+   "renderHash": "746e1f08e154a556",
+   "passId": "blockout",
+   "mapStrippedRender": "renders/blockout/mapstripped.png"
+  },
+  {
+   "passed": true,
+   "checks": {
+    "silhouetteIoU": 0.8956,
+    "aspectRatioDelta": 0.0046,
+    "scaleDelta": 0.0418,
+    "bilateralSymmetryError": 0.2426,
+    "colorDelta": {
+     "checked": 10,
+     "maxDeltaE": 24.51,
+     "perComponent": [
+      {
+       "componentId": "head",
+       "deltaE": 6.16
+      },
+      {
+       "componentId": "striking-face",
+       "deltaE": 2.37
+      },
+      {
+       "componentId": "claw-prong-upper",
+       "deltaE": 1.26
+      },
+      {
+       "componentId": "claw-prong-lower",
+       "deltaE": 1.26
+      },
+      {
+       "componentId": "shank",
+       "deltaE": 6.16
+      },
+      {
+       "componentId": "grip",
+       "deltaE": 24.51
+      },
+      {
+       "componentId": "grip-collar",
+       "deltaE": 19.61
+      },
+      {
+       "componentId": "grip-butt",
+       "deltaE": 23.06
+      },
+      {
+       "componentId": "grip-logo-panel",
+       "deltaE": 22.87
+      },
+      {
+       "componentId": "cheek-stamp",
+       "deltaE": 13.09
+      }
+     ],
+     "gated": false
+    }
+   },
+   "failures": [],
+   "maskWarnings": [],
+   "renderHash": "db68614246a65dad",
+   "passId": "structural-pass"
+  },
+  {
+   "passed": true,
+   "checks": {
+    "silhouetteIoU": 0.9118,
+    "aspectRatioDelta": 0.0138,
+    "scaleDelta": 0.0138,
+    "bilateralSymmetryError": 0.2377,
+    "colorDelta": {
+     "checked": 10,
+     "maxDeltaE": 24.59,
+     "perComponent": [
+      {
+       "componentId": "head",
+       "deltaE": 6.16
+      },
+      {
+       "componentId": "striking-face",
+       "deltaE": 2.37
+      },
+      {
+       "componentId": "claw-prong-upper",
+       "deltaE": 1.26
+      },
+      {
+       "componentId": "claw-prong-lower",
+       "deltaE": 1.26
+      },
+      {
+       "componentId": "shank",
+       "deltaE": 6.16
+      },
+      {
+       "componentId": "grip",
+       "deltaE": 24.59
+      },
+      {
+       "componentId": "grip-collar",
+       "deltaE": 19.62
+      },
+      {
+       "componentId": "grip-butt",
+       "deltaE": 23.14
+      },
+      {
+       "componentId": "grip-logo-panel",
+       "deltaE": 22.96
+      },
+      {
+       "componentId": "cheek-stamp",
+       "deltaE": 13.09
+      }
+     ],
+     "gated": false
+    }
+   },
+   "failures": [],
+   "maskWarnings": [],
+   "renderHash": "53af6d9c2db8058b",
+   "passId": "structural-pass"
+  },
+  {
+   "passed": true,
+   "checks": {
+    "silhouetteIoU": 0.9112,
+    "aspectRatioDelta": 0.0015,
+    "scaleDelta": 0.0169,
+    "bilateralSymmetryError": 0.2429,
+    "colorDelta": {
+     "checked": 10,
+     "maxDeltaE": 23.24,
+     "perComponent": [
+      {
+       "componentId": "head",
+       "deltaE": 6.32
+      },
+      {
+       "componentId": "striking-face",
+       "deltaE": 2.49
+      },
+      {
+       "componentId": "claw-prong-upper",
+       "deltaE": 1.14
+      },
+      {
+       "componentId": "claw-prong-lower",
+       "deltaE": 1.14
+      },
+      {
+       "componentId": "shank",
+       "deltaE": 6.32
+      },
+      {
+       "componentId": "grip",
+       "deltaE": 23.24
+      },
+      {
+       "componentId": "grip-collar",
+       "deltaE": 17.97
+      },
+      {
+       "componentId": "grip-butt",
+       "deltaE": 21.85
+      },
+      {
+       "componentId": "grip-logo-panel",
+       "deltaE": 21.65
+      },
+      {
+       "componentId": "cheek-stamp",
+       "deltaE": 13.25
+      }
+     ],
+     "gated": false
+    }
+   },
+   "failures": [],
+   "maskWarnings": [],
+   "renderHash": "c0730eaa9083a3be",
+   "passId": "form-refinement"
+  },
+  {
+   "passed": false,
+   "checks": {
+    "silhouetteIoU": 0.9095,
+    "aspectRatioDelta": 0.0015,
+    "scaleDelta": 0.0169,
+    "bilateralSymmetryError": 0.2424,
+    "colorDelta": {
+     "checked": 10,
+     "maxDeltaE": 41.47,
+     "perComponent": [
+      {
+       "componentId": "head",
+       "deltaE": 6.59
+      },
+      {
+       "componentId": "striking-face",
+       "deltaE": 10.51
+      },
+      {
+       "componentId": "claw-prong-upper",
+       "deltaE": 41.47
+      },
+      {
+       "componentId": "claw-prong-lower",
+       "deltaE": 41.47
+      },
+      {
+       "componentId": "shank",
+       "deltaE": 6.59
+      },
+      {
+       "componentId": "grip",
+       "deltaE": 8.81
+      },
+      {
+       "componentId": "grip-collar",
+       "deltaE": 5.01
+      },
+      {
+       "componentId": "grip-butt",
+       "deltaE": 9.12
+      },
+      {
+       "componentId": "grip-logo-panel",
+       "deltaE": 8.55
+      },
+      {
+       "componentId": "cheek-stamp",
+       "deltaE": 1.11
+      }
+     ],
+     "gated": true
+    }
+   },
+   "failures": [
+    "max per-part color delta-E 41.47 exceeds threshold 20.0"
+   ],
+   "maskWarnings": [],
+   "renderHash": "3e412f04e49f8943",
+   "passId": "material-pass"
+  },
+  {
+   "passed": true,
+   "checks": {
+    "silhouetteIoU": 0.9095,
+    "aspectRatioDelta": 0.0015,
+    "scaleDelta": 0.0169,
+    "bilateralSymmetryError": 0.2424,
+    "colorDelta": {
+     "checked": 10,
+     "maxDeltaE": 10.51,
+     "perComponent": [
+      {
+       "componentId": "head",
+       "deltaE": 6.59
+      },
+      {
+       "componentId": "striking-face",
+       "deltaE": 10.51
+      },
+      {
+       "componentId": "claw-prong-upper",
+       "deltaE": 6.31
+      },
+      {
+       "componentId": "claw-prong-lower",
+       "deltaE": 6.31
+      },
+      {
+       "componentId": "shank",
+       "deltaE": 6.59
+      },
+      {
+       "componentId": "grip",
+       "deltaE": 8.81
+      },
+      {
+       "componentId": "grip-collar",
+       "deltaE": 5.01
+      },
+      {
+       "componentId": "grip-butt",
+       "deltaE": 9.12
+      },
+      {
+       "componentId": "grip-logo-panel",
+       "deltaE": 8.55
+      },
+      {
+       "componentId": "cheek-stamp",
+       "deltaE": 1.11
+      }
+     ],
+     "gated": true
+    }
+   },
+   "failures": [],
+   "maskWarnings": [],
+   "renderHash": "3e412f04e49f8943",
+   "passId": "material-pass"
+  },
+  {
+   "passed": true,
+   "checks": {
+    "silhouetteIoU": 0.9095,
+    "aspectRatioDelta": 0.0015,
+    "scaleDelta": 0.0169,
+    "bilateralSymmetryError": 0.2424,
+    "colorDelta": {
+     "checked": 10,
+     "maxDeltaE": 11.98,
+     "perComponent": [
+      {
+       "componentId": "head",
+       "deltaE": 5.05
+      },
+      {
+       "componentId": "striking-face",
+       "deltaE": 1.45
+      },
+      {
+       "componentId": "claw-prong-upper",
+       "deltaE": 7.52
+      },
+      {
+       "componentId": "claw-prong-lower",
+       "deltaE": 7.52
+      },
+      {
+       "componentId": "shank",
+       "deltaE": 5.05
+      },
+      {
+       "componentId": "grip",
+       "deltaE": 9.74
+      },
+      {
+       "componentId": "grip-collar",
+       "deltaE": 3.95
+      },
+      {
+       "componentId": "grip-butt",
+       "deltaE": 8.71
+      },
+      {
+       "componentId": "grip-logo-panel",
+       "deltaE": 8.35
+      },
+      {
+       "componentId": "cheek-stamp",
+       "deltaE": 11.98
+      }
+     ],
+     "gated": true
+    }
+   },
+   "failures": [],
+   "maskWarnings": [],
+   "renderHash": "482b2b0f7ded8d50",
+   "passId": "surface-pass"
+  },
+  {
+   "passed": true,
+   "checks": {
+    "silhouetteIoU": 0.9095,
+    "aspectRatioDelta": 0.0015,
+    "scaleDelta": 0.0169,
+    "bilateralSymmetryError": 0.2424,
+    "colorDelta": {
+     "checked": 10,
+     "maxDeltaE": 11.98,
+     "perComponent": [
+      {
+       "componentId": "head",
+       "deltaE": 5.05
+      },
+      {
+       "componentId": "striking-face",
+       "deltaE": 1.45
+      },
+      {
+       "componentId": "claw-prong-upper",
+       "deltaE": 7.52
+      },
+      {
+       "componentId": "claw-prong-lower",
+       "deltaE": 7.52
+      },
+      {
+       "componentId": "shank",
+       "deltaE": 5.05
+      },
+      {
+       "componentId": "grip",
+       "deltaE": 9.74
+      },
+      {
+       "componentId": "grip-collar",
+       "deltaE": 3.95
+      },
+      {
+       "componentId": "grip-butt",
+       "deltaE": 8.71
+      },
+      {
+       "componentId": "grip-logo-panel",
+       "deltaE": 8.35
+      },
+      {
+       "componentId": "cheek-stamp",
+       "deltaE": 11.98
+      }
+     ],
+     "gated": true
+    }
+   },
+   "failures": [],
+   "maskWarnings": [],
+   "renderHash": "482b2b0f7ded8d50",
+   "passId": "surface-pass"
+  },
+  {
+   "passed": true,
+   "checks": {
+    "silhouetteIoU": 0.9112,
+    "aspectRatioDelta": 0.0015,
+    "scaleDelta": 0.0169,
+    "bilateralSymmetryError": 0.2429,
+    "colorDelta": {
+     "checked": 10,
+     "maxDeltaE": 10.87,
+     "perComponent": [
+      {
+       "componentId": "head",
+       "deltaE": 5.17
+      },
+      {
+       "componentId": "striking-face",
+       "deltaE": 1.59
+      },
+      {
+       "componentId": "claw-prong-upper",
+       "deltaE": 5.18
+      },
+      {
+       "componentId": "claw-prong-lower",
+       "deltaE": 5.18
+      },
+      {
+       "componentId": "shank",
+       "deltaE": 5.17
+      },
+      {
+       "componentId": "grip",
+       "deltaE": 9.57
+      },
+      {
+       "componentId": "grip-collar",
+       "deltaE": 3.28
+      },
+      {
+       "componentId": "grip-butt",
+       "deltaE": 8.78
+      },
+      {
+       "componentId": "grip-logo-panel",
+       "deltaE": 8.36
+      },
+      {
+       "componentId": "cheek-stamp",
+       "deltaE": 10.87
+      }
+     ],
+     "gated": true
+    }
+   },
+   "failures": [],
+   "maskWarnings": [],
+   "renderHash": "796904be80e9b4a1",
+   "passId": "lighting-pass"
+  },
+  {
+   "passed": true,
+   "checks": {
+    "silhouetteIoU": 0.9112,
+    "aspectRatioDelta": 0.0015,
+    "scaleDelta": 0.0169,
+    "bilateralSymmetryError": 0.2429,
+    "colorDelta": {
+     "checked": 10,
+     "maxDeltaE": 10.87,
+     "perComponent": [
+      {
+       "componentId": "head",
+       "deltaE": 5.17
+      },
+      {
+       "componentId": "striking-face",
+       "deltaE": 1.59
+      },
+      {
+       "componentId": "claw-prong-upper",
+       "deltaE": 5.18
+      },
+      {
+       "componentId": "claw-prong-lower",
+       "deltaE": 5.18
+      },
+      {
+       "componentId": "shank",
+       "deltaE": 5.17
+      },
+      {
+       "componentId": "grip",
+       "deltaE": 9.6
+      },
+      {
+       "componentId": "grip-collar",
+       "deltaE": 3.33
+      },
+      {
+       "componentId": "grip-butt",
+       "deltaE": 8.78
+      },
+      {
+       "componentId": "grip-logo-panel",
+       "deltaE": 8.37
+      },
+      {
+       "componentId": "cheek-stamp",
+       "deltaE": 10.87
+      }
+     ],
+     "gated": true
+    }
+   },
+   "failures": [],
+   "maskWarnings": [],
+   "renderHash": "318e5ca4112952f5",
+   "passId": "interaction-pass"
+  },
+  {
+   "passed": true,
+   "checks": {
+    "silhouetteIoU": 0.9109,
+    "aspectRatioDelta": 0.0015,
+    "scaleDelta": 0.0169,
+    "bilateralSymmetryError": 0.2429,
+    "colorDelta": {
+     "checked": 10,
+     "maxDeltaE": 14.66,
+     "perComponent": [
+      {
+       "componentId": "head",
+       "deltaE": 10.75
+      },
+      {
+       "componentId": "striking-face",
+       "deltaE": 14.66
+      },
+      {
+       "componentId": "claw-prong-upper",
+       "deltaE": 2.21
+      },
+      {
+       "componentId": "claw-prong-lower",
+       "deltaE": 2.21
+      },
+      {
+       "componentId": "shank",
+       "deltaE": 10.75
+      },
+      {
+       "componentId": "grip",
+       "deltaE": 10.88
+      },
+      {
+       "componentId": "grip-collar",
+       "deltaE": 5.11
+      },
+      {
+       "componentId": "grip-butt",
+       "deltaE": 9.78
+      },
+      {
+       "componentId": "grip-logo-panel",
+       "deltaE": 9.46
+      },
+      {
+       "componentId": "cheek-stamp",
+       "deltaE": 3.85
+      }
+     ],
+     "gated": true
+    }
+   },
+   "failures": [],
+   "maskWarnings": [],
+   "renderHash": "eafc6707e7b80de7",
+   "passId": "optimization-pass"
+  },
+  {
+   "passed": true,
+   "checks": {
+    "silhouetteIoU": 0.9108,
+    "aspectRatioDelta": 0.0015,
+    "scaleDelta": 0.0169,
+    "bilateralSymmetryError": 0.2428,
+    "colorDelta": {
+     "checked": 10,
+     "maxDeltaE": 10.54,
+     "perComponent": [
+      {
+       "componentId": "head",
+       "deltaE": 5.64
+      },
+      {
+       "componentId": "striking-face",
+       "deltaE": 1.97
+      },
+      {
+       "componentId": "claw-prong-upper",
+       "deltaE": 4.86
+      },
+      {
+       "componentId": "claw-prong-lower",
+       "deltaE": 4.86
+      },
+      {
+       "componentId": "shank",
+       "deltaE": 5.64
+      },
+      {
+       "componentId": "grip",
+       "deltaE": 9.69
+      },
+      {
+       "componentId": "grip-collar",
+       "deltaE": 3.4
+      },
+      {
+       "componentId": "grip-butt",
+       "deltaE": 8.9
+      },
+      {
+       "componentId": "grip-logo-panel",
+       "deltaE": 8.48
+      },
+      {
+       "componentId": "cheek-stamp",
+       "deltaE": 10.54
+      }
+     ],
+     "gated": true
+    }
+   },
+   "failures": [],
+   "maskWarnings": [],
+   "renderHash": "b06fd3f984486bb6",
+   "passId": "optimization-pass"
+  }
+ ],
+ "factoryPatch": {
+  "script": "tools/patch_factory.py (re-run after every generate_threejs_factory.py)",
+  "why": "generator sweeps are elliptical with linear station lists (kinks), extrude outlines are polylines, and the repetition emitter is radial-only",
+  "sweeps": {
+   "head": {
+    "step": 0.0015,
+    "radialSegments": 48
+   },
+   "shank": {
+    "step": 0.002,
+    "radialSegments": 40
+   },
+   "grip-collar": {
+    "step": 0.001,
+    "radialSegments": 48
+   },
+   "grip-butt": {
+    "step": 0.0008,
+    "radialSegments": 72
+   }
+  },
+  "claw": {
+   "outer": [
+    0,
+    7
+   ],
+   "inner": [
+    8,
+    15
+   ],
+   "bevel": 0.0004,
+   "curveSegments": 10
+  },
+  "decals": [
+   {
+    "component": "cheek-stamp",
+    "target": "head",
+    "texture": "../evidence/stamp/stamp_ink.png",
+    "box": [
+     112,
+     118,
+     222,
+     205
+    ],
+    "region": {
+     "yMin": 0.006,
+     "xMin": -0.02,
+     "xMax": 0.014,
+     "zMin": -0.014,
+     "zMax": 0.04
+    },
+    "lift": 0.00012,
+    "paddedTop": 167,
+    "paddedSize": [
+     1280,
+     914
+    ],
+    "renderSize": [
+     840,
+     600
+    ],
+    "metalness": 0.3,
+    "roughness": 0.7,
+    "source": "authoring/make_stamp_ink.py (reference pixels, local-steel normalised)"
+   },
+   {
+    "component": "shank-scuff",
+    "target": "shank",
+    "texture": "../evidence/stamp/scuff.png",
+    "box": [
+     225,
+     150,
+     560,
+     320
+    ],
+    "region": {
+     "yMin": 0.0,
+     "xMin": -0.01,
+     "xMax": 0.12,
+     "zMin": -0.04,
+     "zMax": 0.04
+    },
+    "lift": 0.00012,
+    "paddedTop": 167,
+    "paddedSize": [
+     1280,
+     914
+    ],
+    "renderSize": [
+     840,
+     600
+    ],
+    "metalness": 0.0,
+    "roughness": 0.85,
+    "tint": 0.82,
+    "source": "authoring/make_scuff.py (reference pixels: bright low-saturation mill-scale inside the shank band)"
+   },
+   {
+    "component": "grip-print-marks",
+    "target": "grip",
+    "texture": "../evidence/stamp/grip_marks.png",
+    "box": [
+     960,
+     340,
+     1220,
+     455
+    ],
+    "regions": [
+     {
+      "yMin": 0.004,
+      "xMin": 0.279,
+      "xMax": 0.294,
+      "zMin": -0.009,
+      "zMax": 0.007
+     },
+     {
+      "yMin": 0.004,
+      "xMin": 0.222,
+      "xMax": 0.254,
+      "zMin": -0.012,
+      "zMax": 0.012
+     }
+    ],
+    "lift": 8e-05,
+    "paddedTop": 167,
+    "paddedSize": [
+     1280,
+     914
+    ],
+    "renderSize": [
+     840,
+     600
+    ],
+    "metalness": 0.0,
+    "roughness": 0.6,
+    "source": "authoring/make_grip_marks.py (reference pixels: lanyard-hole interior + panel logo)"
+   }
+  ],
+  "explode": {
+   "scale": 2.0,
+   "clearance": 0.012
+  },
+  "decalCamera": "spec.referenceCamera (fitted); paddedTop/paddedSize/renderSize below map viewer pixels to reference pixels",
+  "cavityAO": {
+   "claw-prong-upper": {
+    "why": "(extrude geometry frame: lateral normals are +-Z, mapped to hammer +-Y by the node) blackened forging scale on both lateral faces (photo #211e1f on the camera-facing face), darkest on the slot-facing face; edges/top arc keep the steel",
+    "terms": [
+     {
+      "normalY": [
+       0.4,
+       0.9
+      ],
+      "normalSign": -1,
+      "shade": 0.24,
+      "normalAxis": "z"
+     },
+     {
+      "normalY": [
+       0.4,
+       0.9
+      ],
+      "normalSign": 1,
+      "shade": 0.3,
+      "normalAxis": "z"
+     }
+    ]
+   },
+   "claw-prong-lower": {
+    "why": "same, mirrored",
+    "terms": [
+     {
+      "normalY": [
+       0.4,
+       0.9
+      ],
+      "normalSign": 1,
+      "shade": 0.24,
+      "normalAxis": "z"
+     },
+     {
+      "normalY": [
+       0.4,
+       0.9
+      ],
+      "normalSign": -1,
+      "shade": 0.3,
+      "normalAxis": "z"
+     }
+    ]
+   },
+   "head": {
+    "why": "under-cheek throat where shank and claw meet the eye block",
+    "terms": [
+     {
+      "x": [
+       0.006,
+       0.016
+      ],
+      "zMax": [
+       0.012,
+       0.022
+      ],
+      "shade": 0.62
+     },
+     {
+      "x": [
+       0.0,
+       0.01
+      ],
+      "zMax": [
+       -0.016,
+       -0.006
+      ],
+      "shade": 0.7
+     }
+    ]
+   },
+   "shank": {
+    "why": "throat fillet next to the eye and claw underside",
+    "terms": [
+     {
+      "xMax": [
+       0.012,
+       0.03
+      ],
+      "zMax": [
+       -0.008,
+       0.0
+      ],
+      "shade": 0.6
+     },
+     {
+      "xMax": [
+       0.006,
+       0.016
+      ],
+      "shade": 0.8
+     }
+    ]
+   },
+   "striking-face": {
+    "why": "neck waist concavity (lathe-local y = profile height)",
+    "terms": [
+     {
+      "y": [
+       0.0,
+       0.004
+      ],
+      "yMax": [
+       0.01,
+       0.016
+      ],
+      "shade": 0.72
+     }
+    ]
+   }
+  },
+  "steelFinish": {
+   "size": 512,
+   "why": "reference crops (40x32 px) tile as a weave; procedural longitudinal brushing, palette/roughness from the same crops",
+   "materials": {
+    "forged-steel": {
+     "seed": 11,
+     "albedoLow": 0.82,
+     "albedoHigh": 1.0,
+     "roughLow": 0.26,
+     "roughHigh": 0.46,
+     "bumpScale": 0.12,
+     "repeat": [
+      1,
+      1
+     ]
+    },
+    "face-steel": {
+     "seed": 23,
+     "albedoLow": 0.9,
+     "albedoHigh": 1.0,
+     "roughLow": 0.45,
+     "roughHigh": 0.6,
+     "bumpScale": 0.25,
+     "repeat": [
+      3,
+      1
+     ]
+    },
+    "claw-steel": {
+     "seed": 31,
+     "albedoLow": 0.88,
+     "albedoHigh": 1.0,
+     "roughLow": 0.4,
+     "roughHigh": 0.52,
+     "bumpScale": 0.08,
+     "repeat": [
+      40,
+      40
+     ]
+    }
+   }
+  }
+ }
+}
