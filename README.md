@@ -55,6 +55,7 @@ scene.add(createClawHammerModel({ castShadow: true }));
 |---|---|---|
 | `enamel-mug` | "Coffee Mug (Unsplash).jpg", Wikimedia Commons | CC0 |
 | `claw-hammer` | "Claw-hammer.jpg", Wikimedia Commons | Public domain |
+| `porcelain-teapot` | "Teapot 2010 G1.jpg", Wikimedia Commons | Public domain |
 
 The models were rebuilt as procedural code with the
 [img2threejs](https://github.com/img2threejs/img2threejs) skill (Apache-2.0).

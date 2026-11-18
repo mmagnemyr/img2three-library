@@ -2,6 +2,7 @@
 import type * as THREE from 'three';
 import * as claw_hammer from './claw-hammer/createObjectModel';
 import * as enamel_mug from './enamel-mug/createObjectModel';
+import * as porcelain_teapot from './porcelain-teapot/createObjectModel';
 
 export type LibraryModel = {
   slug: string;
@@ -21,4 +22,5 @@ export type LibraryModel = {
 export const models: LibraryModel[] = [
   { slug: "claw-hammer", title: "Snickarhammare", module: claw_hammer as unknown as Record<string, any>, create: claw_hammer.createClawHammerModel, info: {"fidelityEstimate": 0.81, "turns": 285, "apiEquivalentCostUsd": 22.48, "durationMinutes": 61, "published": "2026-11-17", "reference": "models/claw-hammer/reference.jpg"} },
   { slug: "enamel-mug", title: "Emaljmugg", module: enamel_mug as unknown as Record<string, any>, create: enamel_mug.createEnamelMugModel, info: {"fidelityEstimate": 0.8, "turns": 239, "apiEquivalentCostUsd": 20.01, "durationMinutes": 58, "published": "2026-11-17", "reference": "models/enamel-mug/reference.jpg"} },
+  { slug: "porcelain-teapot", title: "Porslinstekanna", module: porcelain_teapot as unknown as Record<string, any>, create: porcelain_teapot.createPorcelainTeapotModel, info: {"fidelityEstimate": 0.78, "turns": 252, "apiEquivalentCostUsd": 21.62, "durationMinutes": 73, "published": "2026-11-18", "reference": "models/porcelain-teapot/reference.jpg"} },
 ];

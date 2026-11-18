@@ -1,0 +1,28 @@
+{
+  "slug": "porcelain-teapot",
+  "title": "Porslinstekanna",
+  "factory": "createObjectModel.ts",
+  "export": "createPorcelainTeapotModel",
+  "typeName": "PorcelainTeapot",
+  "sourceRun": "C:\\repos\\img2three-runs\\porcelain-teapot-20261117-162313",
+  "published": "2026-11-18",
+  "assetUrls": {
+    "../textures/body_albedo.png": "models/porcelain-teapot/assets/textures/body_albedo.png",
+    "../textures/body_roughness.png": "models/porcelain-teapot/assets/textures/body_roughness.png",
+    "../textures/body_height.png": "models/porcelain-teapot/assets/textures/body_height.png",
+    "../textures/body_normal.png": "models/porcelain-teapot/assets/textures/body_normal.png",
+    "../textures/body_ao.png": "models/porcelain-teapot/assets/textures/body_ao.png",
+    "../textures/lid_albedo.png": "models/porcelain-teapot/assets/textures/lid_albedo.png",
+    "../textures/lid_roughness.png": "models/porcelain-teapot/assets/textures/lid_roughness.png",
+    "../textures/lid_height.png": "models/porcelain-teapot/assets/textures/lid_height.png",
+    "../textures/lid_normal.png": "models/porcelain-teapot/assets/textures/lid_normal.png",
+    "../textures/lid_ao.png": "models/porcelain-teapot/assets/textures/lid_ao.png",
+    "../textures/spout_flower_decal.png": "models/porcelain-teapot/assets/textures/spout_flower_decal.png",
+    "../textures/gold_solid.png": "models/porcelain-teapot/assets/textures/gold_solid.png",
+    "../textures/handle_stain_decal.png": "models/porcelain-teapot/assets/textures/handle_stain_decal.png"
+  },
+  "turns": 252,
+  "apiEquivalentCostUsd": 21.62,
+  "durationMinutes": 73,
+  "fidelityEstimate": 0.78
+}

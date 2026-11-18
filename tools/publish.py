@@ -123,10 +123,11 @@ def main() -> int:
     if refs:
         shutil.copy2(refs[0], dest / f"reference{refs[0].suffix}")
     final = run / "renders" / "final"
-    for preview in ("comparison.png", "reference.png"):
-        if (final / preview).exists():
-            shutil.copy2(final / preview, dest / f"preview-{preview}")
-            break
+    # agents name the photo-vs-render sheet comparison.png or comparison-<view>.png; fall back to the render
+    previews = sorted(final.glob("comparison*.png")) or sorted(final.glob("reference.png"))
+    if previews:
+        kind = "comparison" if previews[0].name.startswith("comparison") else "reference"
+        shutil.copy2(previews[0], dest / f"preview-{kind}.png")
 
     meta = {"slug": slug, "title": title, "factory": "createObjectModel.ts", "export": export_name,
             "typeName": type_name, "sourceRun": str(run), "published": date.today().isoformat(),
