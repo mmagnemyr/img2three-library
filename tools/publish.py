@@ -23,6 +23,9 @@ MODELS = LIB / "models"
 # a quoted relative URL to an image, as a texture load in the factory ("../evidence/x.png", "projection/y.png")
 ASSET_URL = re.compile(r"""(["'])((?:\.\./|\./)?[A-Za-z0-9_\-./]+\.(?:png|jpe?g|webp))\1""")
 
+# a relative module import: `from '../evidence/x.json'` or `import '../y'`
+REL_IMPORT = re.compile(r"""(\bfrom\s+|\bimport\s+)(["'])(\.\.?/[^"']+)\2""")
+
 
 def slugify(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-") or "model"
@@ -30,16 +33,26 @@ def slugify(text: str) -> str:
 
 def run_numbers(run: Path) -> dict:
     out: dict = {}
-    log = run / "run.jsonl"
-    if log.exists():
+    # run.jsonl, plus run.<n>.jsonl from earlier sessions when the run was resumed: sum them all
+    turns = cost = ms = 0.0
+    sessions = 0
+    for log in sorted(run.glob("run*.jsonl")):
+        last = None
         for line in log.read_text(encoding="utf-8", errors="replace").splitlines():
             if '"type":"result"' in line.replace(" ", ""):
                 try:
-                    ev = json.loads(line)
+                    last = json.loads(line)
                 except ValueError:
                     continue
-                out = {"turns": ev.get("num_turns"), "apiEquivalentCostUsd": round(ev.get("total_cost_usd") or 0, 2),
-                       "durationMinutes": round((ev.get("duration_ms") or 0) / 60000)}
+        if last:
+            sessions += 1
+            turns += last.get("num_turns") or 0
+            cost += last.get("total_cost_usd") or 0
+            ms += last.get("duration_ms") or 0
+    if sessions:
+        out = {"turns": int(turns), "apiEquivalentCostUsd": round(cost, 2), "durationMinutes": round(ms / 60000)}
+        if sessions > 1:
+            out["sessions"] = sessions
     result = run / "RESULT.md"
     if result.exists():
         m = re.search(r"fidelity estimate:?\**\s*\**([0-9.]+)", result.read_text(encoding="utf-8", errors="replace"), re.I)
@@ -114,6 +127,25 @@ def main() -> int:
             copied[url] = new_url
             return f"{quote}{new_url}{quote}"
 
+        def rewrite_import(match: re.Match) -> str:
+            # a module import that reaches outside src/ (e.g. '../evidence/x.json'): copy the file into
+            # models/<slug>/data/<path inside the run> and point the import there
+            quote, spec = match.group(2), match.group(3)
+            file = (src / spec).resolve()
+            if not file.is_file():
+                return match.group(0)
+            try:
+                rel = file.relative_to(run)
+            except ValueError:
+                return match.group(0)
+            if rel.parts[0] == "src":
+                return match.group(0)  # a sibling module, copied with the other .ts files
+            target = dest / "data" / rel
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(file, target)
+            return f"{match.group(1)}{quote}./data/{rel.as_posix()}{quote}"
+
+        body = REL_IMPORT.sub(rewrite_import, body)
         (dest / ts.name).write_text(ASSET_URL.sub(rewrite, body), encoding="utf-8", newline="\n")
 
     for name in ("object-sculpt-spec.json", "RESULT.md"):
